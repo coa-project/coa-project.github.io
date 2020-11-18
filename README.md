@@ -1,36 +1,45 @@
-## Welcome to GitHub Pages
+## Welcome to PyCoA release 1.0
 
-You can use the [editor on GitHub](https://github.com/pycoa/pycoa.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+_April/November 2020_
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[<img src="https://github.com/tjbtjbtjb/pycoa/blob/main/docs/fig/UK.png" height="14px" alt="UK flag"> English  version ](https://github.com/tjbtjbtjb/pycoa/blob/main/README.md) / 
+[ <img src="https://github.com/tjbtjbtjb/pycoa/blob/main/docs/fig/FR.png" height="14px" alt="FR flag"> Version française ](https://github.com/tjbtjbtjb/pycoa/blob/main/README_FR.md)
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+`PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
+- a simple access to common Covid-19 databases;
+- tools to represent and analyse Covid-19 data such as time series plots and maps.
 
-```markdown
-Syntax highlighted code block
+It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/tjbtjbtjb/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```python
+import pycoa.pycoa as pc
+pc.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
+pc.map(where=['world'])
+pc.hist(where='middle africa', which='confirmed')
+pc.get(where=['usa'], what='daily', which='recovered')
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+PyCoA works:
+- on a local install of Python™ such as [`Spyder`](https://www.spyder-ide.org/),
+- on an online `Jupyter` platforms, such as [`Google Colab`](https://colab.research.google.com/),
+- or even through a `docker`, using for example [`mybinder`](https://mybinder.org/).
 
-### Jekyll Themes
+Demo code is available: 
+- as [notebooks](https://github.com/tjbtjbtjb/pycoa/tree/main/notebooks)
+- as [`py` files](https://github.com/tjbtjbtjb/pycoa/tree/main/py)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pycoa/pycoa.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**-> Là il faut changer les liens pour pointer vers un unique demo code**
+
+Full documentation is on [the Wiki](https://github.com/tjbtjbtjb/pycoa/wiki/Home).
+
+### Authors
+
+* Tristan Beau - [Université de Paris](http://u-paris.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
+* Julien Browaeys - [Université de Paris](http://u-paris.fr) - [MSC laboratory](http://www.msc.univ-paris-diderot.fr/)
+* Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
+
+
 
 ### Support or Contact
 
