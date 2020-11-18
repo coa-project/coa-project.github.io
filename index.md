@@ -44,7 +44,7 @@ Full documentation is on [the Wiki](https://github.com/tjbtjbtjb/pycoa/wiki/Home
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
 
 ---
-**-> Après j'effacerais tout (ce qui est commenté) parce que je ne comprends pas... et je pense que cela sert peu**
+
 
 <!-- 
 <section id="downloads" class="clearfix">
