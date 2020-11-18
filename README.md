@@ -2,15 +2,15 @@
 
 _April/November 2020_
 
-[<img src="https://github.com/tjbtjbtjb/pycoa/blob/main/docs/fig/UK.png" height="14px" alt="UK flag"> English  version ](https://github.com/tjbtjbtjb/pycoa/blob/main/README.md) / 
-[ <img src="https://github.com/tjbtjbtjb/pycoa/blob/main/docs/fig/FR.png" height="14px" alt="FR flag"> Version française ](https://github.com/tjbtjbtjb/pycoa/blob/main/README_FR.md)
+[<img src="https://github.com/pycoa/pycoa.github.io/fig/UK.png" height="14px" alt="UK flag"> English  version ](https://github.com/pycoa/pycoa.github.io/README.md) / 
+[ <img src="https://github.com/pycoa/pycoa.github.io/fig/FR.png" height="14px" alt="FR flag"> Version française ](https://github.com/pycoa/pycoa.github.io/README_FR.md)
 
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
 - a simple access to common Covid-19 databases;
 - tools to represent and analyse Covid-19 data such as time series plots and maps.
 
-It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/tjbtjbtjb/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
+It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/pycoa/pycoa.github.io/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
 ```python
 import pycoa.pycoa as pc
@@ -26,12 +26,12 @@ PyCoA works:
 - or even through a `docker`, using for example [`mybinder`](https://mybinder.org/).
 
 Demo code is available: 
-- as [notebooks](https://github.com/tjbtjbtjb/pycoa/tree/main/notebooks)
-- as [`py` files](https://github.com/tjbtjbtjb/pycoa/tree/main/py)
+- as [notebooks](https://github.com/pycoa/pycoa/pycoa-notebooks)
+- as [`py` files](https://github.com/pycoa/pycoa/py
 
 **-> Là il faut changer les liens pour pointer vers un unique demo code**
 
-Full documentation is on [the Wiki](https://github.com/tjbtjbtjb/pycoa/wiki/Home).
+Full documentation is on [the Wiki](https://github.com/pycoa/pycoa/pycoa/wiki/Home).
 
 ### Authors
 
