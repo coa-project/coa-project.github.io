@@ -46,8 +46,6 @@ La documentation complète se trouve sur [le Wiki](https://github.com/pycoa/wiki
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
 
 ---
-**-> Après j'effacerais tout (ce qui est commenté) parce que je ne comprends pas... et je pense que cela sert peu**
-
 <!-- 
 <section id="downloads" class="clearfix">
   <a href="https://github.com/tjbtjbtjb/pycoa/zipball/main" id="download-zip" class="button"><span>Download .zip</span></a>
