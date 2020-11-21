@@ -28,7 +28,7 @@ cf.hist(where='middle africa', which='confirmed')
 cf.get(where=['usa'], which='recovered')
 ```
 
-PyCoA works currently inside `Jupyter` notebook, over a local install or on online platforms such as [`Google Colab`](https://colab.research.google.com/)
+PyCoA works currently inside `Jupyter` notebook, over a local install or on online platforms such as [`Google Colab`](https://colab.research.google.com/).
 
 Demo code is available as a [notebook on GitHub](https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb) or directly as [`Google Colab notebook`](https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb).
 
