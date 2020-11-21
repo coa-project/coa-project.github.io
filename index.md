@@ -14,9 +14,9 @@ April/November 2020
 - a simple access to common Covid-19 databases;
 - tools to represent and analyse Covid-19 data such as time series plots and maps.
 
-<img src="fig/pycoa_plot_example.png" height="160px" align=down> <img src="fig/pycoa_map_example.png" height="160px" align=down> 
+<img src="fig/pycoa_plot_example.png" height="220px" align=top> <img src="fig/pycoa_map_example.png" height="160px" align=top> 
 
-<img src="fig/pycoa_hist_example.png" height="160px" align=down> <img src="fig/pycoa_get_example.png" height="160px" align=down>
+<img src="fig/pycoa_hist_example.png" height="220px" align=top> <img src="fig/pycoa_get_example.png" height="160px" align=top>
 
 It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/coa-project/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
