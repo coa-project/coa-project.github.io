@@ -1,4 +1,5 @@
-#  PyCoA release 1.0 <img src="fig/logo-anime.gif" width="200px" align=down> 
+#  PyCoA release v1.0 
+<img src="fig/logo-anime.gif" width="200px" align=down> 
 April/November 2020
 
 <section id="downloads" class="clearfix">
@@ -42,4 +43,4 @@ Full documentation is on [the Wiki](https://github.com/coa-project/pycoa/wiki/Ho
 
 ### Contact
 * [`support@pycoa.fr`](mailto:support@pycoa.fr)
-* This page : (pycoa.fr)[http://pycoa.fr]
+* This page : [`pycoa.fr`](http://pycoa.fr)
