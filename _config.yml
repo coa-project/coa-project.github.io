@@ -1,4 +1,4 @@
-theme: jekyll-theme-midnight
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-relative-links
 relative_links:
@@ -7,3 +7,4 @@ relative_links:
 include:
   - index.md
   - index_FR.md
+  
