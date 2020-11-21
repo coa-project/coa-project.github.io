@@ -13,9 +13,9 @@ April/November 2020
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](https://tjbtjbtjb.github.io/pycoa) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://tjbtjbtjb.github.io/pycoa/index_FR)
 
-<img src="fig/pycoa_plot_example.png" width="200px" align=down> <img src="fig/pycoa_map_example.png" width="200px" align=down> 
+<img src="fig/pycoa_plot_example.png" height="160px" align=down> <img src="fig/pycoa_map_example.png" height="160px" align=down> 
 
-<img src="fig/pycoa_hist_example.png" width="200px" align=down> <img src="fig/pycoa_get_example.png" width="200px" align=down> 
+<img src="fig/pycoa_hist_example.png" height="160px" align=down> <img src="fig/pycoa_get_example.png" height="160px" align=down> 
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
 - a simple access to common Covid-19 databases;
