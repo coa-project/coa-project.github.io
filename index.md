@@ -9,15 +9,15 @@ April/November 2020
 </section>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](https://tjbtjbtjb.github.io/pycoa) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://tjbtjbtjb.github.io/pycoa/index_FR)
-
-<img src="fig/pycoa_plot_example.png" height="160px" align=down> <img src="fig/pycoa_map_example.png" height="160px" align=down> 
-
-<img src="fig/pycoa_hist_example.png" height="160px" align=down> <img src="fig/pycoa_get_example.png" height="160px" align=down> 
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://tjbtjbtjb.github.io/pycoa/index_FR) 
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
 - a simple access to common Covid-19 databases;
 - tools to represent and analyse Covid-19 data such as time series plots and maps.
+
+<img src="fig/pycoa_plot_example.png" height="160px" align=down> <img src="fig/pycoa_map_example.png" height="160px" align=down> 
+
+<img src="fig/pycoa_hist_example.png" height="160px" align=down> <img src="fig/pycoa_get_example.png" height="160px" align=down>
 
 It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/tjbtjbtjb/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
