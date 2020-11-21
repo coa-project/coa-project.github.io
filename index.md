@@ -2,11 +2,13 @@
 <img src="fig/logo-anime.gif" width="200px" align=down> 
 April/November 2020
 
+<frame>
 <section id="downloads" class="clearfix">
   <a href="https://github.com/coa-project/pycoa/zipball/main" id="download-zip" class="button"><span>Download .zip</span></a>
   <a href="https://github.com/coa-project/pycoa/tarball/main" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
   <a href="https://github.com/coa-project/pycoa/" id="view-on-github" class="button"><span>View on GitHub</span></a>
 </section>
+</frame>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](https://tjbtjbtjb.github.io/pycoa) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://tjbtjbtjb.github.io/pycoa/index_FR)
