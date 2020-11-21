@@ -1,5 +1,4 @@
-#  PyCoA release v1.0 
-<img src="fig/logo-anime.gif" width="200px" align=down> 
+#  PyCoA release v1.0 <img src="fig/logo-anime.gif" width="140px" align=top> 
 April/November 2020
 
 <section id="downloads" class="clearfix">
