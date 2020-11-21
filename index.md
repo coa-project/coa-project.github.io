@@ -1,14 +1,18 @@
-<!-- [Pycoa Logo](fig/pycoa_logo.png) -->
-
-<img src="fig/pycoa_plot_example.png" width="200px"> <img src="fig/pycoa_map_example.png" width="200px"> <img src="fig/pycoa_hist_example.png" width="200px"> <img src="fig/pycoa_get_example.png" width="200px">
-
-# PyCoA release 1.0
-
+#  PyCoA release 1.0 <img src="fig/logo-anime.gif" width="200px" align=down> 
 April/November 2020
+
+<section id="downloads" class="clearfix">
+  <a href="https://github.com/coa-project/pycoa/zipball/main" id="download-zip" class="button"><span>Download .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/tarball/main" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/" id="view-on-github" class="button"><span>View on GitHub</span></a>
+</section>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](https://tjbtjbtjb.github.io/pycoa) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://tjbtjbtjb.github.io/pycoa/index_FR)
 
+<img src="fig/pycoa_plot_example.png" width="200px" align=down> <img src="fig/pycoa_map_example.png" width="200px" align=down> 
+
+<img src="fig/pycoa_hist_example.png" width="200px" align=down> <img src="fig/pycoa_get_example.png" width="200px" align=down> 
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
 - a simple access to common Covid-19 databases;
@@ -17,25 +21,18 @@ April/November 2020
 It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/tjbtjbtjb/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
 ```python
-import pycoa.pycoa as pc
-pc.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
-pc.map(where=['world'])
-pc.hist(where='middle africa', which='confirmed')
-pc.get(where=['usa'], what='daily', which='recovered')
+import coa.front as cf
+cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
+cf.map(where=['world'])
+cf.hist(where='middle africa', which='confirmed')
+cf.get(where=['usa'], which='recovered')
 ```
 
-PyCoA works:
-- on a local install of Python™ such as [`Spyder`](https://www.spyder-ide.org/),
-- on an online `Jupyter` platforms, such as [`Google Colab`](https://colab.research.google.com/),
-- or even through a `docker`, using for example [`mybinder`](https://mybinder.org/).
+PyCoA works currently inside `Jupyter` notebook, over a local install or on online platforms such as [`Google Colab`](https://colab.research.google.com/)
 
-Demo code is available: 
-- as [notebooks](https://github.com/tjbtjbtjb/pycoa/tree/main/notebooks)
-- as [`py` files](https://github.com/tjbtjbtjb/pycoa/tree/main/py)
+Demo code is available as a [notebook on GitHub](https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb) or directly as [`Google Colab notebook`](https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb)
 
-**-> Là il faut changer les liens pour pointer vers un unique demo code**
-
-Full documentation is on [the Wiki](https://github.com/tjbtjbtjb/pycoa/wiki/Home).
+Full documentation is on [the Wiki](https://github.com/coa-project/pycoa/wiki/Home).
 
 ### Authors
 
@@ -43,13 +40,6 @@ Full documentation is on [the Wiki](https://github.com/tjbtjbtjb/pycoa/wiki/Home
 * Julien Browaeys - [Université de Paris](http://u-paris.fr) - [MSC laboratory](http://www.msc.univ-paris-diderot.fr/)
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
 
----
-
-
-<!-- 
-<section id="downloads" class="clearfix">
-  <a href="https://github.com/tjbtjbtjb/pycoa/zipball/main" id="download-zip" class="button"><span>Download .zip</span></a>
-  <a href="https://github.com/tjbtjbtjb/pycoa/tarball/main" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-  <a href="https://github.com/tjbtjbtjb/pycoa/" id="view-on-github" class="button"><span>View on GitHub</span></a>
-</section>~~
--->
+### Contact
+* [`support@pycoa.fr`](mailto:support@pycoa.fr)
+* This page : (pycoa.fr)[http://pycoa.fr]
