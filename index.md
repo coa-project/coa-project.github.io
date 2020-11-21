@@ -1,4 +1,4 @@
-#  PyCoA release v1.0 
+**  PyCoA release v1.0 **
 <img src="fig/logo-anime.gif" width="200px" align=down> 
 April/November 2020
 
