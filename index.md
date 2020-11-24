@@ -18,21 +18,21 @@ April/November 2020
 
 <img src="fig/pycoa_hist_example.png" height="220px" align=top> <img src="fig/pycoa_get_example.png" height="160px" align=top>
 
-It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing [pycoa install](https://github.com/coa-project/pycoa/wiki/Install) to your framework, the following few lines of code produce the four figures introducing this short documentation.
+It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing <a href"https://github.com/coa-project/pycoa/wiki/Install" target=_blank>installing pycoa</a> to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
 ```python
 import coa.front as cf
 cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
-cf.map(where=['world'])
-cf.hist(where='middle africa', which='confirmed')
-cf.get(where=['usa'], which='recovered')
+cf.map(where=['world'],what='daily',when='01/04/2020')
+cf.hist(where='middle africa', which='confirmed',what='cumul')
+cf.get(where=['usa'], what='daily', which='recovered',output='pandas')
 ```
 
 PyCoA works currently inside `Jupyter` notebook, over a local install or on online platforms such as [`Google Colab`](https://colab.research.google.com/).
 
-Demo code is available as a [notebook on GitHub](https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb) or directly as [`Google Colab notebook`](https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb).
+Demo code is available as a <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >notebook on GitHub</a> or directly as [`Google Colab notebook`](https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb).
 
-Full documentation is on [the Wiki](https://github.com/coa-project/pycoa/wiki/Home).
+Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home" target=_blank>the Wiki</a>.
 
 ### Authors
 
