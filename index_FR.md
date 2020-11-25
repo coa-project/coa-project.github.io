@@ -30,7 +30,7 @@ cf.get(where=['usa'], what='daily', which='recovered',output='pandas')
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
 
-Un code de démonstration simple est accesible comme sous forme d'un <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >notebook sur GitHub</a> ou bien directement en tant que <a href="https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb">Google Colab notebook</a>.
+Un code de démonstration simple est accesible comme sous forme d'un <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >notebook sur GitHub</a> ou bien directement en tant que <a href="https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >Google Colab notebook</a>.
 
 La documentation complète se trouve sur <a href="https://github.com/coa-project/pycoa/wiki/FR:Home" target=_blank>le Wiki</a>.
 
