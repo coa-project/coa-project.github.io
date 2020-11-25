@@ -1,43 +1,38 @@
-<!-- [Pycoa Logo](fig/pycoa_logo.png) -->
-
-<img src="fig/pycoa_plot_example.png" width="200px"> <img src="fig/pycoa_map_example.png" width="200px"> <img src="fig/pycoa_hist_example.png" width="200px"> <img src="fig/pycoa_get_example.png" width="200px">
-
-# PyCoA version 1.0
-
+#  PyCoA version v1.0 <img src="fig/logo-anime.gif" width="140px" align=top> 
 Avril/Novembre 2020
 
-<!-- _Ceci est la <a href="index_FR">version française </a><img src="fig/FR.png" height="14px" alt="FR flag" />. There is also an <a href=""/>english version </a><img src="fig/UK.png" height="14px" alt="UK flag" />._ -->
+<section id="downloads" class="clearfix">
+  <a href="https://github.com/coa-project/pycoa/zipball/main" id="download-zip" class="button" target=_blank><span>Télécharger le .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/tarball/main" id="download-tar-gz" class="button" target=_blank><span>Télécharger le .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/" id="view-on-github" class="button" target=_blank><span>Voir sur GitHub</span></a>
+</section>
 
-[<img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](https://github.com/pycoa/pycoa.github.io/index_FR) / 
-[ <img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](https://github.com/pycoa/pycoa.github.io)
-
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles ou des cartes.
 
-Elle est pensée pour être accessibles à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Pythpn™. Comme exemple, après avoir [installé PyCoA](https://github.com/pycoa/wiki/Install), les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
+<img src="fig/pycoa_plot_example.png" height="200px" align=top> <img src="fig/pycoa_map_example.png" height="200px" align=bottom> 
+
+<img src="fig/pycoa_hist_example.png" height="200px" align=top> <img src="fig/pycoa_get_example.png" height="200px" align=top>
+
+Cette analyse est pensée pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Pythpn™. Comme exemple, après avoir <a href="https://github.com/coa-project/pycoa/wiki/FR:Install" target=_blank>installé PyCoA</a>, les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
 
 ```python
-import pycoa.pycoa as pc
-pc.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
-pc.map(where=['world'])
-pc.hist(where='middle africa', which='confirmed')
-pc.get(where=['usa'], what='daily', which='recovered')
+import coa.front as cf
+cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
+cf.map(where=['world'],what='daily',when='01/04/2020')
+cf.hist(where='middle africa', which='confirmed',what='cumul')
+cf.get(where=['usa'], what='daily', which='recovered',output='pandas')
 ```
 
-PyCoA fonctionne :
-- sur une installation locale de Python™ comme [`Spyder`](https://www.spyder-ide.org/),
-- sur des plateforme `Jupyter` en ligne, comme [`Google Colab`](https://colab.research.google.com/),
-- ou même avec un `docker`, comme [`mybinder`](https://mybinder.org/).
+PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
 
-Un code de démonstration est accesible comme : 
-- [notebook Jupyter](https://github.com/pycoa/pycoa-notebooks)
-- [fichier `.py`](https://github.com/pycoa/py)
+Un code de démonstration simple est accesible comme sous forme d'un <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >notebook sur GitHub</a> ou bien directement en tant que <a href="https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb">Google Colab notebook</a>.
 
-**-> Là il faut changer les liens pour pointer vers un unique demo code**
-
-La documentation complète se trouve sur [le Wiki](https://github.com/pycoa/wiki/Home).
+La documentation complète se trouve sur <a href="https://github.com/coa-project/pycoa/wiki/FR:Home" target=_blank>le Wiki</a>.
 
 ### Auteurs
 
@@ -45,11 +40,9 @@ La documentation complète se trouve sur [le Wiki](https://github.com/pycoa/wiki
 * Julien Browaeys - [Université de Paris](http://u-paris.fr) - [MSC laboratory](http://www.msc.univ-paris-diderot.fr/)
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
 
----
-<!-- 
-<section id="downloads" class="clearfix">
-  <a href="https://github.com/tjbtjbtjb/pycoa/zipball/main" id="download-zip" class="button"><span>Download .zip</span></a>
-  <a href="https://github.com/tjbtjbtjb/pycoa/tarball/main" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-  <a href="https://github.com/tjbtjbtjb/pycoa/" id="view-on-github" class="button"><span>View on GitHub</span></a>
-</section>~~
--->
+### Contact
+* [`support@pycoa.fr`](mailto:support@pycoa.fr)
+* This page : [`pycoa.fr`](http://pycoa.fr)
+
+<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
