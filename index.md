@@ -18,7 +18,7 @@ April/November 2020
 
 <img src="fig/pycoa_hist_example.png" height="200px" align=top> <img src="fig/pycoa_get_example.png" height="200px" align=top>
 
-It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after installing <a href"=https://github.com/coa-project/pycoa/wiki/Install" target=_blank>installing pycoa</a> to your framework, the following few lines of code produce the four figures introducing this short documentation.
+It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after <a href"=https://github.com/coa-project/pycoa/wiki/Install" target=_blank>installing pycoa</a> to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
 ```python
 import coa.front as cf
@@ -28,7 +28,7 @@ cf.hist(where='middle africa', which='confirmed',what='cumul')
 cf.get(where=['usa'], what='daily', which='recovered',output='pandas')
 ```
 
-PyCoA works currently inside `Jupyter` notebook, over a local install or on online platforms such as [`Google Colab`](https://colab.research.google.com/).
+`PyCoA` works currently inside `Jupyter` notebook, over a local install or on online platforms such as <a href="https://colab.research.google.com/">Google Colab</a>.
 
 Demo code is available as a <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank >notebook on GitHub</a> or directly as <a href="https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb">Google Colab notebook</a>.
 
