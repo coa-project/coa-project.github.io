@@ -43,3 +43,6 @@ Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home
 ### Contact
 * [`support@pycoa.fr`](mailto:support@pycoa.fr)
 * This page : [`pycoa.fr`](http://pycoa.fr)
+
+<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
