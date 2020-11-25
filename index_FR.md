@@ -2,8 +2,8 @@
 Avril/Novembre 2020
 
 <section id="downloads" class="clearfix">
-  <a href="https://github.com/coa-project/pycoa/zipball/main" id="download-zip" class="button" target=_blank><span>Télécharger le .zip</span></a>
-  <a href="https://github.com/coa-project/pycoa/tarball/main" id="download-tar-gz" class="button" target=_blank><span>Télécharger le .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/zipball/main" id="download-zip" class="button" target=_blank><span>Archive .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/tarball/main" id="download-tar-gz" class="button" target=_blank><span>Archive .tar.gz</span></a>
   <a href="https://github.com/coa-project/pycoa/" id="view-on-github" class="button" target=_blank><span>Voir sur GitHub</span></a>
 </section>
 
@@ -44,5 +44,5 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 * [`support@pycoa.fr`](mailto:support@pycoa.fr)
 * This page : [`pycoa.fr`](http://pycoa.fr)
 
-<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a>
+<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Suivre @pycoa_fr</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
