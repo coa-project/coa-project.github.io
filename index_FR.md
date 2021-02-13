@@ -12,7 +12,7 @@ Avril 2020 / Février 2021
 
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
-- des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles ou des cartes.
+- des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, es histogrammes ou des cartes.
 
 <img src="fig/pycoa_plot_example.png" height="200px" align=top> <img src="fig/pycoa_map_example.png" height="200px" align=bottom> 
 
@@ -22,10 +22,15 @@ Cette analyse est pensée pour être accessible à des non-spécialistes : des l
 
 ```python
 import coa.front as cf
-cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
-cf.map(where=['world'],what='daily',when='01/04/2020')
-cf.hist(where='middle africa', which='confirmed',what='cumul')
-cf.get(where=['usa'], what='daily', which='recovered',output='pandas')
+# default database is JHU
+cf.plot(option='sumall') # default is for all countries
+cf.plot(where='northern africa') # default is 'deaths'
+cf.map(where='americas',what='daily',when='01/02/2021',which='confirmed')
+cf.hist(where=['asia','oceania'], which='confirmed',typeofhist='byvalue',bins=30)
+display( cf.get(where='europe', what='daily', which='recovered',output='pandas') )
+
+cf.setwhom('owid') # changing database
+cf.hist(which='total_vaccinations') # default is for all countries
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
