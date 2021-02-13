@@ -2,9 +2,9 @@
 April 2020 - February 2021 
 
 <section id="downloads" class="clearfix">
-  <a href="https://github.com/coa-project/pycoa/archive/v1.0.zip" id="download-zip" class="button" target=_blank><span>Download .zip</span></a>
-  <a href="https://github.com/coa-project/pycoa/archive/v1.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>Download .tar.gz</span></a>
-  <a href="https://github.com/coa-project/pycoa/tree/v1.0" id="view-on-github" class="button" target=_blank><span>View on GitHub</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span>Download .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>Download .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span>View on GitHub</span></a>
 </section>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
