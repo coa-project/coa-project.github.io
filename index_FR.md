@@ -1,10 +1,10 @@
-#  PyCoA version v1.0 <img src="fig/logo-anime.gif" width="140px" align=top> 
-Avril/Novembre 2020
+#  PyCoA version v2.0 <img src="fig/logo-anime.gif" width="140px" align=top> 
+Avril 2020 / Février 2021
 
 <section id="downloads" class="clearfix">
-  <a href="https://github.com/coa-project/pycoa/archive/v1.0.zip" id="download-zip" class="button" target=_blank><span>Archive .zip</span></a>
-  <a href="https://github.com/coa-project/pycoa/archive/v1.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>Archive .tar.gz</span></a>
-  <a href="https://github.com/coa-project/pycoa/tree/v1.0" id="view-on-github" class="button" target=_blank><span>Voir sur GitHub</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span>Archive .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>Archive .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span>Voir sur GitHub</span></a>
 </section>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
@@ -36,9 +36,9 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 
 ### Auteurs
 
-* Tristan Beau - [Université de Paris](http://u-paris.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
-* Julien Browaeys - [Université de Paris](http://u-paris.fr) - [MSC laboratory](http://www.msc.univ-paris-diderot.fr/)
-* Olivier Dadoun - [CNRS](http://cnrs.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
+* Tristan Beau - [Université de Paris](http://u-paris.fr) - [laboratoire LPNHE](http://lpnhe.in2p3.fr/)
+* Julien Browaeys - [Université de Paris](http://u-paris.fr) - [laboratoire MSC](http://www.msc.univ-paris-diderot.fr/)
+* Olivier Dadoun - [CNRS](http://cnrs.fr) - Sorbonne Université](https://www.sorbonne-universite.fr/) - [laboratoire LPNHE](http://lpnhe.in2p3.fr/)
 
 ### Contact
 * [`support@pycoa.fr`](mailto:support@pycoa.fr)
