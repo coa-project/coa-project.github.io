@@ -34,9 +34,10 @@ display( cf.get(where='europe', what='daily', which='recovered',output='pandas')
 cf.setwhom('owid') # changing database
 cf.hist(which='total_vaccinations') # default is for all countries
 ```
-Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis.
+Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-
+<img src="fig/pycoa_v2.0_spf.png" height="200px" align=bottom> <img src="fig/pycoa_v2.0_opencovid19.png" height="200px" align=bottom>
+<img src="fig/pycoa_v2.0_jhu-usa.png" height="200px" align=top>
 
 ```python
 cf.setwhom('spf')
