@@ -37,7 +37,7 @@ cf.hist(which='total_vaccinations') # default is for all countries
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
 <img src="fig/pycoa_v2.0_spf.png" height="200px" align=bottom> <img src="fig/pycoa_v2.0_opencovid19.png" height="200px" align=bottom>
-<img src="fig/pycoa_v2.0_jhu-usa.png" height="200px" align=top>
+<img src="fig/pycoa_v2.0_jhu-usa.png" height="200px" align=top> <img src="fig/pycoa_v2.0_jhu-usa-ma.png" height="200px" align=top>
 
 ```python
 cf.setwhom('spf')
@@ -48,6 +48,7 @@ cf.plot(which='cur_hospitalises',what='daily',option='smooth7',when='01/09/2020:
 
 cf.setwhom('jhu-usa')
 cf.hist() # Deaths per state
+cf.map() # idem but map view
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
