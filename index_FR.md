@@ -34,14 +34,20 @@ display( cf.get(where='europe', what='daily', which='recovered',output='pandas')
 cf.setwhom('owid') # changing database
 cf.hist(which='total_vaccinations') # default is for all countries
 ```
-<iframe src="fig/advertising.html" 
-	sandbox="allow-same-origin allow-scripts"
-    	width="100%"
-    	height="500"
-    	scrolling="no"
-    	seamless="seamless"
-    	frameborder="0">
-</iframe>
+Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis.
+
+
+
+```python
+cf.setwhom('spf')
+cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations
+
+cf.setwhom('opencovid19')
+cf.plot(which='cur_hospitalises',what='daily',option='smooth7',when='01/09/2020:') # Currently in hospital
+
+cf.setwhom('jhu-usa')
+cf.hist() # Deaths per state
+```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
 
