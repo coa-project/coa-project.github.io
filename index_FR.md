@@ -34,12 +34,14 @@ display( cf.get(where='europe', what='daily', which='recovered',output='pandas')
 cf.setwhom('owid') # changing database
 cf.hist(which='total_vaccinations') # default is for all countries
 ```
-<iframe src="fig/advertising.html" sandbox="allow-same-origin allow-scripts"
-    width="100%"
-    height="500"
-    scrolling="no"
-    seamless="seamless"
-    frameborder="0"></iframe>
+<iframe src="fig/advertising.html" 
+	sandbox="allow-same-origin allow-scripts"
+    	width="100%"
+    	height="500"
+    	scrolling="no"
+    	seamless="seamless"
+    	frameborder="0">
+</iframe>
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
 
