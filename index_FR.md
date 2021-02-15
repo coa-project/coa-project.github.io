@@ -18,7 +18,6 @@ Avril 2020 / Février 2021
 |Série temporelle (cumulative) 	     | Séries temporelles de différents pays	   |
 |------------|-------------|
 |<img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300">|<img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300">|
-
 | Carte      |  Histogramme |
 |------------|-------------|
 |<img src="fig/pycoa_v2.0_map.png" height="250px" width="300">|<img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300">|
