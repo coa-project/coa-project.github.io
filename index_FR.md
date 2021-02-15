@@ -10,18 +10,19 @@ Avril 2020 / Février 2021
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
-<iframe width="100%" height="200" width="250" src="fig/pycoa_v2_mapworld.html" frameborder="0"></iframe>
+<iframe width="100%" height="400" width="500" src="fig/pycoa_v2_mapworld.html" frameborder="0"></iframe>
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, es histogrammes ou des cartes.
-<p align="center">
+
 |col 1 	     | 	col2	   |
 |------------|-------------|
 |<img src="fig/pycoa_v2.0_plot_sumall.png" height="200px" width="250">|<img src="fig/pycoa_v2.0_plot_std.png" height="200px" width="250">|
+
 | col1 	     |  col2	   |
 |------------|-------------|
 |<img src="fig/pycoa_v2.0_map.png" height="200px" width="250">|<img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" width="250">|
-</p>
+
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
 
