@@ -23,8 +23,8 @@ Avril 2020 / Février 2021
 --->
 <iframe src="fig/pycoa_v2.0_sumall_plot.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
+        width="60%"
+        height="300"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
@@ -32,8 +32,8 @@ Avril 2020 / Février 2021
 
 <iframe src="fig/pycoa_v2.0_map_hist.html    " 
     sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
+        width="60%"
+        height="300"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
