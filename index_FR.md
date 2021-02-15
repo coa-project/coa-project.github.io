@@ -45,16 +45,11 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-<center>
-<iframe src="fig/pycoa_v2_jhu-usa.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="400px"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
+<div class="resizable" style="width: 200px; height: 200px;">
+    <iframe src="fig/pycoa_v2_jhu-usa.html" style="width: 100%; height: 100%;"></iframe>
+</div>
 
+<center>
 <iframe src="fig/pycoa_v2_spf.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
