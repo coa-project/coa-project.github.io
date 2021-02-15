@@ -20,7 +20,7 @@ Avril 2020 / Février 2021
 
 <img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
 
-<iframe src="fig/pycoa_v2.0_sumall.html" 
+<iframe src="fig/pycoa_v2.0_sumall_plot.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
         height="500"
@@ -29,25 +29,7 @@ Avril 2020 / Février 2021
         frameborder="0">
 </iframe>
 
-<iframe src="fig/pycoa_v2.0_plot.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-
-<iframe src="fig/pycoa_v2.0_hist.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-
-<iframe src="fig/pycoa_v2.0_map.html" 
+<iframe src="fig/pycoa_v2.0_map_hist.html    " 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
         height="500"
@@ -70,16 +52,7 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-<iframe src="fig/pycoa_v2.0_spf.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-
-<iframe src="fig/pycoa_v2.0_usa.html" 
+<iframe src="fig/pycoa_v2.0_spf_usa_map.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
         height="500"
