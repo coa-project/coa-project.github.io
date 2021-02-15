@@ -10,19 +10,19 @@ Avril 2020 / Février 2021
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
-
-<center>
+<p align="center">
 <iframe width="100%" height="475" src="fig/pycoa_v2_mapworld.html" frameborder="0">
 </iframe>
-</center>
-
+</p>
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, es histogrammes ou des cartes.
 
 <img src="fig/pycoa_v2.0_plot_sumall.png" height="200px" align=top> <img src="fig/pycoa_v2.0_plot_std.png" height="200px" align=bottom> 
-<img src="fig/pycoa_v2.0_map.png" height="200px" align=top> <img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>
-<img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
+<img src="fig/pycoa_v2.0_map.png" height="200px" align=top> 
+<img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> 
+<!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
+<!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
 Cette analyse est pensée pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Python™. Comme exemple, après avoir <a href="https://github.com/coa-project/pycoa/wiki/FR:Install" target=_blank>installé PyCoA</a>, les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
 
 ```python
@@ -37,8 +37,7 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-
-<center>
+<p align="center">
 <iframe src="fig/pycoa_v2_spf.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
@@ -47,7 +46,7 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
         seamless="seamless"
         frameborder="0">
 </iframe>
-</center>
+</p>
 ```python
 cf.setwhom('jhu-usa') # JHU USA database
 cf.map() # deaths, map view
