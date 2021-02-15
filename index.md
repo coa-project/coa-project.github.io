@@ -48,7 +48,7 @@ Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [Sorbonne Université](https://www.sorbonne-universite.fr/) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
 
 ### Contact
-* [`support@pycoa.fr`](mailto:support@pycoa.fr)
+* Email : [`support@pycoa.fr`](mailto:support@pycoa.fr)
 * This page : [`pycoa.fr`](http://pycoa.fr)
 
 <a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a>

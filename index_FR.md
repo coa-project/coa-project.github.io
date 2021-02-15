@@ -88,6 +88,9 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
         seamless="seamless"
         frameborder="0">
 </iframe>
+
+Ils sont obtenus aisément avec les quelques simples lignes suivantes.
+
 </center>
 ```python
 cf.setwhom('jhu-usa') # JHU USA database
@@ -110,7 +113,7 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 * Olivier Dadoun - [CNRS](http://cnrs.fr) - [Sorbonne Université](https://www.sorbonne-universite.fr/) - [laboratoire LPNHE](http://lpnhe.in2p3.fr/)
 
 ### Contact
-* [`support@pycoa.fr`](mailto:support@pycoa.fr)
+* Courriel : [`support@pycoa.fr`](mailto:support@pycoa.fr)
 * Cette page : [`pycoa.fr`](http://pycoa.fr)
 
 <a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Suivre @pycoa_fr</a>
