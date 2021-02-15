@@ -74,7 +74,7 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 <iframe src="fig/pycoa_v2_jhu-usa.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
-        height="500px"
+        height="400px"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
