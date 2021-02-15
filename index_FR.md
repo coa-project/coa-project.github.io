@@ -21,41 +21,44 @@ Avril 2020 / Février 2021
 
 <img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
 --->
-<center>
-<iframe src="fig/pycoa_v2_plot_sumall.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500px"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-<iframe src="fig/pycoa_v2_plot_std.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500px"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
 
-<iframe src="fig/pycoa_v2_map.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500px"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-<iframe src="fig/pycoa_v2_hist.html" 
-    sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500px"
-        scrolling="no"
-        seamless="seamless"
-        frameborder="0">
-</iframe>
-</center>
+#table {
+    display: table;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 20px;
+}
+
+<div id="table">
+   <div class="row">
+      <div class="cell">
+         <h5>MAis allo, quoi</h5>
+         <iframe width="560" height="315" src="fig/pycoa_v2_plot_sumall.html" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="cell">
+         <h5 align="right">OUI</h5>
+         <iframe width="560" height="315" src="fig/pycoa_v2_plot_std.html" frameborder="0" align="right" allowfullscreen></iframe>
+      </div>
+   </div>
+   <div class="row">
+      <div class="cell">
+         <h5>Genial</h5>
+         <iframe width="560" height="315" src="fig/pycoa_v2_map.html" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="cell">
+         <h5 align="right">TOP</h5>
+         <iframe width="560" height="315" src="fig/pycoa_v2_hist.html" frameborder="0" align="right" allowfullscreen></iframe>
+      </div>
+   </div>
+</div>
+
+
 Cette analyse est pensée pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Python™. Comme exemple, après avoir <a href="https://github.com/coa-project/pycoa/wiki/FR:Install" target=_blank>installé PyCoA</a>, les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
 
 ```python
