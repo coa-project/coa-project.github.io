@@ -23,17 +23,16 @@ Avril 2020 / Février 2021
 --->
 <iframe src="fig/pycoa_v2_plot_sumall.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
 </iframe>
-
 <iframe src="fig/pycoa_v2_plot_std.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
@@ -41,17 +40,16 @@ Avril 2020 / Février 2021
 
 <iframe src="fig/pycoa_v2_map.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
 </iframe>
-
 <iframe src="fig/pycoa_v2_hist.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
@@ -74,8 +72,8 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 <iframe src="fig/pycoa_v2_jhu-usa.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
@@ -83,8 +81,8 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 <iframe src="fig/pycoa_v2_spf.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="60%"
-        height="300"
+        width="100%"
+        height="100%"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
