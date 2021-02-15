@@ -21,7 +21,7 @@ Avril 2020 / Février 2021
 
 <img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
 --->
-<iframe src="fig/pycoa_v2.0_sumall_plot.html" 
+<iframe src="fig/pycoa_v2_plot_sumall.html" 
     sandbox="allow-same-origin allow-scripts"
         width="60%"
         height="300"
@@ -30,7 +30,7 @@ Avril 2020 / Février 2021
         frameborder="0">
 </iframe>
 
-<iframe src="fig/pycoa_v2.0_map_hist.html    " 
+<iframe src="fig/pycoa_v2_plot_std.html" 
     sandbox="allow-same-origin allow-scripts"
         width="60%"
         height="300"
@@ -38,6 +38,25 @@ Avril 2020 / Février 2021
         seamless="seamless"
         frameborder="0">
 </iframe>
+
+<iframe src="fig/pycoa_v2_map.html" 
+    sandbox="allow-same-origin allow-scripts"
+        width="60%"
+        height="300"
+        scrolling="no"
+        seamless="seamless"
+        frameborder="0">
+</iframe>
+
+<iframe src="fig/pycoa_v2_hist.html" 
+    sandbox="allow-same-origin allow-scripts"
+        width="60%"
+        height="300"
+        scrolling="no"
+        seamless="seamless"
+        frameborder="0">
+</iframe>
+
 
 Cette analyse est pensée pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Python™. Comme exemple, après avoir <a href="https://github.com/coa-project/pycoa/wiki/FR:Install" target=_blank>installé PyCoA</a>, les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
 
@@ -53,10 +72,19 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-<iframe src="fig/pycoa_v2.0_spf_usa_map.html" 
+<iframe src="fig/pycoa_v2_jhu-usa.html" 
     sandbox="allow-same-origin allow-scripts"
-        width="100%"
-        height="500"
+        width="60%"
+        height="300"
+        scrolling="no"
+        seamless="seamless"
+        frameborder="0">
+</iframe>
+
+<iframe src="fig/pycoa_v2_spf.html" 
+    sandbox="allow-same-origin allow-scripts"
+        width="60%"
+        height="300"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
