@@ -22,7 +22,7 @@ Avril 2020 / Février 2021
 <img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
 --->
 <center>
-<iframe src="pycoa_v2_all.html" 
+<iframe src="fig/pycoa_v2_all.html" 
     sandbox="allow-same-origin allow-scripts"
         width="50%"
         height="300px"
