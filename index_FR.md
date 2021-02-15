@@ -14,12 +14,13 @@ Avril 2020 / Février 2021
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, es histogrammes ou des cartes.
 
+<!---
 <img src="fig/pycoa_v2.0_plot_sumall.png" height="200px" align=top> <img src="fig/pycoa_v2.0_plot_std.png" height="200px" align=bottom> 
 
 <img src="fig/pycoa_v2.0_map.png" height="200px" align=top> <img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>
 
 <img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px" align=top> <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top>
-
+--->
 <iframe src="fig/pycoa_v2.0_sumall_plot.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
