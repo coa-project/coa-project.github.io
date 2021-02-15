@@ -24,7 +24,7 @@ Avril 2020 / Février 2021
 <iframe src="fig/pycoa_v2_plot_sumall.html" 
     sandbox="allow-same-origin allow-scripts"
         width="100%"
-        height="100%"
+        height="300"
         scrolling="no"
         seamless="seamless"
         frameborder="0">
@@ -89,11 +89,11 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 </iframe>
 
 ```python
-cf.setwhom('spf') # Santé Publique France database
-cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view
-
 cf.setwhom('jhu-usa') # JHU USA database
 cf.map() # deaths, map view
+
+cf.setwhom('spf') # Santé Publique France database
+cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view with folium visualization output
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
