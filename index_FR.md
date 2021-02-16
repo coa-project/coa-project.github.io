@@ -1,5 +1,5 @@
-# <img src="fig/logo-anime.gif" width="140px" align=top> 
-Avril 2020 / Février 2021
+<!-- # <img src="fig/logo-anime.gif" width="140px" align=top> 
+Avril 2020 / Février 2021 -->
 
 <section id="downloads" class="clearfix">
   <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Archive .zip</span></a>
