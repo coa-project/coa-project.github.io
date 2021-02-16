@@ -20,14 +20,21 @@ Avril 2020 / Février 2021
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
 
+<center>
+
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
 |<a href="fig/pycoa_v2_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
+
+</center>
+
+<center>
 
 |Carte | Histogramme | 
 |------------|-------------|
 |<a href="fig/pycoa_v2_map.html" target="_blank"><img src="fig/pycoa_v2.0_map.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2_hist.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
 
+</center>
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
 
