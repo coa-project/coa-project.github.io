@@ -8,6 +8,6 @@ include:
   - index.md
   - index_FR.md
 title: [ PyCoa - version v2.0 ]
-description: [ A Python Covid Analysis toolkit ] 
+description: [ A Python Covid Analysis toolkit - nov. 2020 / feb. 2021 ] 
 email      : support@pycoa.fr
 url        : http://pycoa.fr
