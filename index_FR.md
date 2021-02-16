@@ -2,9 +2,10 @@
 Avril 2020 / Février 2021
 
 <section id="downloads" class="clearfix">
-  <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span>Archive .zip</span></a>
-  <a href="https://github.com/coa-project/pycoa/archive/v2.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>Archive .tar.gz</span></a>
-  <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span>Voir sur GitHub</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" >Archive .zip</span></a>
+  <a href="https://github.com/coa-project/pycoa/archive/v2.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Tar_gz_archive_icon.svg" height="25px" >Archive .tar.gz</span></a>
+  <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px">Voir sur GitHub</span></a>
 </section>
 
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
@@ -23,7 +24,7 @@ Avril 2020 / Février 2021
 
 |Carte | Histogramme | 
 |------------|-------------|
-|<a href="fig/pycoa_v2_map.html" target="_blank"><img src="fig/pycoa_v2.0_map.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
+|<a href="fig/pycoa_v2_map.html" target="_blank"><img src="fig/pycoa_v2.0_map.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2_hist.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
 
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
