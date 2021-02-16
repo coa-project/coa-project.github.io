@@ -19,7 +19,7 @@ Avril 2020 / Février 2021
 
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
-|<a href="fig/pycoa_v2_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
+|<a href="fig/pycoa_v2_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
 
 |Carte | Histogramme | 
 |------------|-------------|
@@ -42,7 +42,7 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-|Données SPF | Données JHU-USA | https://coa-project.github.io/fig/pycoa_v2_spf.html
+|Données SPF | Données JHU-USA |
 |------------|-------------|
 |<a href="/fig/pycoa_v2_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2_hist_jhu-usa.html" target="_blank"><img src="fig/pycoa_v2_jhu-usa.png" height="250px" width="300px"></a>|
 
