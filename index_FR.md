@@ -19,11 +19,11 @@ Avril 2020 / Février 2021
 
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
-|<img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px">|<img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px">|
+|<a href="fig/pycoa_v2.0_plot_sumall.html"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_std.html"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
 
 |Carte | Histogramme | 
 |------------|-------------|
-|<img src="fig/pycoa_v2.0_map.png" height="250px" width="300">|<img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px">|
+|<a href="fig/pycoa_v2.0_map.html"><img src="fig/pycoa_v2.0_map.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
 
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
@@ -42,16 +42,16 @@ cf.hist(which='total_vaccinations') # default is for all countries
 ```
 Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après.
 
-<center>
-<iframe height="440" width="600" src="fig/pycoa_v2_spf.html" frameborder="0"></iframe>
-</center>
+|Données SPF | Données JHU-USA | 
+|------------|-------------|
+|<a href="fig/pycoa_v2.0_spf.html"><img src="fig/pycoa_v2.0_spf.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2.0_hist_jhu-usa.html"><img src="fig/pycoa_v2.0_jhu-usa.png" height="250px" width="300px"></a>|
 
 ```python
-cf.setwhom('jhu-usa') # JHU USA database
-cf.map() # deaths, map view
-
 cf.setwhom('spf') # Santé Publique France database
 cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view with folium visualization output
+
+cf.setwhom('jhu-usa') # JHU USA database
+cf.map() # deaths, map view
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
