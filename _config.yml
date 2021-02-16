@@ -9,3 +9,5 @@ include:
   - index_FR.md
 title: [PyCoa]
 description: [ A Python Covid Analysis toolkit ] 
+email      : support@pycoa.fr
+url        : http://pycoa.fr
