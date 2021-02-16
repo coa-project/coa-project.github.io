@@ -7,4 +7,5 @@ relative_links:
 include:
   - index.md
   - index_FR.md
-  
+title: [PyCoa - Python Covid Analysis V2.0 - ]
+description: [ A Python Covid Analysis toolkit ] 

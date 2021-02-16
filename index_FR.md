@@ -1,4 +1,3 @@
-title: [PyCoa - A Python Covid Analysis ]
 #  PyCoA version v2.0 <img src="fig/logo-anime.gif" width="140px" align=top> 
 Avril 2020 / Février 2021
 
