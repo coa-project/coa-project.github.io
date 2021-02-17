@@ -7,7 +7,7 @@ April 2020 - February 2021
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span>View on GitHub</span></a>
 </section>
 
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr/index) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
