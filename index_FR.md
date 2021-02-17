@@ -23,7 +23,7 @@ Avril 2020 / Février 2021 -->
 
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
-|<a href="fig/pycoa_v2_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
+|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
 
 
 |Carte | Histogramme | 
