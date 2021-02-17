@@ -10,8 +10,8 @@ Avril 2020 / Février 2021 -->
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
 </section>
 
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr/index) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) / 
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR) 
 
 <center>
 <iframe height="400" width="600" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
@@ -20,11 +20,11 @@ Avril 2020 / Février 2021 -->
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
 
-|Série temporelle (cumulative) | Séries temporelles superposées |
+|Série temporelle (cumulative) | Séries temporelles du G20 |
 |------------|-------------|
 |<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="250px" width="300px"></a>|
 
-|Carte | Histogramme | 
+|Carte (OECD) | Histogramme | 
 |------------|-------------|
 |<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
 
@@ -71,7 +71,7 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 
 ### Contact
 * Courriel : [`support@pycoa.fr`](mailto:support@pycoa.fr)
-* Cette page : [`pycoa.fr`](http://pycoa.fr)
+* Cette page : [`www.pycoa.fr`](http://www.pycoa.fr/index_FR)
 
 <a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Suivre @pycoa_fr</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
