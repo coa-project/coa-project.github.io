@@ -20,16 +20,13 @@ Avril 2020 / Février 2021 -->
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
 
-<center>
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
-
+|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="250px" width="300px"></a>|
 
 |Carte | Histogramme | 
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_map.html" target="_blank"><img src="fig/pycoa_v2.0_map.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
-</center>
+|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png" height="250px" width="300"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px" width="300px"></a>|
 
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
@@ -39,9 +36,9 @@ Cette analyse est pensée pour être accessible à des non-spécialistes : des l
 ```python
 import coa.front as cf
 # default database is JHU
-cf.plot(option='sumall') # default is for all countries
-cf.plot(where=['european union','gbr']) # default is 'deaths'
-cf.map(where='americas',what='daily',when='01/02/2021',which='confirmed')
+cf.plot(option='sumall') # default is 'deaths', for all countries
+cf.plot(where='g20') # managing region
+cf.map(where='oecd',what='daily',when='01/02/2021',which='confirmed')
 
 cf.setwhom('owid') # changing database
 cf.hist(which='total_vaccinations') # default is for all countries
