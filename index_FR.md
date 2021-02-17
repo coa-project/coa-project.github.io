@@ -10,7 +10,7 @@ Avril 2020 / Février 2021 -->
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
 </section>
 
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr) / 
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr/index) / 
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
 <center>
@@ -23,7 +23,7 @@ Avril 2020 / Février 2021 -->
 <center>
 |Série temporelle (cumulative) | Séries temporelles superposées |
 |------------|-------------|
-|<a href="fig/pycoa_v2_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
+|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_std.html" target="_blank"><img src="fig/pycoa_v2.0_plot_std.png" height="250px" width="300px"></a>|
 
 
 |Carte | Histogramme | 
