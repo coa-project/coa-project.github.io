@@ -20,7 +20,7 @@ Avril 2020 / Février 2021 -->
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
 
-|Série temporelle (cumulative) | Séries temporelles du G20 |
+|Série temporelle (cumulative) | Séries temporelles (G20) |
 |------------|-------------|
 |<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px" width="300px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="250px" width="300px"></a>|
 
@@ -54,7 +54,7 @@ cf.setwhom('spf') # Santé Publique France database
 cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view with folium visualization output
 
 cf.setwhom('jhu-usa') # JHU USA database
-cf.map() # deaths, map view
+cf.hist() # deaths, map view
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
