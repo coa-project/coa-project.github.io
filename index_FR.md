@@ -22,11 +22,11 @@ Avril 2020 / Février 2021 -->
 
 |Série temporelle (cumulative) | Séries temporelles (G20) |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="250px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="250px"></a>|
+|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="200px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="200px"></a>|
 
 |Carte (OECD) | Histogramme | 
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png" height="250px"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="250px"></a>|
+|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png" height="200px"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px"></a>|
 
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
@@ -47,7 +47,7 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 |Données SPF | Données JHU-USA |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" height="250px"></a>|<a href="fig/pycoa_v2.0_jhu-usa.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usa.png" height="250px"></a>|
+|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" height="200px"></a>|<a href="fig/pycoa_v2.0_jhu-usa.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usa.png" height="200px"></a>|
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
