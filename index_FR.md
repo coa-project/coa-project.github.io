@@ -49,10 +49,10 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
-cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view with folium visualization output
+cf.map(which='tot_vacc',tile='esri') # Vaccinations, map view optional tile 
 
-cf.setwhom('jhu-usa') # JHU USA database
-cf.map() # deaths, map view
+cf.setwhom('jhu-usa',visu='folium') # JHU USA database
+cf.map() # deaths, map view with folium visualization output
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
