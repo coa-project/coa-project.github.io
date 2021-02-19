@@ -1,3 +1,6 @@
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) / 
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR) 
+
 <section id="downloads" class="clearfix">
   <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Archive .zip</span></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -6,9 +9,6 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
 </section>
-
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR) 
 
 <center>
 <iframe id="mobilehide" height="460" width="580" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
