@@ -47,14 +47,14 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 |Données SPF | Données JHU-USA |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png"></a>|<a href="fig/pycoa_v2.0_jhu-usa.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usa.png"></a>|
+|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png"></a>|<a href="fig/fig/pycoa_v2.0_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usafolium.jpg"></a>|
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
 cf.map(which='tot_vacc',visu='folium',tile='esri') # Vaccinations, map view with folium visualization output
 
 cf.setwhom('jhu-usa') # JHU USA database
-cf.hist() # deaths, map view
+cf.map() # deaths, map view
 ```
 
 PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
