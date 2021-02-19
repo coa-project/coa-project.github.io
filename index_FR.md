@@ -10,9 +10,6 @@ Avril 2020 / Février 2021 -->
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
 </section>
 
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR) 
-
 <center>
 <iframe height="400" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
 </center>
@@ -22,11 +19,11 @@ Avril 2020 / Février 2021 -->
 
 |Série temporelle (cumulative) | Séries temporelles (G20) |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png" height="200px"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png" height="200px"></a>|
+|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png"></a>|
 
 |Carte (OECD) | Histogramme | 
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png" height="200px"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png" height="200px"></a>|
+|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png"></a>|
 
 <!--<img src="fig/pycoa_v2.0_hist_byvalue.png" height="200px" align=top>-->
 <!-- <img src="fig/pycoa_v2.0_pandas.png" height="200px" align=top> -->
