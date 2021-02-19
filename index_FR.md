@@ -10,9 +10,11 @@ Avril 2020 / Février 2021 -->
   <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
 </section>
 
+<div class="mobileHide">
 <center>
 <iframe height="380" width="500" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
 </center>
+</div>
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
 - des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
