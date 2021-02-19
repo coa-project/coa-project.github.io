@@ -11,7 +11,7 @@ Avril 2020 / Février 2021 -->
 </section>
 
 <center>
-<iframe height="400" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
+<iframe src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
 </center>
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
 - un accès simple aux bases de données sur la Covid-19 ;
