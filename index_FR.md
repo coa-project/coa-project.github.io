@@ -45,7 +45,7 @@ Depuis la version `v2.0`, PyCoA accède également à des données locales comme
 
 |Données SPF | Données JHU-USA |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png"></a>|<a href="fig/fig/pycoa_v2.0_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usafolium.jpg"></a>|
+|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" height=384></a>|<a href="fig/pycoa_v2.0_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usafolium.jpg" height=384></a>|
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
