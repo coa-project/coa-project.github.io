@@ -2,11 +2,11 @@
 [ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
 
 <section id="downloads" class="clearfix">
-  <a href="https://github.com/coa-project/pycoa/archive/v2.0.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Download .zip</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/coa-project/pycoa/archive/v2.0.tar.gz" id="download-tar-gz" class="button" target=_blank><span>
+  <a href="https://github.com/coa-project/pycoa/archive/main.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Download .zip</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/coa-project/pycoa/archive/main.tar.gz" id="download-tar-gz" class="button" target=_blank><span>
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Tar_gz_archive_icon.svg" height="25px" align="bottom" alt="targz icon from wikipedia">Download .tar.gz</span></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/coa-project/pycoa/tree/v2.0" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">View on GitHub</span></a>
+  <a href="https://github.com/coa-project/pycoa/tree/main" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">View on GitHub</span></a>
 </section>
 
 <center>
@@ -40,7 +40,7 @@ cf.hist(which='total_vaccinations') # default is for all countries
 
 Since the `v2.0` version, PyCoA manages also local data like
 [JHU-USA](https://coronavirus.jhu.edu/) for the United-States, 
-[SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) or [OpenCovid19](https://github.com/opencovid19-fr) for France. Then we get plots like the ones just below.
+[SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) or [OpenCovid19](https://github.com/opencovid19-fr) for France. Then we get plots like the ones just below. Other databases has been added for Italy or India.
 
 |SPF data | JHU-USA data |
 |------------|-------------|
@@ -50,8 +50,8 @@ Since the `v2.0` version, PyCoA manages also local data like
 cf.setwhom('spf') # Santé Publique France database
 cf.map(which='tot_vacc',tile='esri') # Vaccinations, map view optional tile 
 
-cf.setwhom('jhu-usa',visu='folium') # JHU USA database
-cf.map() # deaths, map view with folium visualization output
+cf.setwhom('jhu-usa') # JHU USA database
+cf.map(visu='folium') # deaths, map view with folium visualization output
 ```
 
 `PyCoA` works currently inside `Jupyter` notebook, over a local install or on online platforms such as <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
