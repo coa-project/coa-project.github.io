@@ -10,7 +10,7 @@
 </section>
 
 <center>
-<iframe id="mobilehide" height="460" width="580" src="fig/pycoa_v2.0_mapworld.html" frameborder="0"></iframe>
+<iframe id="mobilehide" height="460" width="580" src="fig/mapFranceVariant.html" frameborder="0"></iframe>
 </center>
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
