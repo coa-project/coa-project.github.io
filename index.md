@@ -8,8 +8,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/coa-project/pycoa/tree/main" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">View on GitHub</span></a>
   <a href="https://mybinder.org/v2/gh/coa-project/coadocker/HEAD" id="view-on-binder" class="button" target=_blank><span><img src="https://mybinder.org/badge_logo.svg" height="25px" align="bottom" alt="binder icon"></span></a>
-<a href="https://twitter.com/intent/tweet?button_hashtag=pycoa_fr&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #pycoa_fr</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </section>
 
 <center>
@@ -72,6 +71,3 @@ Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home
 ### Contact
 * Email : [`support@pycoa.fr`](mailto:support@pycoa.fr)
 * This page : [`www.pycoa.fr`](http://www.pycoa.fr)
-
-<a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @pycoa_fr</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
