@@ -8,6 +8,8 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Tar_gz_archive_icon.svg" height="25px" align="bottom" alt="targz icon from wikipedia">Archive .tar.gz</span></a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/coa-project/pycoa/tree/main" id="view-on-github" class="button" target=_blank><span><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="25px" align="bottom" alt="github icon from github">Voir sur GitHub</span></a>
+  <a href="https://mybinder.org/v2/gh/coa-project/coadocker/HEAD" id="view-on-binder" class="button" target=_blank><span><img src="https://mybinder.org/badge_logo.svg" height="25px" align="bottom" alt="binder icon"></span></a>
+
 </section>
 
 <center>
