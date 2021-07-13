@@ -72,6 +72,7 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 * Tweeter : [`@pycoa_fr`](https://twitter.com/pycoa_fr)
 
 ### On parle de nous…
+* Dans les actualités de [Sorbonne Université](https://www.sorbonne-universite.fr) (juillet 2021) : [PyCoa : un logiciel gratuit d’analyse des données de la Covid-19](https://www.sorbonne-universite.fr/actualites/pycoa-un-logiciel-gratuit-danalyse-des-donnees-de-la-covid-19)
 * Dans les actualités de [l'UFR de physique de Université de Paris](https://physique.u-paris.fr) (juillet 2021) : [«Un logiciel pour mieux comprendre la pandémie»](https://physique.u-paris.fr/actualites/un-logiciel-pycoa-pour-mieux-comprendre-la-pandemie)
 * Dans les actualités de [Université de Paris](http://u-paris.fr) (juin 2021) : [«Un logiciel pour mieux comprendre la pandémie»](https://u-paris.fr/un-logiciel-pour-mieux-comprendre-la-pandemie/)
 * au [22ème salon culture et jeux mathématiques](https://salon-math.fr) (mai 2021) : [`https://salon-math.fr/2021/04/14/pycoa/`](https://salon-math.fr/2021/04/14/pycoa/)
