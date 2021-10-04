@@ -97,4 +97,4 @@ La documentation complète se trouve sur <a href="https://github.com/coa-project
 * Dans les actualités de [Université de Paris](http://u-paris.fr) (juin 2021) : [«Un logiciel pour mieux comprendre la pandémie»](https://u-paris.fr/un-logiciel-pour-mieux-comprendre-la-pandemie/)
 * au [22ème salon culture et jeux mathématiques](https://salon-math.fr) (mai 2021) : [`https://salon-math.fr/2021/04/14/pycoa/`](https://salon-math.fr/2021/04/14/pycoa/)
 * à l'[hackathon covid - lutter ensemble](https://hackathon-covid.fr) (avril 2021) : [`https://forum.hackathon-covid.fr/t/3a-pycoa-une-analyse-python-des-donnees-covid-pour-tous/251`](https://forum.hackathon-covid.fr/t/3a-pycoa-une-analyse-python-des-donnees-covid-pour-tous/251)
-* à l'hackathon [Data Against Covid-19](https://ultrahack.org/covid-19datahack) (avril 2020) : [
+* à l'hackathon [Data Against Covid-19](https://ultrahack.org/covid-19datahack) (avril 2020) : [`https://ultrahack.org/covid-19datahack`](https://ultrahack.org/covid-19datahack)

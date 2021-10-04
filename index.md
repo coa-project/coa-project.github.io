@@ -96,4 +96,5 @@ Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home
 * In the news of [Université de Paris](http://u-paris.fr) (june 2021) : [«Un logiciel pour mieux comprendre la pandémie»](https://u-paris.fr/un-logiciel-pour-mieux-comprendre-la-pandemie/)
 * At the [22ème salon culture et jeux mathématiques](https://salon-math.fr) (may 2021) : 
 [`https://salon-math.fr/2021/04/14/pycoa/`](https://salon-math.fr/2021/04/14/pycoa/)
-* At the [hackathon covid - lutter ensemble](https://hackathon-covid.fr) (april 2021) : [`https://forum.hackathon-covid.fr/t/3a-pycoa-une-analyse-python-des-donnees-covid-pour-tous/251`](https://forum.hackathon-covid.fr/t/3a-pycoa-une-analyse-python-des-donnees-covid-pour-tous/251)
+* At the [hackathon covid - lutter ensemble](https://hackathon-covid.fr) (april 2021) : [`https://ultrahack.org/covid-19datahack`](https://ultrahack.org/covid-19datahack)
+
