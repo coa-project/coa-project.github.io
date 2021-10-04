@@ -42,15 +42,27 @@ cf.map(where='oecd',what='daily',when='01/02/2021',which='confirmed')
 
 cf.setwhom('owid') # changing database
 cf.hist(which='total_vaccinations') # default is for all countries
+cf.hist(which='cur_icu_patients',typeofhist='pie',where='european union')
+cf.hist(which='total_people_fully_vaccinated_per_hundred',typeofhist='byvalue',where='asia')
 ```
 
-Since the `v2.0` version, PyCoA manages also local data like
-[JHU-USA](https://coronavirus.jhu.edu/) for the United-States, 
-[SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) or [OpenCovid19](https://github.com/opencovid19-fr) for France. Then we get plots like the ones just below. Other databases has been added for Italy or India.
+Since the `v2.0` version, PyCoA manages also local data :
+- [JHU-USA](https://coronavirus.jhu.edu/) or [CovidTracking](https://covidtracking.com) for the United-States, 
+- [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19), [OpenCovid19](https://github.com/opencovid19-fr) or [Obepine](https://www.reseau-obepine.fr/donnees-ouvertes/) for France,
+- [DPC](https://github.com/pcm-dpc/COVID-19) for Italy,
+- [Covid19India](https://api.covid19india.org) for India,
+- [RKI](https://github.com/jgehrcke/covid-19-germany-gae) for Germany,
+- [Escovid19Data](https://github.com/montera34/escovid19data) for Spain,
+- [PHE](https://api.coronavirus.data.gov.uk) for United Kingdom,
+- [Sciensano](https://epistat.sciensano.be) for Belgium,
+- [DGS](https://github.com/dssg-pt/covid19pt-data) for Portugal,
+- [MOH](https://github.com/MoH-Malaysia) for Malaysia.
+
+Then we get plots like the ones just below. Other databases has been added for Italy or India.
 
 |SPF data | JHU-USA data |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" width=504></a>|<a href="fig/pycoa_v2.0_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usafolium.jpg" width=504></a>|
+|<a href="fig/pycoa_v2.10_spf.html" target="_blank"><img src="fig/pycoa_v2.10_spf.png" width=504></a>|<a href="fig/pycoa_v2.10_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.10_jhu-usafolium.jpg" width=504></a>|
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
