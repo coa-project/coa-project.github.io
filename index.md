@@ -12,20 +12,24 @@
 </section>
 
 <center>
-<iframe id="mobilehide" height="460" width="580" src="fig/mapFranceVariant.html" frameborder="0"></iframe>
+<iframe id="mobilehide" height="460" width="580" src="fig/pycoa_v2.10_mapFranceVariant.html" frameborder="0"></iframe>
 </center>
 
 `PyCoA` (Python Covid Analysis) is a Python™ framework which provides:
 - a simple access to common Covid-19 databases;
-- tools to represent and analyse Covid-19 data such as time series plots, histograms and maps.
+- tools to represent and analyse Covid-19 data such as time series plots, histograms, pies and maps.
 
 |Time serie (cumulative) | Time series (G20) |
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png"></a>|
+|<a href="fig/pycoa_v2.10_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.10_plot_sumall.png"></a>|<a href="fig/pycoa_v2.10_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.10_plot_g20.png"></a>|
 
 |MAP (OECD) | Histogram | 
 |------------|-------------|
-|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png"></a>|
+|<a href="fig/pycoa_v2.10_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.10_map_oecd.png"></a>|<a href="fig/pycoa_v2.10_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.10_hist_bycountry.png"></a>|
+
+|PIE (EU) | Histogram by value (ASIA) |
+|------------|-------------|
+|<a href="fig/pycoa_v2.10_pie.html" target="_blank"><img src="fig/pycoa_v2.10_pie.png"></a>|<a href="fig/pycoa_v2.10_histval.html" target="_blank"><img src="fig/pycoa_v2.10_histval.png"></a>|
 
 It is designed to be accessible to non-specialists: teenagers learning Python™, students, science journalists, even scientists who are not familiar in data access methods. A simple analysis can be performed out of the box, as well as a more complex analysis for people familiar with Python™ programming. As an example, after <a href="https://github.com/coa-project/pycoa/wiki/Install" target=_blank>installing pycoa</a> to your framework, the following few lines of code produce the four figures introducing this short documentation.
 
