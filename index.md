@@ -23,9 +23,9 @@
 |------------|-------------|
 |<a href="fig/pycoa_v2.10_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.10_plot_sumall.png"></a>|<a href="fig/pycoa_v2.10_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.10_plot_g20.png"></a>|
 
-|MAP (OECD) | Histogram | 
+|MAP (OECD) | Histogram (World) | 
 |------------|-------------|
-|<a href="fig/pycoa_v2.10_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.10_map_oecd.png"></a>|<a href="fig/pycoa_v2.10_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.10_hist_bycountry.png"></a>|
+|<a href="fig/pycoa_v2.10_plot_oecd.html" target="_blank"><img src="fig/pycoa_v2.10_plot_oecd.png"></a>|<a href="fig/pycoa_v2.10_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.10_hist_bycountry.png"></a>|
 
 |PIE (EU) | Histogram by value (ASIA) |
 |------------|-------------|
@@ -62,7 +62,7 @@ Then we get plots like the ones just below. Other databases has been added for I
 
 |SPF data | JHU-USA data |
 |------------|-------------|
-|<a href="fig/pycoa_v2.10_spf.html" target="_blank"><img src="fig/pycoa_v2.10_spf.png" width=504></a>|<a href="fig/pycoa_v2.10_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.10_jhu-usafolium.jpg" width=504></a>|
+|<a href="fig/pycoa_v2.10_spf.html" target="_blank"><img src="fig/pycoa_v2.10_spf.png" width=504></a>|<a href="fig/pycoa_v2.10_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.10_jhu-usafolium.png" width=504></a>|
 
 ```python
 cf.setwhom('spf') # Santé Publique France database
