@@ -27,7 +27,7 @@
 |------------|-------------|
 |<a href="fig/pycoa_v2.10_plot_oecd.html" target="_blank"><img src="fig/pycoa_v2.10_plot_oecd.png"></a>|<a href="fig/pycoa_v2.10_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.10_hist_bycountry.png"></a>|
 
-|PIE (EU) | Histogram by value (ASIA) |
+|PIE (EU) | Histogram by value (Asia) |
 |------------|-------------|
 |<a href="fig/pycoa_v2.10_pie.html" target="_blank"><img src="fig/pycoa_v2.10_pie.png"></a>|<a href="fig/pycoa_v2.10_histval.html" target="_blank"><img src="fig/pycoa_v2.10_histval.png"></a>|
 
