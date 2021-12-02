@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.front module &mdash; coa,  dev documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="coa.geo module" href="coa.geo.html" />
+    <link rel="prev" title="coa.ffront module" href="coa.ffront.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> coa, 
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="coa.html">coa package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coa.covid19.html">coa.covid19 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.dbinfo.html">coa.dbinfo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.display.html">coa.display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.error.html">coa.error module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.ffront.html">coa.ffront module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">coa.front module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#about">About :</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="coa.geo.html">coa.geo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.tools.html">coa.tools module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">coa, </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="coa.html">coa package</a> &raquo;</li>
+      <li>coa.front module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/coa.front.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-coa.front">
+<span id="coa-front-module"></span><h1>coa.front module<a class="headerlink" href="#module-coa.front" title="Permalink to this headline"></a></h1>
+<p>Project : PyCoA - Copyright ©pycoa.fr
+Date :    april 2020 - march 2021
+Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
+License: See joint LICENSE file</p>
+<p>Module : coa.front</p>
+<section id="about">
+<h2>About :<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
+<p>This is the PyCoA front end functions. It provides easy access and
+use of the whole PyCoA framework in a simplified way.
+The use can change the database, the type of data, the output format
+with keywords (see help of functions below).</p>
+</section>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline"></a></h2>
+<dl>
+<dt>** plotting covid deaths (default value) vs. time **</dt><dd><p>import coa.front as cf</p>
+<p>cf.plot(where=’France’)  # where keyword is mandatory</p>
+</dd>
+</dl>
+<p>** getting recovered data for some countries **</p>
+<blockquote>
+<div><p>cf.get(where=[‘Spain’,’Italy’],which=’recovered’)</p>
+</div></blockquote>
+<dl>
+<dt>** listing available database and which data can be used **</dt><dd><p>cf.listwhom()
+cf.setwhom(‘jhu’) # return available keywords (aka ‘which’ data)
+cf.listwhich()   # idem
+cf.listwhat()    # return available time series type (weekly,</p>
+<blockquote>
+<div><p># daily…)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>cf.plot(option=’sumall’) # return the cumulative plot for all countries</dt><dd><p># for default which keyword. See cf.listwhich() and
+# and other cf.list**() function (see below)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.chartsinput_deco" title="coa.front.chartsinput_deco"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chartsinput_deco</span></code></a></p></td>
+<td><p>Main decorator it mainly deals with arg testings</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.get" title="coa.front.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a></p></td>
+<td><p>Return covid19 data in specified format output (default, by list) for specified locations ('where' keyword).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.getinfo" title="coa.front.getinfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getinfo</span></code></a></p></td>
+<td><p>Return keyword_definition for the db selected</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.getversion" title="coa.front.getversion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getversion</span></code></a></p></td>
+<td><p>Return the current running version of pycoa.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.getwhom" title="coa.front.getwhom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getwhom</span></code></a></p></td>
+<td><p>Return the current base which is used</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.hist" title="coa.front.hist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hist</span></code></a></p></td>
+<td><p>Create histogram according to arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.listbypop" title="coa.front.listbypop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listbypop</span></code></a></p></td>
+<td><p>Get the list of available population normalization</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.listoption" title="coa.front.listoption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listoption</span></code></a></p></td>
+<td><p>Return the list of currently avalailable option apply to data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.listoutput" title="coa.front.listoutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listoutput</span></code></a></p></td>
+<td><p>Return the list of currently available output types for the get() function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.listtile" title="coa.front.listtile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listtile</span></code></a></p></td>
+<td><p>Return the list of currently avalailable tile option for map() Default is the first one.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.listvisu" title="coa.front.listvisu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listvisu</span></code></a></p></td>
+<td><p>Return the list of currently available visualization for the map() function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.listwhat" title="coa.front.listwhat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listwhat</span></code></a></p></td>
+<td><p>Return the list of currently avalailable type of series available.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.listwhere" title="coa.front.listwhere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listwhere</span></code></a></p></td>
+<td><p>Get the list of available regions/subregions managed by the current database</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.listwhich" title="coa.front.listwhich"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listwhich</span></code></a></p></td>
+<td><p>Get which are the available fields for the current base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.listwhom" title="coa.front.listwhom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">listwhom</span></code></a></p></td>
+<td><p>Return the list of currently avalailable databases for covid19 data in PyCoA.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.map" title="coa.front.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map</span></code></a></p></td>
+<td><p>Create a map according to arguments and options. See help(map). - 2 types of visu are avalailable so far : bokeh or folium (see listvisu()) by default visu='bokeh' - In the default case (i.e visu='bokeh') available option are :     - dateslider=True: a date slider is called and displayed on the right part of the map     - maplabel = text, value are displayed directly on the map                = spark, sparkline are displayed directly on the map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.merger" title="coa.front.merger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merger</span></code></a></p></td>
+<td><p>Merge two or more pycoa pandas from get_stats operation 'coapandas': list (min 2D) of pandas from stats 'whichcol': list variable associate to the coapandas list to be retrieve</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.plot" title="coa.front.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<td><p>Create a date plot according to arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.saveoutput" title="coa.front.saveoutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveoutput</span></code></a></p></td>
+<td><p>Export pycoas pandas as an output file selected by output argument 'pandas': pandas to save 'saveformat': excel (default) or csv 'savename': None (default pycoaout+ '.xlsx/.csv')</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.setwhom" title="coa.front.setwhom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setwhom</span></code></a></p></td>
+<td><p>Set the covid19 database used, given as a string.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.chartsinput_deco">
+<span class="sig-name descname"><span class="pre">chartsinput_deco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#chartsinput_deco"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.chartsinput_deco" title="Permalink to this definition"></a></dt>
+<dd><p>Main decorator it mainly deals with arg testings</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.get" title="Permalink to this definition"></a></dt>
+<dd><p>Return covid19 data in specified format output (default, by list)
+for specified locations (‘where’ keyword).
+The used database is set by the setbase() function but can be
+changed on the fly (‘whom’ keyword)
+Keyword arguments
+—————–</p>
+<dl>
+<dt>where  –   a single string of location, or list of (mandatory,</dt><dd><p>no default value)</p>
+</dd>
+<dt>which  –   what sort of data to deliver ( ‘death’,’confirmed’,</dt><dd><p>‘recovered’ for ‘jhu’ default database). See listwhich() function
+for full list according to the used database.</p>
+</dd>
+<dt>what   –   which data are computed, either in cumulative mode</dt><dd><p>(‘cumul’, default value), or ‘daily’ (diff with previous day
+and ‘weekly’ (diff with previous week). See
+listwhich() for fullist of available
+Full list of what keyword with the listwhat() function.</p>
+</dd>
+<dt>whom   –   Database specification (overload the setbase()</dt><dd><p>function). See listwhom() for supported list</p>
+</dd>
+<dt>when   –   dates are given under the format dd/mm/yyyy. In the when</dt><dd><p>option, one can give one date which will be the end of
+the data slice. Or one can give two dates separated with
+“:”, which will define the time cut for the output data
+btw those two dates.</p>
+</dd>
+<dt>output –   output format returned ( pandas (default), array (numpy.array),</dt><dd><p>dict or list). See listoutput() function.</p>
+</dd>
+<dt>option –   pre-computing option.</dt><dd><ul class="simple">
+<li><p>nonneg means that negative daily balance is pushed back</p></li>
+</ul>
+<p>to previousdays in order to have a cumulative function which is
+monotonous increasing.
+* nofillnan means that nan value won’t be filled.
+* smooth7 will perform a 7 day window average of data
+* sumall will return integrated over locations given via the
+where keyword. If using double bracket notation, the sumall
+option is applied for each bracketed member of the where arg.</p>
+<p>By default : no option.
+See listoption().</p>
+</dd>
+<dt>bypop –    normalize by population (if available for the selected database).</dt><dd><ul class="simple">
+<li><p>by default, ‘no’ normalization</p></li>
+<li><p>can normalize by ‘100’, ‘1k’, ‘100k’ or ‘1M’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.getinfo">
+<span class="sig-name descname"><span class="pre">getinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#getinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.getinfo" title="Permalink to this definition"></a></dt>
+<dd><p>Return keyword_definition for the db selected</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.getversion">
+<span class="sig-name descname"><span class="pre">getversion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#getversion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.getversion" title="Permalink to this definition"></a></dt>
+<dd><p>Return the current running version of pycoa.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.getwhom">
+<span class="sig-name descname"><span class="pre">getwhom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#getwhom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.getwhom" title="Permalink to this definition"></a></dt>
+<dd><p>Return the current base which is used</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.hist">
+<span class="sig-name descname"><span class="pre">hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#hist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.hist" title="Permalink to this definition"></a></dt>
+<dd><p>Create histogram according to arguments.
+See help(hist).
+Keyword arguments
+—————–</p>
+<p>where (mandatory if no input), what, which, whom, when : (see help(get))</p>
+<dl class="simple">
+<dt>input       –  input data to plot within the pycoa framework (e.g.</dt><dd><p>after some analysis or filtering). Default is None which
+means that we use the basic raw data through the get
+function.
+When the ‘input’ keyword is set, where, what, which,
+whom when keywords are ignored.
+input should be given as valid pycoa pandas dataframe.</p>
+</dd>
+<dt>input_field –  is the name of the field of the input pandas to plot.</dt><dd><p>Default is ‘deaths/cumul’, the default output field of
+the get() function.</p>
+</dd>
+<dt>width_height<span class="classifier">width and height of the picture .</span></dt><dd><p>If specified should be a list of width and height.
+For instance width_height=[400,500]</p>
+</dd>
+</dl>
+<p>typeofhist  –  ‘bylocation’ (default), ‘byvalue’ or pie</p>
+<dl class="simple">
+<dt>bins        –  number of bins used, only available for ‘byvalue’ type of</dt><dd><p>histograms.
+If none provided, a default value will be used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listbypop">
+<span class="sig-name descname"><span class="pre">listbypop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listbypop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listbypop" title="Permalink to this definition"></a></dt>
+<dd><p>Get the list of available population normalization</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listoption">
+<span class="sig-name descname"><span class="pre">listoption</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listoption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listoption" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently avalailable option apply to data.
+Default is no option.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listoutput">
+<span class="sig-name descname"><span class="pre">listoutput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listoutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listoutput" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently available output types for the
+get() function. The first one is the default output given if
+not specified.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listtile">
+<span class="sig-name descname"><span class="pre">listtile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listtile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listtile" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently avalailable tile option for map()
+Default is the first one.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listvisu">
+<span class="sig-name descname"><span class="pre">listvisu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listvisu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listvisu" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently available visualization for the
+map() function. The first one is the default output given if
+not specified.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listwhat">
+<span class="sig-name descname"><span class="pre">listwhat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listwhat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listwhat" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently avalailable type of series available.
+The first one is the default one.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listwhere">
+<span class="sig-name descname"><span class="pre">listwhere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clustered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listwhere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listwhere" title="Permalink to this definition"></a></dt>
+<dd><p>Get the list of available regions/subregions managed by the current database</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listwhich">
+<span class="sig-name descname"><span class="pre">listwhich</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listwhich"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listwhich" title="Permalink to this definition"></a></dt>
+<dd><p>Get which are the available fields for the current base.
+Output is a list of string.
+By default, the listwhich()[0] is the default which field in other
+functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.listwhom">
+<span class="sig-name descname"><span class="pre">listwhom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detailed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#listwhom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.listwhom" title="Permalink to this definition"></a></dt>
+<dd><p>Return the list of currently avalailable databases for covid19
+data in PyCoA.
+The first one is the default one.</p>
+<p>If detailed=True, gives information location of each given database.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.map" title="Permalink to this definition"></a></dt>
+<dd><p>Create a map according to arguments and options.
+See help(map).
+- 2 types of visu are avalailable so far : bokeh or folium (see listvisu())
+by default visu=’bokeh’
+- In the default case (i.e visu=’bokeh’) available option are :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>dateslider=True: a date slider is called and displayed on the right part of the map</p></li>
+<li><dl class="simple">
+<dt>maplabel = text, value are displayed directly on the map</dt><dd><p>= spark, sparkline are displayed directly on the map</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.merger">
+<span class="sig-name descname"><span class="pre">merger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#merger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.merger" title="Permalink to this definition"></a></dt>
+<dd><p>Merge two or more pycoa pandas from get_stats operation
+‘coapandas’: list (min 2D) of pandas from stats
+‘whichcol’: list variable associate to the coapandas list to be retrieve</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.plot" title="Permalink to this definition"></a></dt>
+<dd><p>Create a date plot according to arguments. See help(plot).
+Keyword arguments
+—————–</p>
+<p>where (mandatory), what, which, whom, when : (see help(get))</p>
+<dl class="simple">
+<dt>input       –  input data to plot within the pycoa framework (e.g.</dt><dd><p>after some analysis or filtering). Default is None which
+means that we use the basic raw data through the get
+function.
+When the ‘input’ keyword is set, where, what, which,
+whom when keywords are ignored.
+input should be given as valid pycoa pandas dataframe.</p>
+</dd>
+<dt>input_field –  is the name of the field of the input pandas to plot.</dt><dd><p>Default is ‘deaths/cumul’, the default output field of
+the get() function.</p>
+</dd>
+<dt>width_height<span class="classifier">width and height of the picture .</span></dt><dd><p>If specified should be a list of width and height. For instance width_height=[400,500]</p>
+</dd>
+</dl>
+<p>title       –  to force the title of the plot</p>
+<dl>
+<dt>typeofplot  – ‘date’ (default), ‘menulocation’ or ‘versus’</dt><dd><p>‘date’:date plot
+‘menulocation’: date plot with two scroll menu locations.</p>
+<blockquote>
+<div><p>Usefull to study the behaviour of a variable for two different countries.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘versus’: plot variable against an other one.</dt><dd><p>For this type of plot one should used ‘input’ and ‘input_field’ (not fully tested).
+Moreover dim(input_field) must be 2.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.saveoutput">
+<span class="sig-name descname"><span class="pre">saveoutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#saveoutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.saveoutput" title="Permalink to this definition"></a></dt>
+<dd><p>Export pycoas pandas as an output file selected by output argument
+‘pandas’: pandas to save
+‘saveformat’: excel (default) or csv
+‘savename’: None (default pycoaout+ ‘.xlsx/.csv’)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.setwhom">
+<span class="sig-name descname"><span class="pre">setwhom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#setwhom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.setwhom" title="Permalink to this definition"></a></dt>
+<dd><p>Set the covid19 database used, given as a string.
+Please see pycoa.listbase() for the available current list.</p>
+<p>By default, the listbase()[0] is the default base used in other
+functions.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coa.ffront.html" class="btn btn-neutral float-left" title="coa.ffront module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coa.geo.html" class="btn btn-neutral float-right" title="coa.geo module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, coa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

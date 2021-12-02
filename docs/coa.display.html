@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.display module &mdash; coa,  dev documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="coa.error module" href="coa.error.html" />
+    <link rel="prev" title="coa.dbinfo module" href="coa.dbinfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> coa, 
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="coa.html">coa package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coa.covid19.html">coa.covid19 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.dbinfo.html">coa.dbinfo module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">coa.display module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#about">About :</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="coa.error.html">coa.error module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.ffront.html">coa.ffront module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.front.html">coa.front module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.geo.html">coa.geo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.tools.html">coa.tools module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">coa, </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="coa.html">coa package</a> &raquo;</li>
+      <li>coa.display module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/coa.display.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-coa.display">
+<span id="coa-display-module"></span><h1>coa.display module<a class="headerlink" href="#module-coa.display" title="Permalink to this headline"></a></h1>
+<p>Project : PyCoA
+Date :    april 2020 - march 2021
+Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
+Copyright ©pycoa.fr
+License: See joint LICENSE file</p>
+<p>Module : coa.display</p>
+<section id="about">
+<h2>About :<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
+<p>An interface module to easily plot pycoa data with bokeh</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<p>Classes:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.display.CocoDisplay" title="coa.display.CocoDisplay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CocoDisplay</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>Class diagram:</p>
+<a class="reference internal image-reference" href="_images/classes_coa.display.png"><img alt="_images/classes_coa.display.png" src="_images/classes_coa.display.png" style="width: 599.0px; height: 1204.0px;" /></a>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CocoDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.add_columns_for_pie_chart">
+<span class="sig-name descname"><span class="pre">add_columns_for_pie_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.add_columns_for_pie_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.add_columns_for_pie_chart" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.bokeh_legend">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bokeh_legend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bkfigure</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.bokeh_legend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.bokeh_legend" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.changeto_nonan_date">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">changeto_nonan_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">when_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.changeto_nonan_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.changeto_nonan_date" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.changeto_nonull_date">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">changeto_nonull_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">when_end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.changeto_nonull_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.changeto_nonull_date" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.convert_tile">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tilename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bokeh'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.convert_tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.convert_tile" title="Permalink to this definition"></a></dt>
+<dd><p>Return tiles url according to folium or bokeh resquested</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decohistomap">
+<span class="sig-name descname"><span class="pre">decohistomap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decohistomap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decohistomap" title="Permalink to this definition"></a></dt>
+<dd><p>Decorator function used for histogram and map</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decohistopie">
+<span class="sig-name descname"><span class="pre">decohistopie</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decohistopie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decohistopie" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decomap">
+<span class="sig-name descname"><span class="pre">decomap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decomap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decomap" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decoplot">
+<span class="sig-name descname"><span class="pre">decoplot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decoplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decoplot" title="Permalink to this definition"></a></dt>
+<dd><p>decorator for plot purpose</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decopycoageo">
+<span class="sig-name descname"><span class="pre">decopycoageo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decopycoageo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decopycoageo" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.decowrapper">
+<span class="sig-name descname"><span class="pre">decowrapper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.decowrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.decowrapper" title="Permalink to this definition"></a></dt>
+<dd><p>Main decorator it mainly deals with arg testings</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.dict_shorten_loc">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dict_shorten_loc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toshort</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.dict_shorten_loc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.dict_shorten_loc" title="Permalink to this definition"></a></dt>
+<dd><p>return a shorten name location</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.get_polycoords">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_polycoords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopandasrow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.get_polycoords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.get_polycoords" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Take a row of a geopandas as an input (i.e<span class="classifier">for index, row in geopdwd.iterrows():…)</span></dt><dd><p>and returns a tuple (if the geometry is a Polygon) or a list (if the geometry is a multipolygon)
+of an exterior.coords</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.get_utcdate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_utcdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.get_utcdate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.get_utcdate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.min_max_range">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min_max_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.min_max_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.min_max_range" title="Permalink to this definition"></a></dt>
+<dd><p>Return a cleverly rounded min and max giving raw min and raw max of data.
+Usefull for hist range and colormap</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_date_plot">
+<span class="sig-name descname"><span class="pre">pycoa_date_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_date_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_date_plot" title="Permalink to this definition"></a></dt>
+<dd><p>Create a date plot according to arguments. See help(pycoa_date_plot).
+Keyword arguments
+—————–
+- input = None : if None take first element. A DataFrame with a Pycoa struture is mandatory
+<a href="#id1"><span class="problematic" id="id2">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- guideline = False
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_histo">
+<span class="sig-name descname"><span class="pre">pycoa_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopdwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_histo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_histo" title="Permalink to this definition"></a></dt>
+<dd><p>Create 1D histogramme by value according to arguments.
+See help(pycoa_histo).
+Keyword arguments
+—————–
+- geopdwd : A DataFrame with a Pycoa struture is mandatory
+<a href="#id3"><span class="problematic" id="id4">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- when : default min and max according to the inpude DataFrame.</p>
+<blockquote>
+<div><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_horizonhisto">
+<span class="sig-name descname"><span class="pre">pycoa_horizonhisto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcfiltered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">panels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_slider</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_horizonhisto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_horizonhisto" title="Permalink to this definition"></a></dt>
+<dd><p>Create 1D histogramme by location according to arguments.
+See help(pycoa_histo).
+Keyword arguments
+—————–
+- srcfiltered : A DataFrame with a Pycoa struture is mandatory
+<a href="#id5"><span class="problematic" id="id6">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_map">
+<span class="sig-name descname"><span class="pre">pycoa_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopdwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geopdwd_filtered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sourcemaplabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardfig</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_map" title="Permalink to this definition"></a></dt>
+<dd><p>Create a map bokeh with arguments.
+See help(pycoa_histo).
+Keyword arguments
+—————–
+- srcfiltered : A DataFrame with a Pycoa struture is mandatory
+<a href="#id7"><span class="problematic" id="id8">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+<li><p>tile : tile</p></li>
+<li><p>maplabel: False</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_mapfolium">
+<span class="sig-name descname"><span class="pre">pycoa_mapfolium</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopdwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_field</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_mapfolium"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_mapfolium" title="Permalink to this definition"></a></dt>
+<dd><p>Create a map folium to arguments.
+See help(pycoa_histo).
+Keyword arguments
+—————–
+- srcfiltered : A DataFrame with a Pycoa struture is mandatory
+<a href="#id9"><span class="problematic" id="id10">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_pie">
+<span class="sig-name descname"><span class="pre">pycoa_pie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcfiltered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">panels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_slider</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_pie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_pie" title="Permalink to this definition"></a></dt>
+<dd><p>Create a pie chart according to arguments.
+See help(pycoa_pie).
+Keyword arguments
+—————–
+- srcfiltered : A DataFrame with a Pycoa struture is mandatory
+<a href="#id11"><span class="problematic" id="id12">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_plot">
+<span class="sig-name descname"><span class="pre">pycoa_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_plot" title="Permalink to this definition"></a></dt>
+<dd><p>Create a versus plot according to arguments.
+See help(pycoa_plot).
+Keyword arguments
+—————–
+- input = None : if None take first element. A DataFrame with a Pycoa struture is mandatory
+<a href="#id13"><span class="problematic" id="id14">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element. It should be a list dim=2. Moreover the 2 variables must be present
+in the DataFrame considered.
+- plot_heigh = width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_scrollingmenu">
+<span class="sig-name descname"><span class="pre">pycoa_scrollingmenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_scrollingmenu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_scrollingmenu" title="Permalink to this definition"></a></dt>
+<dd><p>Create a date plot, with a scrolling menu location, according to arguments.
+See help(pycoa_scrollingmenu).
+Keyword arguments
+—————–
+len(location) &gt; 2
+- input = None : if None take first element. A DataFrame with a Pycoa struture is mandatory
+<a href="#id15"><span class="problematic" id="id16">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+-guideline = False
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoa_sparkmap">
+<span class="sig-name descname"><span class="pre">pycoa_sparkmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopdwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geopdwd_filtered</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sourcemaplabel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardfig</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoa_sparkmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoa_sparkmap" title="Permalink to this definition"></a></dt>
+<dd><p>Create a bokeh map with sparkline label and with to arguments.
+See help(pycoa_histo).
+Keyword arguments
+—————–
+- srcfiltered : A DataFrame with a Pycoa struture is mandatory
+<a href="#id17"><span class="problematic" id="id18">|location|date|Variable desired|daily|cumul|weekly|codelocation|clustername|permanentdisplay|rolloverdisplay|</span></a>
+- input_field = if None take second element could be a list
+- plot_heigh= width_height_default[1]
+- plot_width = width_height_default[0]
+- title = None
+- textcopyrightposition = left
+- textcopyright = default
+- mode = mouse
+- cursor_date = None if True</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>orientation = horizontal</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>when<span class="classifier">default min and max according to the inpude DataFrame.</span></dt><dd><p>Dates are given under the format dd/mm/yyyy.
+when format [dd/mm/yyyy : dd/mm/yyyy]
+if [:dd/mm/yyyy] min date up to
+if [dd/mm/yyyy:] up to max date</p>
+</dd>
+</dl>
+</li>
+<li><p>tile : tile</p></li>
+<li><p>maplabel: False</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.pycoageo">
+<span class="sig-name descname"><span class="pre">pycoageo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geopdwd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geopdwd_filtered</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.pycoageo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.pycoageo" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.rollerJS">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rollerJS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.rollerJS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.rollerJS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.save_map2png">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_map2png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pngfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'map.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.save_map2png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.save_map2png" title="Permalink to this definition"></a></dt>
+<dd><p>Save map as png geckodriver and PIL packages are needed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.save_pandas_as_png">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_pandas_as_png</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pngfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pandas.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.save_pandas_as_png"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.save_pandas_as_png" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.sparkline">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparkline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">0.5)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.sparkline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.sparkline" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a HTML image tag containing a base64 encoded sparkline style plot</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.standardfig">
+<span class="sig-name descname"><span class="pre">standardfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.standardfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.standardfig" title="Permalink to this definition"></a></dt>
+<dd><p>Create a standard Bokeh figure, with pycoa.fr copyright, used in all the bokeh charts</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.test_all_val_null">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_all_val_null</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.test_all_val_null"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.test_all_val_null" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.tiles_list">
+<span class="sig-name descname"><span class="pre">tiles_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.tiles_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.tiles_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="coa.display.CocoDisplay.wgs84_to_web_mercator">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wgs84_to_web_mercator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tuple_xy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/display.html#CocoDisplay.wgs84_to_web_mercator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.display.CocoDisplay.wgs84_to_web_mercator" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Take a tuple (longitude,latitude) from a coordinate reference system crs=EPSG:4326</dt><dd><p>and converts it to a  longitude/latitude tuple from to Web Mercator format</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coa.dbinfo.html" class="btn btn-neutral float-left" title="coa.dbinfo module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coa.error.html" class="btn btn-neutral float-right" title="coa.error module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, coa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
