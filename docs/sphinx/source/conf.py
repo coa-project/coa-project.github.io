@@ -23,7 +23,7 @@ try:
 except:
     release = ""
 
-project = 'coa, '
+project = 'coa'
 copyright = '2021, coa'
 author = 'coa team'
 
