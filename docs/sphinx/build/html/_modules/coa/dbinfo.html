@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.dbinfo &mdash; coa,  dev documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> coa, 
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../coa.html">coa package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">coa, </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>coa.dbinfo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for coa.dbinfo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Project : PyCoA - Copyright ©pycoa.fr</span>
+<span class="sd">Date :    april 2020 - april 2021</span>
+<span class="sd">Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau</span>
+<span class="sd">License: See joint LICENSE file</span>
+<span class="sd">Module : report</span>
+<span class="sd">About</span>
+<span class="sd">-----</span>
+<span class="sd">This is the PyCoA rapport module it gives all available information concerning a database key words</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">coa.error</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="generic_info"><a class="viewcode-back" href="../../coa.dbinfo.html#coa.dbinfo.generic_info">[docs]</a><span class="k">def</span> <span class="nf">generic_info</span><span class="p">(</span><span class="n">namedb</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Return information on the available keyswords for the database selected</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mydico</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;spf&#39;</span><span class="p">:</span>
+        <span class="n">urlmaster1</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/&#39;</span>
+        <span class="n">urlmaster2</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/synthese-des-indicateurs-de-suivi-de-lepidemie-covid-19/&#39;</span>
+        <span class="n">urlmaster3</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/&#39;</span>
+        <span class="n">urlmaster5</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1&#39;</span>
+        <span class="n">urlmaster4</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/indicateurs-de-suivi-de-lepidemie-de-covid-19/&#39;</span>
+        <span class="n">urlmaster6</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-de-laboratoires-pour-le-depistage-indicateurs-sur-les-variants/&#39;</span>
+        <span class="n">urlmaster7</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-de-laboratoires-pour-le-depistage-focus-par-niveau-scolaire/&#39;</span>
+        <span class="n">urlmaster8</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/donnees-de-laboratoires-pour-le-depistage-indicateurs-sur-les-mutations/&#39;</span>
+        <span class="n">urlmaster9</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/en/datasets/donnees-des-urgences-hospitalieres-et-de-sos-medecins-relatives-a-lepidemie-de-covid-19/&#39;</span>
+        <span class="n">url1</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7&#39;</span>
+        <span class="n">url2</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/6fadff46-9efd-4c53-942a-54aca783c30c&#39;</span>
+        <span class="n">url3</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675&#39;</span>
+        <span class="n">url4</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/4acad602-d8b1-4516-bc71-7d5574d5f33e&#39;</span>
+        <span class="n">url5</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/32a16487-3dd3-4326-9d2b-317e5a3b2daf&#39;</span>
+        <span class="n">url6</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/16f4fd03-797f-4616-bca9-78ff212d06e8&#39;</span>
+        <span class="n">url7</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/c0f59f00-3ab2-4f31-8a05-d317b43e9055&#39;</span>
+        <span class="n">url8</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/4d3e5a8b-9649-4c41-86ec-5420eb6b530c&#39;</span>
+        <span class="n">url9</span><span class="o">=</span><span class="s1">&#39;https://www.data.gouv.fr/en/datasets/r/eceb9fb4-3ebc-4da3-828d-f5939712600a&#39;</span>
+        <span class="n">spfdic</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_dc&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_dc:FILLIT&#39;</span><span class="p">,</span><span class="n">url1</span><span class="p">,</span><span class="n">urlmaster1</span><span class="p">],</span>
+        <span class="s1">&#39;cur_hosp&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_hosp:FILLIT&#39;</span><span class="p">,</span><span class="n">url1</span><span class="p">,</span><span class="n">urlmaster1</span><span class="p">],</span>
+        <span class="s1">&#39;tot_rad&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_rad:FILLIT&#39;</span><span class="p">,</span><span class="n">url1</span><span class="p">,</span><span class="n">urlmaster1</span><span class="p">],</span>
+        <span class="s1">&#39;cur_rea&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_rea:FILLIT&#39;</span><span class="p">,</span><span class="n">url1</span><span class="p">,</span><span class="n">urlmaster1</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_tx_incid&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_idx_tx_incid: Taux d</span><span class="se">\&#39;</span><span class="s1">incidence (activité épidémique : Le taux d</span><span class="se">\&#39;</span><span class="s1">incidence correspond au nombre de personnes testées</span><span class="se">\</span>
+<span class="s1">        positives (RT-PCR et test antigénique) pour la première fois depuis plus de 60 jours rapporté à la taille de la population. </span><span class="se">\</span>
+<span class="s1">        Il est exprimé pour 100 000 habitants)&#39;</span><span class="p">,</span><span class="n">url2</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_R&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_idx_R:FILLIT&#39;</span><span class="p">,</span><span class="n">url4</span><span class="p">,</span><span class="n">urlmaster4</span><span class="p">],</span>
+        <span class="s1">&#39;cur_taux_crib&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_taux_crib:FILLIT&#39;</span><span class="p">,</span><span class="n">url4</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_taux_occupation_sae&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_idx_taux_occupation_sae:FILLIT&#39;</span><span class="p">,</span><span class="n">url4</span><span class="p">,</span><span class="n">urlmaster4</span><span class="p">],</span>
+        <span class="s1">&#39;cur_taux_pos&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;cur_taux_pos: Taux de positivité des tests virologiques (Le taux de positivité correspond au nombre de personnes testées positives</span><span class="se">\</span>
+<span class="s1">         (RT-PCR et test antigénique) pour la première fois depuis plus de 60 jours rapporté au nombre total de personnes testées positives ou </span><span class="se">\</span>
+<span class="s1">         négatives sur une période donnée ; et qui n‘ont jamais été testées positive dans les 60 jours précédents.)&#39;</span><span class="p">,</span><span class="n">url4</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc1&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_vacc1: (nom initial n_cum_dose1)&#39;</span><span class="p">,</span><span class="n">url5</span><span class="p">,</span><span class="n">urlmaster5</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc2&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_vacc2: (nom initial n_cum_dose2)&#39;</span><span class="p">,</span><span class="n">url5</span><span class="p">,</span><span class="n">urlmaster5</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc3&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_vacc3: (nom initial n_cum_dose3)&#39;</span><span class="p">,</span><span class="n">url5</span><span class="p">,</span><span class="n">urlmaster5</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc4&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_vacc4: (nom initial n_cum_dose4)&#39;</span><span class="p">,</span><span class="n">url5</span><span class="p">,</span><span class="n">urlmaster5</span><span class="p">],</span>
+        <span class="s1">&#39;tot_rappel_vacc&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_rappel_vacc: (nom initial n_rappel)&#39;</span><span class="p">,</span><span class="n">url5</span><span class="p">,</span><span class="n">urlmaster5</span><span class="p">],</span>
+        <span class="s1">&#39;tot_incid_hosp&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_incid_hosp: Nombre total de personnes hospitalisées&#39;</span><span class="p">,</span><span class="n">url2</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;tot_incid_rea&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_incid_rea: Nombre total d</span><span class="se">\&#39;</span><span class="s1">admissions en réanimation&#39;</span><span class="p">,</span><span class="n">url2</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;tot_incid_rad&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_incid_rad: Nombre total de  retours à domicile&#39;</span><span class="p">,</span><span class="n">url2</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;tot_incid_dc&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_incid_dc: Nombre total de personnes  décédées&#39;</span><span class="p">,</span><span class="n">url2</span><span class="p">,</span><span class="n">urlmaster2</span><span class="p">],</span>
+        <span class="s1">&#39;tot_P&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_P: Nombre total de tests positifs&#39;</span><span class="p">,</span><span class="n">url3</span><span class="p">,</span><span class="n">urlmaster3</span><span class="p">],</span>
+        <span class="s1">&#39;tot_T&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tot_T: Nombre total de tests réalisés&#39;</span><span class="p">,</span><span class="n">url3</span><span class="p">,</span><span class="n">urlmaster3</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_Prc_tests_PCR_TA_crible&#39;</span> <span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;Prc_tests_PCR_TA_crible: </span><span class="si">% d</span><span class="s1">e tests PCR criblés parmi les PCR positives.&#39;</span><span class="p">,</span><span class="n">url6</span><span class="p">,</span><span class="n">urlmaster6</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_Prc_susp_501Y_V1&#39;</span> <span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;Prc_susp_501Y_V1: </span><span class="si">% d</span><span class="s1">e tests avec suspicion de variant 20I/501Y.V1 (UK).</span><span class="se">\n</span><span class="s1"> Royaume-Uni (UK): code Nexstrain= 20I/501Y.V1.&#39;</span><span class="p">,</span><span class="n">url6</span><span class="p">,</span><span class="n">urlmaster6</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_Prc_susp_501Y_V2_3&#39;</span> <span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;Prc_susp_501Y_V2_3: </span><span class="si">% d</span><span class="s1">e tests avec suspicion de variant 20H/501Y.V2 (ZA) ou 20J/501Y.V3 (BR).Afrique du Sud (ZA) : </span><span class="se">\</span>
+<span class="s1">        code Nexstrain= 20H/501Y.V2. Brésil (BR) : code Nexstrain= 20J/501Y.V3&#39;</span><span class="p">,</span><span class="n">url6</span><span class="p">,</span><span class="n">urlmaster6</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_Prc_susp_IND&#39;</span> <span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;Prc_susp_IND: </span><span class="si">% d</span><span class="s1">e tests avec une détection de variant mais non identifiable&#39;</span><span class="p">,</span><span class="n">url6</span><span class="p">,</span><span class="n">urlmaster6</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_Prc_susp_ABS&#39;</span> <span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;Prc_susp_ABS: </span><span class="si">% d</span><span class="s1">e tests avec une absence de détection de variant&#39;</span><span class="p">,</span><span class="n">url6</span><span class="p">,</span><span class="n">urlmaster6</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_ti&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;ti : taux d</span><span class="se">\&#39;</span><span class="s1">incidence hebdomadaire rapporté à la population pour 100 000 habitants , par semaine calendaire (en milieu scolaire)&#39;</span><span class="p">,</span><span class="n">url7</span><span class="p">,</span><span class="n">urlmaster7</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_tp&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="s1">&#39;tp :Le taux de positivité hebdomadaire rapporté 100 tests réalisés, par semaine calendaire (en milieu scolaire)&#39;</span><span class="p">,</span><span class="n">url7</span><span class="p">,</span><span class="n">urlmaster7</span><span class="p">],</span>
+        <span class="s1">&#39;nb_crib&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre de tests criblés&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_pos&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre de tests positifs&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;tx_crib&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Taux tests criblés&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_tx_A1&#39;</span><span class="p">:[</span><span class="s1">&#39;FILL IT&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_tx_B1&#39;</span><span class="p">:[</span><span class="s1">&#39;FILL IT&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_tx_C1&#39;</span><span class="p">:[</span><span class="s1">&#39;FILL IT&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_A0&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est négatif (A = E484K)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_A1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est positif (A = E484K)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;tx_A1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Taux de présence mutation A (A = E484K)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_B0&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est négatif (B = E484Q)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_B1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est positif (B = E484Q)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;tx_B1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Taux de présence mutation B (B = E484Q)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_C0&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est négatif (C = L452R)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;nb_C1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est positif (C = L452R)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;tx_C1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Taux de présence mutation C (C = L452R)&#39;</span><span class="p">,</span><span class="n">url8</span><span class="p">,</span><span class="n">urlmaster8</span><span class="p">],</span>
+        <span class="s1">&#39;cur_nbre_pass_corona&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;  Nombre de passages aux urgences pour suspicion de COVID-19 (nbre_pass_corona)&#39;</span><span class="p">,</span><span class="n">url9</span><span class="p">,</span><span class="n">urlmaster9</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">spfdic</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;spfnational&#39;</span><span class="p">:</span>
+        <span class="n">spfn</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cur_reanimation&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(nom d</span><span class="se">\&#39;</span><span class="s1">origine patients_reanimation) en current réa &#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_hospitalises&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;(nom d</span><span class="se">\&#39;</span><span class="s1">origine patients_hospitalises) en current patients hospitalises &#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_cas_confirmes&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="s1">&#39;total_cas_confirmes: total cumulé du nombre de décès&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_deces_hopital&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;total_deces_hopital: total deces hopital &#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_patients_gueris&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;total_patients_gueris: total patients gueris&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_deces_ehpad&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;total cumulé deces ehpad&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_cas_confirmes_ehpad&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;total cumulé confirmes ehpad&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;total_cas_possibles_ehpad&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;total cumulé possibles ehpad&#39;</span><span class="p">],</span>\
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">spfn</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+              <span class="n">spfn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/d3a98a30-893f-47f7-96c5-2f4bcaaa0d71&#39;</span><span class="p">)</span>
+              <span class="n">spfn</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://www.data.gouv.fr/en/datasets/donnees-relatives-a-lepidemie-de-covid-19-en-france-vue-densemble/&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">spfn</span>
+
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;opencovid19&#39;</span><span class="p">:</span>
+        <span class="n">op19</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deces&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deces: total cumulé du nombre de décès au niveau national&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_cas_confirmes&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cas_confirmes: total cumulé du nombre de cas confirmes au niveau national&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_reanimation&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_reanimation:  nombre de personnes en réanimation&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_hospitalises&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_hospitalises: nombre de personnes en hospitalisation&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_gueris&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_gueris: total cumulé du nombre de gueris au niveau national&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_nouvelles_hospitalisations&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_nouvelles_hospitalisations: total cumulé du nombre d</span><span class="se">\&#39;</span><span class="s1">hospitalisation au niveau national&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_nouvelles_reanimations&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_nouvelles_reanimations: tot_nouvelles_reanimations: total cumulé du nombre réanimations au niveau national&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_depistes&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_depistes: total cumulé du nombre de personnes dépistées (testées par PCR) au niveau national&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">op19</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">op19</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv&#39;</span><span class="p">)</span>
+            <span class="n">op19</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/opencovid19-fr/data&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">op19</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;opencovid19national&#39;</span><span class="p">:</span>
+        <span class="n">op19nat</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;tot_deces&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deces: total cumulé du nombre de décès&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_cas_confirmes&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cas_confirmes: total cumulé du nombre de cas confirmés&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_cas_ehpad&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cas_ehpad: total cumulé du nombre de cas en EHPAD&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_cas_confirmes_ehpad&#39;</span><span class="p">:[</span><span class="s1">&#39;total cumulé du nombre de cas positifs en EHPAD&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_cas_possibles_ehpad&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cas_possibles_ehpad:FILLIT&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_deces_ehpad&#39;</span><span class="p">:[</span><span class="s1">&#39;total cumulé du nombre de décès en EHPAD&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;cur_reanimation&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_hospitalises: nombre de personnes en reanimation&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;cur_hospitalises&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_hospitalises: nombre de personnes en hospitalisation&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_gueris&#39;</span><span class="p">:[</span><span class="s1">&#39;total cumulé du nombre de gueris&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_nouvelles_hospitalisations&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_nouvelles_hospitalisations: total cumulé du nombre d</span><span class="se">\&#39;</span><span class="s1">hospitalisation&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_nouvelles_reanimations&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_nouvelles_reanimations: tot_nouvelles_reanimations: total cumulé du nombre réanimations&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;tot_depistes&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_depistes: total cumulé du nombre de personnes dépistées (testées par PCR)&#39;</span><span class="p">]</span>
+          <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">op19nat</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+              <span class="n">op19nat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv&#39;</span><span class="p">)</span>
+              <span class="n">op19nat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/opencovid19-fr/data&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">op19nat</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;obepine&#39;</span><span class="p">:</span>
+        <span class="n">obe</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;idx_obepine&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deces: total cumulé du nombre de décès&#39;</span><span class="p">]}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">obe</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+              <span class="n">obe</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://www.data.gouv.fr/fr/datasets/r/89196725-56cf-4a83-bab0-170ad1e8ef85&#39;</span><span class="p">)</span>
+              <span class="n">obe</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://www.data.gouv.fr/en/datasets/surveillance-du-sars-cov-2-dans-les-eaux-usees-1&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">obe</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;owid&#39;</span><span class="p">:</span>
+        <span class="n">owid</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;total_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;total_deaths: Total deaths attributed to COVID-19&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;total_cases: Total confirmed cases of COVID-19&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_tests&#39;</span><span class="p">:[</span><span class="s1">&#39;total_tests: Total tests for COVID-19&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_new_tests&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_new_tests (original name new_tests): New tests for COVID-19 (only calculated for consecutive days)&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_vaccinations&#39;</span><span class="p">:[</span><span class="s1">&#39;total_vaccinations: Total number of COVID-19 vaccination doses administered&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_population&#39;</span><span class="p">:[</span><span class="s1">&#39;total_population: total population of a given country&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_people_fully_vaccinated_per_hundred&#39;</span><span class="p">:[</span><span class="s1">&#39;total_people_fully_vaccinated_per_hundred (original name people_fully_vaccinated_per_hundred): Total number of people who received all doses prescribed by the vaccination protocol per 100 people in the total population&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_boosters&#39;</span><span class="p">:[</span><span class="s1">&#39;total_boosters: Total number of COVID-19 vaccination booster doses administered (doses administered beyond the number prescribed by the vaccination protocol)&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_people_vaccinated&#39;</span><span class="p">:[</span><span class="s1">&#39;total_people_vaccinated (original name people_vaccinated): Total number of people who received at least one vaccine dose&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_people_fully_vaccinated&#39;</span><span class="p">:[</span><span class="s1">&#39;total_people_fully_vaccinated (original name people_fully_vaccinated): Total number of people who received all doses prescribed by the vaccination protocol&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_people_vaccinated_per_hundred&#39;</span><span class="p">:[</span><span class="s1">&#39;total_people_vaccinated_per_hundred (original name people_vaccinated_per_hundred): total_people_vaccinated_per_hundred:Total number of people who received all doses prescribed by the vaccination protocol per 100 people in the total population&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">:[</span><span class="s1">&#39;total_cases_per_million: Total confirmed cases of COVID-19 per 1,000,000 people&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_deaths_per_million&#39;</span><span class="p">:[</span><span class="s1">&#39;total_deaths_per_million: Total deaths attributed to COVID-19 per 1,000,000 people&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;total_vaccinations_per_hundred&#39;</span><span class="p">:[</span><span class="s1">&#39;total_vaccinations_per_hundred: COVID19 vaccine doses administered per 100 people&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_reproduction_rate&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_reproduction_rate (original name reproduction_rate): Real-time estimate of the effective reproduction rate (R) of COVID-19. See https://github.com/crondonm/TrackingR/tree/main/Estimates-Database&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_icu_patients&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_icu_patients (orignal name icu_patients): Number of COVID-19 patients in intensive care units (ICUs) on a given day&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_hosp_patients&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_hosp_patients (original name hosp_patients): Number of COVID-19 patients in hospital on a given day&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_idx_positive_rate&#39;</span><span class="p">:[</span><span class="s1">&#39;cur_idx_positive_rate (original name positive_rate): The share of COVID-19 tests that are positive, given as a rolling 7-day average (this is the inverse of tests_per_case)&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">owid</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">owid</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv&quot;</span><span class="p">)</span>
+            <span class="n">owid</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://github.com/owid&quot;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">owid</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;jhu&#39;</span><span class="p">:</span>
+        <span class="n">jhu</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deaths (original name deaths): counts include confirmed and probable (where reported).&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_confirmed&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_confirmed (original name confirmed): counts include confirmed and probable (where reported).&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_recovered&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_recovered (original name recovered): cases are estimates based on local media reports, and state and local reporting when available, and therefore may be substantially lower than the true number. US state-level recovered cases are from COVID Tracking Project (https://covidtracking.com/)&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv&#39;</span><span class="p">]</span>
+         <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">jhu</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+             <span class="n">jhu</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://github.com/CSSEGISandData/COVID-19&quot;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">jhu</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;jhu-usa&#39;</span><span class="p">:</span>
+        <span class="n">jhuusa</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deaths (original name deaths): counts include confirmed and probable (where reported).&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_confirmed&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_confirmed (original name confirmed): counts include confirmed and probable (where reported).&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">jhuusa</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">jhuusa</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://github.com/CSSEGISandData/COVID-19&quot;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">jhuusa</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;moh&#39;</span><span class="p">:</span>
+        <span class="n">moh</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cases: total cases (from original data cases_new )&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;hosp_covid&#39;</span><span class="p">:[</span><span class="s1">&#39;hosp_covid: hosp_covid&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;daily_partial&#39;</span><span class="p">:[</span><span class="s1">&#39;daily_partial: daily_partial&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;daily_full&#39;</span><span class="p">:[</span><span class="s1">&#39;daily_full: daily_full&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;icu_covid&#39;</span><span class="p">:[</span><span class="s1">&#39;icu_covid: icu_covid&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;beds_icu_covid&#39;</span><span class="p">:[</span><span class="s1">&#39;beds_icu_covid: beds_icu_covid&#39;</span><span class="p">],</span>\
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">moh</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">moh</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/epidemic/cases_state.csv&quot;</span><span class="p">)</span>
+            <span class="n">moh</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://github.com/MoH-Malaysia/covid19-public&quot;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">moh</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;minciencia&#39;</span><span class="p">:</span>
+        <span class="n">mi</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cases&#39;</span><span class="p">:[</span><span class="s1">&#39;cases: Casos confirmados&#39;</span><span class="p">],</span>\
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">mi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/MinCiencia/Datos-COVID19/master/output/producto1/Covid-19_std.csv&quot;</span><span class="p">)</span>
+            <span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://github.com/MinCiencia&quot;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">mi</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;covid19india&#39;</span><span class="p">:</span>
+        <span class="n">india</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Deceased&#39;</span><span class="p">:[</span><span class="s1">&#39;Deceased:FILLIT&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;Confirmed&#39;</span><span class="p">:[</span><span class="s1">&#39;Confirmed:FILLIT&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;Recovered&#39;</span><span class="p">:[</span><span class="s1">&#39;Recovered:FILLIT&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;Tested&#39;</span><span class="p">:[</span><span class="s1">&#39;Tested:FILLIT&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">india</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">india</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://api.covid19india.org/csv/latest/states.csv&#39;</span><span class="p">)</span>
+            <span class="n">india</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://www.covid19india.org/&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">india</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;dpc&#39;</span><span class="p">:</span>
+        <span class="n">ita</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cases:original name totale_casi + FILLIT&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deaths:original name deceduti + FILLIT&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">ita</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ita</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv&#39;</span><span class="p">)</span>
+            <span class="n">ita</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/pcm-dpc/COVID-19&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">ita</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;rki&#39;</span><span class="p">:</span>
+        <span class="n">rki</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_deaths:FILLIT&#39;</span><span class="p">,</span><span class="s1">&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;tot_cases:FILLIT&#39;</span><span class="p">,</span><span class="s1">&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">rki</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">rki</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/jgehrcke/covid-19-germany-gae&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">rki</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;escovid19data&#39;</span><span class="p">:</span>
+        <span class="n">esco</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;Cumulative deaths  (original name deceased)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;Cumulatvie number of new COVID-19 cases (original name cases_accumulated)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;Active COVID-19 cases (original name activos)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_hosp&#39;</span><span class="p">:[</span><span class="s1">&#39;Hospitalized (original name hospitalized)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_hosp&#39;</span><span class="p">:[</span><span class="s1">&#39;Cumulative Hospitalized (original name hospitalized_accumulated)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_icu&#39;</span><span class="p">:[</span><span class="s1">&#39;UCI, intensive care patient, (original name intensive_care)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_recovered&#39;</span><span class="p">:[</span><span class="s1">&#39;Recovered (original name recovered)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_cases_per100k&#39;</span><span class="p">:[</span><span class="s1">&#39;Cumulative cases per 100,000 inhabitants (original name cases_per_cienmil)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_icu_per1M&#39;</span> <span class="p">:[</span><span class="s1">&#39;Intensive care per 1000,000 inhabitants (original name intensive_care_per_1000000)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_deaths_per100k&#39;</span><span class="p">:[</span><span class="s1">&#39;Cumulative deaths per 100,000 inhabitants (original name deceassed_per_100000)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_hosp_per100k&#39;</span><span class="p">:[</span><span class="s1">&#39;Intensive care per 100,000 inhabitants, (original name hospitalized_per_100000)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;deaths:FILLIT&#39;</span><span class="p">,</span><span class="s1">&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cases&#39;</span><span class="p">:[</span><span class="s1">&#39;cases:FILLIT&#39;</span><span class="p">,</span><span class="s1">&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">esco</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">esco</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/montera34/escovid19data/master/data/output/covid19-provincias-spain_consolidated.csv&#39;</span><span class="p">)</span>
+            <span class="n">esco</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/montera34/escovid19data&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">esco</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;sciensano&#39;</span><span class="p">:</span>
+        <span class="n">sci</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cur_hosp&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of lab-confirmed hospitalized COVID-19 patients at the moment of reporting, including ICU (prevalence) (original name TOTAL_IN)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_icu&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of lab-confirmed hospitalized COVID-19 patients in ICU at the moment of reporting (prevalence) (original name TOTAL_IN_ICU)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_resp&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of lab-confirmed hospitalized COVID-19 patients under respiratory support at the moment of reporting (prevalence) (original name TOTAL_IN_RESP)&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;cur_ecmo&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of lab-confirmed hospitalized COVID-19 patients on ECMO at the moment of reporting (prevalence) (orginale name TOTAL_IN_ECMO)&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">sci</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">sci</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://epistat.sciensano.be/Data/COVID19BE_HOSP.csv&#39;</span><span class="p">)</span>
+            <span class="n">sci</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://epistat.wiv-isp.be/covid/&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">sci</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;phe&#39;</span><span class="p">:</span>
+        <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://api.coronavirus.data.gov.uk/v2/data?areaType=ltla&amp;metric=&#39;</span>
+        <span class="n">phe</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;tot_deaths&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of deaths (original name cumDeathsByDeathDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumDeathsByDeathDate&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>\
+        <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumCasesBySpecimenDate&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_tests&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of cases (originale name cumTestByPublishDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumLFDTests&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc1&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumPeopleVaccinatedFirstDoseByVaccinationDate&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc2&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumPeopleVaccinatedSecondDoseByVaccinationDate&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;tot_vacc3&#39;</span><span class="p">:[</span><span class="s1">&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;</span><span class="p">,</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;cumPeopleVaccinatedThirddDoseByVaccinationDate&#39;</span><span class="o">+</span><span class="s1">&#39;&amp;format=csv&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;cur_B.1.617.2&#39;</span><span class="p">:[</span><span class="s1">&#39;Current variant B.1.617.2&#39;</span><span class="p">,</span><span class="n">url</span> <span class="o">+</span><span class="s1">&#39;https://covid-surveillance-data.cog.sanger.ac.uk/download/lineages_by_ltla_and_week.tsv&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">phe</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">phe</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://coronavirus.data.gov.uk/details/download&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">phe</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;dgs&#39;</span><span class="p">:</span>
+        <span class="n">dgs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;tot_cases&#39;</span><span class="p">:[</span><span class="s1">&#39;original name confirmados_1&#39;</span><span class="p">]}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">dgs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+              <span class="n">dgs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/dssg-pt/covid19pt-data/master/data_concelhos_new.csv&#39;</span><span class="p">)</span>
+              <span class="n">dgs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://github.com/dssg-pt/covid19pt-data&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">dgs</span>
+    <span class="k">elif</span> <span class="n">namedb</span> <span class="o">==</span> <span class="s1">&#39;covidtracking&#39;</span><span class="p">:</span>
+        <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://covidtracking.com/data/download/all-states-history.csv&#39;</span>
+        <span class="n">cotra</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;tot_death&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cumulative deaths tot_death (original name death)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_hosp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cumulative hospitalized (original name hospitalizedCumulative)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;cur_hosp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Current hospitalized (original name hospitalizedCurrently)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_icu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original name inIcuCumulative)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;cur_icu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original inIcuCurrently)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_neg_test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original negative)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_pos_test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original positive)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_onVentilator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original onVentilatorCumulative)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;cur_onVentilator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original onVentilatorCurrently)&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;tot_test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;(original totalTestResults)&#39;</span><span class="p">],</span>\
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">cotra</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">cotra</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">cotra</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;https://covidtracking.com/analysis-updates/five-major-metrics-covid-19-data&#39;</span><span class="p">)</span>
+        <span class="n">mydico</span> <span class="o">=</span> <span class="n">cotra</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s1">&#39;Error in the database selected, please check !&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mydico</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="n">keys</span> <span class="o">+</span> <span class="s1">&#39;: this keyword doesn</span><span class="se">\&#39;</span><span class="s1">t exist for this database !&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mydico</span><span class="p">[</span><span class="n">keys</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, coa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
