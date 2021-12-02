@@ -2,7 +2,7 @@ Date creating: |today|
 
 Version : |release|
 
-Welcome to grand documentation!
+Welcome to Pycoa documentation!
 ======================================================
 
 .. toctree::
