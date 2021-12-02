@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.error module &mdash; coa,  dev documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="coa.ffront module" href="coa.ffront.html" />
+    <link rel="prev" title="coa.display module" href="coa.display.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> coa, 
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="coa.html">coa package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="coa.covid19.html">coa.covid19 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.dbinfo.html">coa.dbinfo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.display.html">coa.display module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">coa.error module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#about">About :</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="coa.ffront.html">coa.ffront module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.front.html">coa.front module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.geo.html">coa.geo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coa.tools.html">coa.tools module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">coa, </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="coa.html">coa package</a> &raquo;</li>
+      <li>coa.error module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/coa.error.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-coa.error">
+<span id="coa-error-module"></span><h1>coa.error module<a class="headerlink" href="#module-coa.error" title="Permalink to this headline"></a></h1>
+<p>Project : PyCoA
+Date :    april 2020 - march 2021
+Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
+Copyright ©pycoa.fr
+License: See joint LICENSE file</p>
+<p>Module : coa.error</p>
+<section id="about">
+<h2>About :<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
+<p>Main class definitions for error management within the pycoa framework.
+All Coa exceptions should derive from the main CoaError class.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<p>Exceptions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.error.CoaConnectionError" title="coa.error.CoaConnectionError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaConnectionError</span></code></a></p></td>
+<td><p>Exception raised for connection errors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.error.CoaDbError" title="coa.error.CoaDbError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaDbError</span></code></a></p></td>
+<td><p>Exception raised for database errors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaError</span></code></a></p></td>
+<td><p>Base class for exceptions in PyCoa.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.error.CoaKeyError" title="coa.error.CoaKeyError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaKeyError</span></code></a></p></td>
+<td><p>Exception raised for errors in used key option.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.error.CoaLookupError" title="coa.error.CoaLookupError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaLookupError</span></code></a></p></td>
+<td><p>Exception raised for type lookup errors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.error.CoaNoData" title="coa.error.CoaNoData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaNoData</span></code></a></p></td>
+<td><p>Exception raised when there is no data to plot or to manage (invalid cut)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.error.CoaNotManagedError" title="coa.error.CoaNotManagedError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaNotManagedError</span></code></a></p></td>
+<td><p>Exception raised when the error is unknown and not managed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.error.CoaTypeError" title="coa.error.CoaTypeError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaTypeError</span></code></a></p></td>
+<td><p>Exception raised for type mismatch errors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.error.CoaWhereError" title="coa.error.CoaWhereError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoaWhereError</span></code></a></p></td>
+<td><p>Exception raised for location errors.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaConnectionError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaConnectionError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaConnectionError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaConnectionError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectionError</span></code></p>
+<p>Exception raised for connection errors.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaDbError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaDbError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaDbError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaDbError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a></p>
+<p>Exception raised for database errors.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base class for exceptions in PyCoa.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaKeyError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaKeyError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaKeyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaKeyError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></p>
+<p>Exception raised for errors in used key option.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaLookupError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaLookupError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaLookupError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaLookupError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">LookupError</span></code></p>
+<p>Exception raised for type lookup errors.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaNoData">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaNoData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaNoData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaNoData" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">IndexError</span></code></p>
+<p>Exception raised when there is no data to plot or to manage (invalid cut)</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaNotManagedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaNotManagedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaNotManagedError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaNotManagedError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a></p>
+<p>Exception raised when the error is unknown and not managed.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaTypeError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaTypeError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaTypeError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaTypeError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></p>
+<p>Exception raised for type mismatch errors.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="coa.error.CoaWhereError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CoaWhereError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/error.html#CoaWhereError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.error.CoaWhereError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#coa.error.CoaError" title="coa.error.CoaError"><code class="xref py py-class docutils literal notranslate"><span class="pre">coa.error.CoaError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">IndexError</span></code></p>
+<p>Exception raised for location errors.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coa.display.html" class="btn btn-neutral float-left" title="coa.display module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coa.ffront.html" class="btn btn-neutral float-right" title="coa.ffront module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, coa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
