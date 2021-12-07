@@ -1,5 +1,5 @@
 [<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://pycoa.fr/index) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/index_FR) 
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://pycoa.fr/indexFR) 
 
 <section id="downloads" class="clearfix">
   <a href="https://github.com/coa-project/pycoa/archive/main.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Download .zip</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
