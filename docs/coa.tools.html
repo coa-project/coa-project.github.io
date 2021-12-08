@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.tools module &mdash; Pycoa dev documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Pycoa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">coa.tools module</a><ul>
+<li><a class="reference internal" href="#about">About</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Pycoa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>coa.tools module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/coa.tools.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-coa.tools">
+<span id="coa-tools-module"></span><h1>coa.tools module<a class="headerlink" href="#module-coa.tools" title="Permalink to this headline"></a></h1>
+<p>Project : PyCoA - Copyright ©pycoa.fr
+Date :    april 2020 - march 2021
+Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
+License: See joint LICENSE file</p>
+<p>Module : coa.tools</p>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
+<p>This is the PyCoA tools module to be considered as a swiss knife list of functions.
+One find function for</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>verbose or warning mode management.</p></li>
+<li><p>kwargs analysis</p></li>
+<li><p>filling nan values of given pandas</p></li>
+<li><p>date parsing validation</p></li>
+<li><p>automatic file caching system</p></li>
+</ul>
+</div></blockquote>
+<p>The _verbose_mode variable should be set to 0 if no printing output needed. The
+default value is 1 (print information to stdout). The 2 value grants a debug level information
+printing.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<p>Classes:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.dotdict" title="coa.tools.dotdict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dotdict</span></code></a></p></td>
+<td><p>dot.notation access to dictionary attributes</p></td>
+</tr>
+</tbody>
+</table>
+<p>Class diagram:</p>
+<a class="reference internal image-reference" href="_images/classes_coa.tools.png"><img alt="_images/classes_coa.tools.png" src="_images/classes_coa.tools.png" style="width: 84.0px; height: 105.0px;" /></a>
+<p>Functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.check_valid_date" title="coa.tools.check_valid_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_valid_date</span></code></a></p></td>
+<td><p>Check if a string is compatible with a valid date under the format day/month/year with 2 digits for day, 2 digits for month and 4 digits for year.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.extract_dates" title="coa.tools.extract_dates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_dates</span></code></a></p></td>
+<td><p>Expecting None or 1 or 2 dates separated by :.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.fill_missing_dates" title="coa.tools.fill_missing_dates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fill_missing_dates</span></code></a></p></td>
+<td><p>Filling the input pandas dataframe p with missing dates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.get_db_list_dict" title="coa.tools.get_db_list_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_db_list_dict</span></code></a></p></td>
+<td><p>Return db list dict</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.get_local_from_url" title="coa.tools.get_local_from_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_local_from_url</span></code></a></p></td>
+<td><p>&quot;Download data from the given url and store it into a local file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.get_verbose_mode" title="coa.tools.get_verbose_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_verbose_mode</span></code></a></p></td>
+<td><p>Return the verbose mode</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.info" title="coa.tools.info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">info</span></code></a></p></td>
+<td><p>Print to stdout with similar args as the builtin print function, if _verbose_mode &gt; 0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.kwargs_test" title="coa.tools.kwargs_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwargs_test</span></code></a></p></td>
+<td><p>Test that the list of kwargs is compatible with expected args.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.set_verbose_mode" title="coa.tools.set_verbose_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_verbose_mode</span></code></a></p></td>
+<td><p>Set the verbose mode</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.tostdstring" title="coa.tools.tostdstring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tostdstring</span></code></a></p></td>
+<td><p>Standardization of string for country,region or subregion tests</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.tools.verb" title="coa.tools.verb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">verb</span></code></a></p></td>
+<td><p>Print to stdout with similar args as the builtin print function, if _verbose_mode &gt; 1</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.tools.week_to_date" title="coa.tools.week_to_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">week_to_date</span></code></a></p></td>
+<td><p>convert week to date. 2 cases: - Rolling week     if format is Y-M-D-Y-M-D: return middle dates - One week data Wnumber: return monday correction to the week number.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.check_valid_date">
+<span class="sig-name descname"><span class="pre">check_valid_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#check_valid_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.check_valid_date" title="Permalink to this definition"></a></dt>
+<dd><p>Check if a string is compatible with a valid date under the format day/month/year
+with 2 digits for day, 2 digits for month and 4 digits for year.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="coa.tools.dotdict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dotdict</span></span><a class="reference internal" href="_modules/coa/tools.html#dotdict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.dotdict" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>dot.notation access to dictionary attributes</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.extract_dates">
+<span class="sig-name descname"><span class="pre">extract_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">when</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#extract_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.extract_dates" title="Permalink to this definition"></a></dt>
+<dd><p>Expecting None or 1 or 2 dates separated by :. The format is a string.
+If 2 dates are given, they must be ordered.
+When 1 date is given, assume that’s the latest which is given.
+When None date is give, the oldest date is 01/01/0001, the newest is now.</p>
+<p>It returns 2 datetime object. If nothing given, the oldest date is 01/01/0001,</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.fill_missing_dates">
+<span class="sig-name descname"><span class="pre">fill_missing_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'date'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'location'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#fill_missing_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.fill_missing_dates" title="Permalink to this definition"></a></dt>
+<dd><p>Filling the input pandas dataframe p with missing dates</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.get_db_list_dict">
+<span class="sig-name descname"><span class="pre">get_db_list_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#get_db_list_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.get_db_list_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Return db list dict</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.get_local_from_url">
+<span class="sig-name descname"><span class="pre">get_local_from_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#get_local_from_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.get_local_from_url" title="Permalink to this definition"></a></dt>
+<dd><p>“Download data from the given url and store it into a local file.</p>
+<p>If the expiration time is 0 (default), the data will never be downloaded anymore if available.
+If the expiration time is &lt; 0, it forces to download the file.
+If the expiration time (in seconds) is lower than time difference between now and last modification
+time of the file, the file is downloaded.</p>
+<p>One may add a suffix to the local filename if known.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.get_verbose_mode">
+<span class="sig-name descname"><span class="pre">get_verbose_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#get_verbose_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.get_verbose_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Return the verbose mode</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.info" title="Permalink to this definition"></a></dt>
+<dd><p>Print to stdout with similar args as the builtin print function,
+if _verbose_mode &gt; 0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.kwargs_test">
+<span class="sig-name descname"><span class="pre">kwargs_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">given_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#kwargs_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.kwargs_test" title="Permalink to this definition"></a></dt>
+<dd><p>Test that the list of kwargs is compatible with expected args. If not
+it raises a CoaKeyError with error_string.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.set_verbose_mode">
+<span class="sig-name descname"><span class="pre">set_verbose_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#set_verbose_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.set_verbose_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Set the verbose mode</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.tostdstring">
+<span class="sig-name descname"><span class="pre">tostdstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#tostdstring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.tostdstring" title="Permalink to this definition"></a></dt>
+<dd><p>Standardization of string for country,region or subregion tests</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.verb">
+<span class="sig-name descname"><span class="pre">verb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#verb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.verb" title="Permalink to this definition"></a></dt>
+<dd><p>Print to stdout with similar args as the builtin print function,
+if _verbose_mode &gt; 1</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.tools.week_to_date">
+<span class="sig-name descname"><span class="pre">week_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">whenstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/tools.html#week_to_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.tools.week_to_date" title="Permalink to this definition"></a></dt>
+<dd><p>convert week to date.
+2 cases:
+- Rolling week</p>
+<blockquote>
+<div><p>if format is Y-M-D-Y-M-D: return middle dates</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>One week data Wnumber: return monday correction to the week number</p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Pycoa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

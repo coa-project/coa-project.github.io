@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>coa.tools &mdash; Pycoa dev documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Pycoa
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Pycoa</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>coa.tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for coa.tools</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Project : PyCoA - Copyright ©pycoa.fr</span>
+<span class="sd">Date :    april 2020 - march 2021</span>
+<span class="sd">Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau</span>
+<span class="sd">License: See joint LICENSE file</span>
+
+<span class="sd">Module : coa.tools</span>
+
+<span class="sd">About</span>
+<span class="sd">-----</span>
+<span class="sd">This is the PyCoA tools module to be considered as a swiss knife list of functions.</span>
+<span class="sd">One find function for</span>
+<span class="sd"> - verbose or warning mode management.</span>
+<span class="sd"> - kwargs analysis</span>
+<span class="sd"> - filling nan values of given pandas</span>
+<span class="sd"> - date parsing validation</span>
+<span class="sd"> - automatic file caching system</span>
+
+<span class="sd">The _verbose_mode variable should be set to 0 if no printing output needed. The</span>
+<span class="sd">default value is 1 (print information to stdout). The 2 value grants a debug level information</span>
+<span class="sd">printing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">gettempdir</span>
+<span class="kn">from</span> <span class="nn">getpass</span> <span class="kn">import</span> <span class="n">getuser</span>
+<span class="kn">from</span> <span class="nn">zlib</span> <span class="kn">import</span> <span class="n">crc32</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+<span class="kn">import</span> <span class="nn">unidecode</span>
+
+<span class="kn">from</span> <span class="nn">coa.error</span> <span class="kn">import</span> <span class="n">CoaKeyError</span><span class="p">,</span> <span class="n">CoaTypeError</span><span class="p">,</span> <span class="n">CoaConnectionError</span><span class="p">,</span> <span class="n">CoaNotManagedError</span>
+
+<span class="c1"># testing if coadata is available</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="n">_coacache_folder</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="n">_coacache_module_info</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;coacache&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">_coacache_module_info</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">_coacache_folder</span> <span class="o">=</span> <span class="n">_coacache_module_info</span><span class="o">.</span><span class="n">submodule_search_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Verbosity of pycoa</span>
+<span class="n">_verbose_mode</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># default</span>
+
+<span class="c1"># Known db</span>
+<span class="n">_db_list_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;jhu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">,</span><span class="s1">&#39;nation&#39;</span><span class="p">,</span><span class="s1">&#39;World&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;owid&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">,</span><span class="s1">&#39;nation&#39;</span><span class="p">,</span><span class="s1">&#39;World&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;jhu-usa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;United States of America&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;spf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FRA&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;France&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;spfnational&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">,</span><span class="s1">&#39;nation&#39;</span><span class="p">,</span><span class="s1">&#39;France&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;opencovid19&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FRA&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;France&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;opencovid19national&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">,</span><span class="s1">&#39;nation&#39;</span><span class="p">,</span><span class="s1">&#39;France&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dpc&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ITA&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;Italy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;covidtracking&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;USA&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;United States of America&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;covid19india&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IND&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;India&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;rki&#39;</span><span class="p">:[</span><span class="s1">&#39;DEU&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;Germany&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;escovid19data&#39;</span><span class="p">:[</span><span class="s1">&#39;ESP&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;Spain&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;phe&#39;</span><span class="p">:[</span><span class="s1">&#39;GBR&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;United Kingdom&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;sciensano&#39;</span><span class="p">:[</span><span class="s1">&#39;BEL&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;Belgium&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dgs&#39;</span><span class="p">:[</span><span class="s1">&#39;PRT&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;Portugal&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;obepine&#39;</span><span class="p">:[</span><span class="s1">&#39;FRA&#39;</span><span class="p">,</span><span class="s1">&#39;region&#39;</span><span class="p">,</span><span class="s1">&#39;France&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;moh&#39;</span><span class="p">:[</span><span class="s1">&#39;MYS&#39;</span><span class="p">,</span><span class="s1">&#39;subregion&#39;</span><span class="p">,</span><span class="s1">&#39;Malaysia&#39;</span><span class="p">],</span>
+    <span class="c1">#&#39;minciencia&#39;:[&#39;CHL&#39;,&#39;subregion&#39;,&#39;Chile&#39;]</span>
+    <span class="p">}</span>
+
+<span class="c1"># ----------------------------------------------------</span>
+<span class="c1"># --- Usefull functions for pycoa --------------------</span>
+<span class="c1"># ----------------------------------------------------</span>
+
+<div class="viewcode-block" id="get_db_list_dict"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.get_db_list_dict">[docs]</a><span class="k">def</span> <span class="nf">get_db_list_dict</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return db list dict&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_db_list_dict</span></div>
+
+
+<div class="viewcode-block" id="get_verbose_mode"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.get_verbose_mode">[docs]</a><span class="k">def</span> <span class="nf">get_verbose_mode</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return the verbose mode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_verbose_mode</span></div>
+
+<div class="viewcode-block" id="set_verbose_mode"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.set_verbose_mode">[docs]</a><span class="k">def</span> <span class="nf">set_verbose_mode</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the verbose mode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_verbose_mode</span>
+    <span class="n">_verbose_mode</span><span class="o">=</span><span class="n">v</span>
+    <span class="k">return</span> <span class="n">get_verbose_mode</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="info"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.info">[docs]</a><span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print to stdout with similar args as the builtin print function,</span>
+<span class="sd">    if _verbose_mode &gt; 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_verbose_mode</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="verb"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.verb">[docs]</a><span class="k">def</span> <span class="nf">verb</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print to stdout with similar args as the builtin print function,</span>
+<span class="sd">    if _verbose_mode &gt; 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_verbose_mode</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="kwargs_test"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.kwargs_test">[docs]</a><span class="k">def</span> <span class="nf">kwargs_test</span><span class="p">(</span><span class="n">given_args</span><span class="p">,</span> <span class="n">expected_args</span><span class="p">,</span> <span class="n">error_string</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test that the list of kwargs is compatible with expected args. If not</span>
+<span class="sd">    it raises a CoaKeyError with error_string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">given_args</span><span class="p">)</span><span class="o">!=</span><span class="nb">dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;kwargs_test error, the given args are not a dict type.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">expected_args</span><span class="p">)</span><span class="o">!=</span><span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;kwargs_test error, the expected args are not a list type&quot;</span><span class="p">)</span>
+
+    <span class="n">bad_kwargs</span><span class="o">=</span><span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">given_args</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">expected_args</span> <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bad_kwargs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="n">error_string</span><span class="o">+</span><span class="s1">&#39; Unrecognized args are &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">bad_kwargs</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="tostdstring"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.tostdstring">[docs]</a><span class="k">def</span> <span class="nf">tostdstring</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Standardization of string for country,region or subregion tests</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">unidecode</span><span class="o">.</span><span class="n">unidecode</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="fill_missing_dates"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.fill_missing_dates">[docs]</a><span class="k">def</span> <span class="nf">fill_missing_dates</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">date_field</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">loc_field</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="n">d1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filling the input pandas dataframe p with missing dates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Expecting input p as a pandas dataframe.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">date_field</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;The date_field is not a proper column of input pandas dataframe.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">loc_field</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;The loc_field is not a proper column of input pandas dataframe.&quot;</span><span class="p">)</span>
+    <span class="c1"># datatoilettage :)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">p</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;&#39;</span><span class="p">])]</span>
+
+    <span class="k">if</span> <span class="n">d2</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">d2</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">d1</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">d1</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="n">date_field</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Waiting for dates as datetime.date.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d1</span> <span class="o">&gt;</span> <span class="n">d2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;Dates should be ordered as d1&lt;d2.&quot;</span><span class="p">)</span>
+
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">date</span>
+
+    <span class="n">all_loc</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">loc_field</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">pfill</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">all_loc</span><span class="p">:</span>
+        <span class="n">pp</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">loc_field</span><span class="p">]</span><span class="o">==</span><span class="n">l</span><span class="p">]</span>
+        <span class="n">pp2</span><span class="o">=</span><span class="n">pp</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="n">date_field</span><span class="p">])</span>
+        <span class="n">pp2</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">pp2</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">pp3</span> <span class="o">=</span> <span class="n">pp2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">fill_value</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="c1">#pandas.NA)</span>
+        <span class="n">pp3</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pp3</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1">#pp3[&#39;location&#39;].fillna(method=&#39;bfill&#39;)</span>
+        <span class="c1">#pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;bfill&#39;)</span>
+        <span class="c1">#pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;ffill&#39;)</span>
+        <span class="n">pfill</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pfill</span><span class="p">,</span> <span class="n">pp3</span><span class="p">])</span>
+    <span class="n">pfill</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pfill</span></div>
+
+
+<div class="viewcode-block" id="check_valid_date"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.check_valid_date">[docs]</a><span class="k">def</span> <span class="nf">check_valid_date</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if a string is compatible with a valid date under the format day/month/year</span>
+<span class="sd">    with 2 digits for day, 2 digits for month and 4 digits for year.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">raise_error</span><span class="o">=</span><span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s1">&#39;Expecting date given as string.&#39;</span><span class="p">)</span>
+
+    <span class="n">d</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">!=</span><span class="mi">3</span><span class="p">:</span>
+        <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">!=</span><span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">!=</span><span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">!=</span><span class="mi">4</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">day</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">raise_error</span><span class="o">=</span><span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">raise_error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Not a valid date should be : day/month/year, with 2 digits &quot;</span> \
+            <span class="s2">&quot;for month or day, 4 digits for year.&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">month</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">day</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Check consistancy of the given date. e.g. the day (btw 1 and 31), &quot;</span> \
+            <span class="s2">&quot;the month (btw 1 and 12) and the year value.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="extract_dates"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.extract_dates">[docs]</a><span class="k">def</span> <span class="nf">extract_dates</span><span class="p">(</span><span class="n">when</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Expecting None or 1 or 2 dates separated by :. The format is a string.</span>
+<span class="sd">    If 2 dates are given, they must be ordered.</span>
+<span class="sd">    When 1 date is given, assume that&#39;s the latest which is given.</span>
+<span class="sd">    When None date is give, the oldest date is 01/01/0001, the newest is now.</span>
+
+<span class="sd">    It returns 2 datetime object. If nothing given, the oldest date is 01/01/0001,</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#w0=datetime.datetime(1,1,1) # minimal year is 1</span>
+    <span class="c1">#w1=datetime.datetime.now()</span>
+    <span class="n">w0</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># minimal year is 1</span>
+    <span class="n">w1</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">when</span><span class="p">:</span>  <span class="c1"># when input is not None, assume min and max date</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">when</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="nb">str</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Date expected as string.&quot;</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">=</span><span class="n">when</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span> <span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;Too many dates given. Expecting 1 or 2 with : as a separator. &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">w1</span><span class="o">=</span><span class="n">check_valid_date</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">w1</span><span class="o">=</span><span class="n">check_valid_date</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">w0</span><span class="o">=</span><span class="n">check_valid_date</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">w0</span><span class="o">&gt;</span><span class="n">w1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s2">&quot;First date must occur before the second one.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">w0</span><span class="p">,</span><span class="n">w1</span></div>
+
+<div class="viewcode-block" id="week_to_date"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.week_to_date">[docs]</a><span class="k">def</span> <span class="nf">week_to_date</span><span class="p">(</span><span class="n">whenstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    convert week to date.</span>
+<span class="sd">    2 cases:</span>
+<span class="sd">    - Rolling week</span>
+<span class="sd">        if format is Y-M-D-Y-M-D: return middle dates</span>
+<span class="sd">    - One week data Wnumber: return monday correction to the week number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">convertion</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">whenstr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">21</span><span class="p">:</span>
+        <span class="n">firstday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">lastday</span>  <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">4</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]))</span>
+        <span class="n">convertion</span> <span class="o">=</span> <span class="n">firstday</span> <span class="o">+</span> <span class="p">(</span><span class="n">lastday</span> <span class="o">-</span> <span class="n">firstday</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">whenstr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">firstday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">whenstr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">convertion</span> <span class="o">=</span> <span class="n">firstday</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">convertion</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">whenstr</span>  <span class="o">+</span> <span class="s1">&#39;-1&#39;</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="si">%G</span><span class="s2">-S%V-</span><span class="si">%u</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">convertion</span></div>
+
+<div class="viewcode-block" id="get_local_from_url"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.get_local_from_url">[docs]</a><span class="k">def</span> <span class="nf">get_local_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">expiration_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;Download data from the given url and store it into a local file.</span>
+
+<span class="sd">    If the expiration time is 0 (default), the data will never be downloaded anymore if available.</span>
+<span class="sd">    If the expiration time is &lt; 0, it forces to download the file.</span>
+<span class="sd">    If the expiration time (in seconds) is lower than time difference between now and last modification</span>
+<span class="sd">    time of the file, the file is downloaded.</span>
+
+<span class="sd">    One may add a suffix to the local filename if known.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tmpdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gettempdir</span><span class="p">(),</span><span class="s2">&quot;pycoa_data&quot;</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">getuser</span><span class="p">())</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
+
+    <span class="n">local_base_filename</span><span class="o">=</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">netloc</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">crc32</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)))</span><span class="o">+</span><span class="n">suffix</span>
+    <span class="n">local_tmp_filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span><span class="n">local_base_filename</span><span class="p">)</span>
+
+    <span class="n">local_file_exists</span><span class="o">=</span><span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">_coacache_folder</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">local_cached_filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_coacache_folder</span><span class="p">,</span><span class="n">local_base_filename</span><span class="p">)</span>
+        <span class="n">local_file_exists</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">local_cached_filename</span><span class="p">)</span>
+        <span class="n">local_filename</span><span class="o">=</span><span class="n">local_cached_filename</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">local_tmp_filename</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">local_file_exists</span><span class="p">:</span> <span class="c1"># prefering the file in tmp if more recent</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">local_tmp_filename</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">local_filename</span><span class="p">):</span>
+                <span class="n">local_filename</span> <span class="o">=</span> <span class="n">local_tmp_filename</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">local_file_exists</span><span class="o">=</span><span class="kc">True</span>
+            <span class="n">local_filename</span><span class="o">=</span><span class="n">local_tmp_filename</span>
+
+    <span class="k">if</span> <span class="n">expiration_time</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">local_file_exists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expiration_time</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">local_filename</span><span class="p">)</span><span class="o">&lt;</span><span class="n">expiration_time</span><span class="p">:</span>
+            <span class="n">verb</span><span class="p">(</span><span class="s1">&#39;Using locally stored data for &#39;</span><span class="o">+</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39; stored as &#39;</span><span class="o">+</span><span class="n">local_filename</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">local_filename</span>
+
+    <span class="c1"># if not : download the file in tmp area</span>
+    <span class="n">local_filename</span><span class="o">=</span><span class="n">local_tmp_filename</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36&#39;</span><span class="p">}</span>
+        <span class="n">urlfile</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span> <span class="c1"># adding headers for server which does not accept no browser presentation</span>
+        <span class="n">fp</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">local_filename</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urlfile</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">verb</span><span class="p">(</span><span class="s1">&#39;Download content of &#39;</span><span class="o">+</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39; . Locally stored as cached data in &#39;</span><span class="o">+</span><span class="n">local_filename</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">local_file_exists</span> <span class="ow">and</span> <span class="n">expiration_time</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="p">:</span>
+            <span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cannot access to &#39;</span><span class="o">+</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39; . Will use locally stored cached version.&#39;</span><span class="p">)</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CoaConnectionError</span><span class="p">(</span><span class="s1">&#39;Cannot access to the url &#39;</span><span class="o">+</span>\
+                <span class="n">url</span><span class="o">+</span><span class="s1">&#39; . Please check your internet connection or url path.&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">CoaNotManagedError</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="s2">&quot; : &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e2</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">local_filename</span></div>
+
+<div class="viewcode-block" id="dotdict"><a class="viewcode-back" href="../../coa.tools.html#coa.tools.dotdict">[docs]</a><span class="k">class</span> <span class="nc">dotdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;dot.notation access to dictionary attributes&quot;&quot;&quot;</span>
+    <span class="fm">__getattr__</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">get</span>
+    <span class="fm">__setattr__</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__setitem__</span>
+    <span class="fm">__delattr__</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__delitem__</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Pycoa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
