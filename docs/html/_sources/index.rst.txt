@@ -9,7 +9,7 @@ Welcome to Pycoa documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   pycoa
+   coa
 
 
 Indices and tables
