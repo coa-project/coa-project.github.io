@@ -8,7 +8,7 @@ coa.front module
 
 
 .. automodule:: coa.front
-    :members: chartsinput_deco, get, getinfo, getversion, getwhom, hist, listbypop, listoption, listoutput, listtile, listvisu, listwhat, listwhere, listwhich, listwhom, map, merger, plot, saveoutput, setwhom
+    :members: chartsinput_deco, get, getinfo, getversion, getwhom, hist, listbypop, listoption, listoutput, listtile, listvisu, listwhat, listwhere, listwhich, listwhom, map, merger, normbypop, plot, saveoutput, setwhom
     :undoc-members:
     :show-inheritance:
 
@@ -38,6 +38,7 @@ coa.front module
         listwhom
         map
         merger
+        normbypop
         plot
         saveoutput
         setwhom

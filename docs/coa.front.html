@@ -185,13 +185,16 @@ cf.listwhat()    # return available time series type (weekly,</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.merger" title="coa.front.merger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merger</span></code></a></p></td>
 <td><p>Merge two or more pycoa pandas from get_stats operation 'coapandas': list (min 2D) of pandas from stats 'whichcol': list variable associate to the coapandas list to be retrieve</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.plot" title="coa.front.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.normbypop" title="coa.front.normbypop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normbypop</span></code></a></p></td>
+<td><p>Return a pandas with a normalisation column add by population * can normalize by '100', '1k', '100k' or '1M'</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.plot" title="coa.front.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
 <td><p>Create a date plot according to arguments.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.saveoutput" title="coa.front.saveoutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveoutput</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.saveoutput" title="coa.front.saveoutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveoutput</span></code></a></p></td>
 <td><p>Export pycoas pandas as an output file selected by output argument 'pandas': pandas to save 'saveformat': excel (default) or csv 'savename': None (default pycoaout+ '.xlsx/.csv')</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#coa.front.setwhom" title="coa.front.setwhom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setwhom</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#coa.front.setwhom" title="coa.front.setwhom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setwhom</span></code></a></p></td>
 <td><p>Set the covid19 database used, given as a string.</p></td>
 </tr>
 </tbody>
@@ -398,6 +401,13 @@ by default visu=’bokeh’
 <dd><p>Merge two or more pycoa pandas from get_stats operation
 ‘coapandas’: list (min 2D) of pandas from stats
 ‘whichcol’: list variable associate to the coapandas list to be retrieve</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="coa.front.normbypop">
+<span class="sig-name descname"><span class="pre">normbypop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pandy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val2norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bypop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coa/front.html#normbypop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#coa.front.normbypop" title="Permalink to this definition"></a></dt>
+<dd><p>Return a pandas with a normalisation column add by population
+* can normalize by ‘100’, ‘1k’, ‘100k’ or ‘1M’</p>
 </dd></dl>
 
 <dl class="py function">

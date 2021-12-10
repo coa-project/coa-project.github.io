@@ -330,6 +330,57 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">_db</span><span class="o">.</span><span class="n">get_keyword_definition</span><span class="p">(</span><span class="n">which</span><span class="p">),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">url:&#39;</span><span class="p">,</span> <span class="n">_db</span><span class="o">.</span><span class="n">get_keyword_url</span><span class="p">(</span><span class="n">which</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">(more info &#39;</span><span class="p">,</span><span class="n">_db</span><span class="o">.</span><span class="n">get_keyword_url</span><span class="p">(</span><span class="n">which</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;)&#39;</span><span class="p">)</span></div>
 
 <span class="c1"># ----------------------------------------------------------------------</span>
+<span class="c1"># --- Normalisation by pop input pandas return pandas whith by pop new column</span>
+<span class="c1"># ---------------------------------------------------------------------</span>
+<div class="viewcode-block" id="normbypop"><a class="viewcode-back" href="../../coa.front.html#coa.front.normbypop">[docs]</a><span class="k">def</span> <span class="nf">normbypop</span><span class="p">(</span><span class="n">pandy</span><span class="p">,</span> <span class="n">val2norm</span><span class="p">,</span><span class="n">bypop</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a pandas with a normalisation column add by population</span>
+<span class="sd">        * can normalize by &#39;100&#39;, &#39;1k&#39;, &#39;100k&#39; or &#39;1M&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_gi</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">list</span><span class="p">):</span>
+        <span class="n">pandy</span> <span class="o">=</span> <span class="n">pandy</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_db</span><span class="o">.</span><span class="n">db_world</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_gi</span><span class="p">,</span><span class="n">coa</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">GeoInfo</span><span class="p">):</span>
+            <span class="n">_gi</span> <span class="o">=</span> <span class="n">coge</span><span class="o">.</span><span class="n">GeoInfo</span><span class="p">()</span>
+        <span class="n">pop_field</span><span class="o">=</span><span class="s1">&#39;population&#39;</span>
+        <span class="n">pandy</span> <span class="o">=</span> <span class="n">_gi</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">pandy</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="n">pop_field</span><span class="p">,</span><span class="n">geofield</span><span class="o">=</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_gi</span><span class="p">,</span><span class="n">coa</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">GeoCountry</span><span class="p">):</span>
+            <span class="n">_gi</span><span class="o">=</span><span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_gi</span><span class="o">.</span><span class="n">get_country</span><span class="p">()</span> <span class="o">!=</span> <span class="n">_db</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">get_country</span><span class="p">():</span>
+                <span class="n">_gi</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">_gi</span> <span class="o">==</span> <span class="kc">None</span> <span class="p">:</span>
+            <span class="n">_gi</span> <span class="o">=</span> <span class="n">_db</span><span class="o">.</span><span class="n">geo</span>
+        <span class="n">pop_field</span><span class="o">=</span><span class="s1">&#39;population_subregion&#39;</span>
+        <span class="k">if</span> <span class="n">pop_field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_gi</span><span class="o">.</span><span class="n">get_list_properties</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s1">&#39;The population information not available for this country. No normalization possible&#39;</span><span class="p">)</span>
+
+        <span class="n">pandy</span><span class="o">=</span><span class="n">_gi</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">pandy</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="n">pop_field</span><span class="p">,</span><span class="n">input_key</span><span class="o">=</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
+
+    <span class="n">clust</span> <span class="o">=</span> <span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clust</span><span class="p">:</span>
+        <span class="n">pandyi</span> <span class="o">=</span> <span class="n">pandy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span> <span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">pandyi</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">pop_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">pandyi</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">cody</span> <span class="o">=</span> <span class="p">[</span><span class="n">pandyi</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)[</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">pandyi</span><span class="p">)</span>
+        <span class="n">pandyi</span> <span class="o">=</span> <span class="n">pandyi</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">codelocation</span><span class="o">=</span><span class="n">cody</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pandyi</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pandyi</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;clustername&#39;</span><span class="p">])</span>
+    <span class="n">pandy</span> <span class="o">=</span> <span class="n">df</span>
+
+    <span class="n">pandy</span><span class="o">=</span><span class="n">pandy</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">=</span><span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">pandy</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">val2norm</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span><span class="p">]</span><span class="o">=</span><span class="n">pandy</span><span class="p">[</span><span class="n">val2norm</span><span class="p">]</span><span class="o">/</span><span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">*</span><span class="n">_dict_bypop</span><span class="p">[</span><span class="n">bypop</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pandy</span></div>
+
+<span class="c1"># ----------------------------------------------------------------------</span>
 <span class="c1"># --- get(**kwargs) ----------------------------------------------------</span>
 <span class="c1"># ----------------------------------------------------------------------</span>
 <div class="viewcode-block" id="get"><a class="viewcode-back" href="../../coa.front.html#coa.front.get">[docs]</a><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -439,50 +490,12 @@
     <span class="n">pandy</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
     <span class="n">pop_field</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="c1"># manage pop norm if asked</span>
-
     <span class="k">if</span> <span class="n">bypop</span> <span class="o">!=</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">list</span><span class="p">):</span>
-            <span class="n">pandy</span> <span class="o">=</span> <span class="n">pandy</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">_db</span><span class="o">.</span><span class="n">db_world</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_gi</span><span class="p">,</span><span class="n">coa</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">GeoInfo</span><span class="p">):</span>
-                <span class="n">_gi</span> <span class="o">=</span> <span class="n">coge</span><span class="o">.</span><span class="n">GeoInfo</span><span class="p">()</span>
-            <span class="n">pop_field</span><span class="o">=</span><span class="s1">&#39;population&#39;</span>
-            <span class="n">pandy</span> <span class="o">=</span> <span class="n">_gi</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">pandy</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="n">pop_field</span><span class="p">,</span><span class="n">geofield</span><span class="o">=</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_gi</span><span class="p">,</span><span class="n">coa</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">GeoCountry</span><span class="p">):</span>
-                <span class="n">_gi</span><span class="o">=</span><span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">_gi</span><span class="o">.</span><span class="n">get_country</span><span class="p">()</span> <span class="o">!=</span> <span class="n">_db</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">get_country</span><span class="p">():</span>
-                    <span class="n">_gi</span><span class="o">=</span><span class="kc">None</span>
-
-            <span class="k">if</span> <span class="n">_gi</span> <span class="o">==</span> <span class="kc">None</span> <span class="p">:</span>
-                <span class="n">_gi</span> <span class="o">=</span> <span class="n">_db</span><span class="o">.</span><span class="n">geo</span>
-            <span class="n">pop_field</span><span class="o">=</span><span class="s1">&#39;population_subregion&#39;</span>
-            <span class="k">if</span> <span class="n">pop_field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_gi</span><span class="o">.</span><span class="n">get_list_properties</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s1">&#39;The population information not available for this country. No normalization possible&#39;</span><span class="p">)</span>
-
-            <span class="n">pandy</span><span class="o">=</span><span class="n">_gi</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">pandy</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="n">pop_field</span><span class="p">,</span><span class="n">input_key</span><span class="o">=</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)</span>
-
-        <span class="n">clust</span> <span class="o">=</span> <span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clust</span><span class="p">:</span>
-            <span class="n">pandyi</span> <span class="o">=</span> <span class="n">pandy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="n">pandy</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span> <span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">pandyi</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">pop_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">pandyi</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-            <span class="n">cody</span> <span class="o">=</span> <span class="p">[</span><span class="n">pandyi</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;codelocation&#39;</span><span class="p">)[</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">pandyi</span><span class="p">)</span>
-            <span class="n">pandyi</span> <span class="o">=</span> <span class="n">pandyi</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">codelocation</span><span class="o">=</span><span class="n">cody</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">pandyi</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pandyi</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;clustername&#39;</span><span class="p">])</span>
-        <span class="n">pandy</span> <span class="o">=</span> <span class="n">df</span>
-
-        <span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">=</span><span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">what</span><span class="p">:</span>
-            <span class="n">pandy</span><span class="p">[</span><span class="n">what</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span><span class="p">]</span><span class="o">=</span><span class="n">pandy</span><span class="p">[</span><span class="n">what</span><span class="p">]</span><span class="o">/</span><span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">*</span><span class="n">_dict_bypop</span><span class="p">[</span><span class="n">bypop</span><span class="p">]</span>
+            <span class="n">val2norm</span><span class="o">=</span><span class="n">what</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">pandy</span><span class="p">[</span><span class="n">which</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span><span class="p">]</span><span class="o">=</span><span class="n">pandy</span><span class="p">[</span><span class="n">which</span><span class="p">]</span><span class="o">/</span><span class="n">pandy</span><span class="p">[</span><span class="n">pop_field</span><span class="p">]</span><span class="o">*</span><span class="n">_dict_bypop</span><span class="p">[</span><span class="n">bypop</span><span class="p">]</span>
+            <span class="n">val2norm</span><span class="o">=</span><span class="n">which</span>
+        <span class="n">pandy</span> <span class="o">=</span> <span class="n">normbypop</span><span class="p">(</span><span class="n">pandy</span><span class="p">,</span><span class="n">val2norm</span><span class="p">,</span><span class="n">bypop</span><span class="p">)</span>
     <span class="c1"># casted_data = None</span>
     <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;pandas&#39;</span><span class="p">:</span>
         <span class="n">pandy</span> <span class="o">=</span> <span class="n">pandy</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;clustername&#39;</span><span class="p">])</span>
@@ -562,10 +575,16 @@
         <span class="n">input_field</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;input_field&#39;</span><span class="p">)</span>
         <span class="n">where</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;where&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">what</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;what&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">which</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;which&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">when</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;when&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">option</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
+        <span class="n">bypop</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;bypop&#39;</span><span class="p">,</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_arg</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">bypop</span> <span class="o">!=</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
+                <span class="n">input_arg</span> <span class="o">=</span> <span class="n">normbypop</span><span class="p">(</span><span class="n">input_arg</span><span class="p">,</span><span class="n">input_field</span><span class="p">,</span><span class="n">bypop</span><span class="p">)</span>
+
             <span class="n">input_field</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;input_field&#39;</span><span class="p">,</span> <span class="n">listwhich</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
             <span class="c1">#if input_field not in input_arg.columns:</span>
             <span class="c1">#    raise CoaKeyError(&quot;Cannot find &quot; + str(input_field) + &quot; field in the pandas data. &quot;</span>
@@ -574,6 +593,7 @@
                 <span class="k">raise</span> <span class="n">CoaKeyError</span><span class="p">(</span><span class="s2">&quot;Cannot use option with input pandas data. &quot;</span>
                                   <span class="s2">&quot;Use option within the get() function instead.&quot;</span><span class="p">)</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_arg</span>
+
         <span class="k">elif</span> <span class="n">input_arg</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s1">&#39;pandas&#39;</span><span class="p">)</span>
             <span class="n">which</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;which&#39;</span><span class="p">,</span> <span class="n">listwhich</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
@@ -583,14 +603,16 @@
             <span class="k">raise</span> <span class="n">CoaTypeError</span><span class="p">(</span><span class="s1">&#39;Waiting input as valid pycoa pandas &#39;</span>
                                <span class="s1">&#39;dataframe. See help.&#39;</span><span class="p">)</span>
 
-        <span class="n">bypop</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;bypop&#39;</span><span class="p">,</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">bypop</span> <span class="o">!=</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">what</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;what&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">what</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span>
                 <span class="n">input_field</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;what&#39;</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">which</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">which</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span>
                 <span class="n">input_field</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">input_field</span> <span class="o">=</span> <span class="n">input_field</span><span class="o">+</span><span class="s1">&#39; per &#39;</span><span class="o">+</span><span class="n">bypop</span>
+
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;input_field&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_field</span>
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -754,7 +776,6 @@
 
     <span class="k">if</span> <span class="s1">&#39;typeofplot&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">typeofplot</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;typeofplot&#39;</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="n">typeofplot</span> <span class="o">==</span> <span class="s1">&#39;date&#39;</span><span class="p">:</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">_cocoplot</span><span class="o">.</span><span class="n">pycoa_date_plot</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="n">input_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">typeofplot</span> <span class="o">==</span> <span class="s1">&#39;versus&#39;</span><span class="p">:</span>

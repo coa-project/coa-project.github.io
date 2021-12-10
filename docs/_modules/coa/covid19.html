@@ -446,6 +446,7 @@
                         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;00&#39;</span><span class="p">])]</span>
                         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
                         <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;975&#39;</span><span class="p">,</span><span class="s1">&#39;977&#39;</span><span class="p">,</span><span class="s1">&#39;978&#39;</span><span class="p">,</span><span class="s1">&#39;986&#39;</span><span class="p">,</span><span class="s1">&#39;987&#39;</span><span class="p">]),</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;980&#39;</span>
+                        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;incid_hosp&#39;</span><span class="p">,</span> <span class="s1">&#39;incid_rea&#39;</span><span class="p">,</span> <span class="s1">&#39;incid_rad&#39;</span><span class="p">,</span> <span class="s1">&#39;incid_dc&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;n_cum_dose1&#39;</span><span class="p">,</span> <span class="s1">&#39;n_cum_dose2&#39;</span><span class="p">,</span><span class="s1">&#39;n_cum_dose3&#39;</span><span class="p">,</span><span class="s1">&#39;n_cum_dose4&#39;</span><span class="p">,</span><span class="s1">&#39;n_cum_rappel&#39;</span><span class="p">]:</span>
                             <span class="n">result</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">errors</span> <span class="o">=</span> <span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;incid_&#39;</span><span class="p">):</span>
@@ -460,7 +461,6 @@
                             <span class="k">if</span> <span class="s1">&#39;n_cum&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
                                 <span class="n">result</span><span class="p">[</span><span class="s1">&#39;tot_&#39;</span><span class="o">+</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;location&#39;</span><span class="p">])[</span><span class="n">w</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="c1">#+result[&#39;offset_&#39;+w]</span>
 
-                        <span class="c1">#</span>
                         <span class="k">def</span> <span class="nf">dontneeeded</span><span class="p">():</span>
                             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                                 <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Prc&#39;</span><span class="p">):</span>
@@ -632,26 +632,25 @@
         <span class="k">return</span> <span class="n">o</span></div>
 
 <div class="viewcode-block" id="DataBase.get_available_keys_words"><a class="viewcode-back" href="../../coa.covid19.html#coa.covid19.DataBase.get_available_keys_words">[docs]</a>   <span class="k">def</span> <span class="nf">get_available_keys_words</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Return all the available keyswords for the database selected</span>
-<span class="sd">        Key-words are for:</span>
-<span class="sd">        - jhu : [&#39;deaths&#39;,&#39;confirmed&#39;,&#39;recovered&#39;]</span>
-<span class="sd">                            * the data are cumulative i.e for a date it represents the total cases</span>
-<span class="sd">            For more information please have a look to https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data</span>
-<span class="sd">        - &#39;owid&#39; : [&#39;total_deaths&#39;,&#39;total_cases&#39;,&#39;reproduction_rate&#39;,&#39;icu_patients&#39;,&#39;hosp_patients&#39;,&#39;total_tests&#39;,</span>
-<span class="sd">                    &#39;positive_rate&#39;,&#39;total_vaccinations&#39;]</span>
-<span class="sd">        For more information please have a look to https://github.com/owid/covid-19-data/tree/master/public/data/</span>
-<span class="sd">        - &#39;spf&#39; : [&#39;hosp&#39;, &#39;rea&#39;, &#39;rad&#39;, &#39;dc&#39;, &#39;incid_hosp&#39;, &#39;incid_rea&#39;, &#39;incid_dc&#39;,</span>
-<span class="sd">                    &#39;incid_rad&#39;, &#39;P&#39;, &#39;T&#39;, &#39;tx_incid&#39;, &#39;R&#39;, &#39;taux_occupation_sae&#39;, &#39;tx_pos&#39;]</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Return all the available keyswords for the database selected</span>
+<span class="sd">            Key-words are for:</span>
+<span class="sd">            - jhu : [&#39;deaths&#39;,&#39;confirmed&#39;,&#39;recovered&#39;]</span>
+<span class="sd">                                * the data are cumulative i.e for a date it represents the total cases</span>
+<span class="sd">                For more information please have a look to https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data</span>
+<span class="sd">            - &#39;owid&#39; : [&#39;total_deaths&#39;,&#39;total_cases&#39;,&#39;reproduction_rate&#39;,&#39;icu_patients&#39;,&#39;hosp_patients&#39;,&#39;total_tests&#39;,</span>
+<span class="sd">                        &#39;positive_rate&#39;,&#39;total_vaccinations&#39;]</span>
+<span class="sd">            For more information please have a look to https://github.com/owid/covid-19-data/tree/master/public/data/</span>
+<span class="sd">            - &#39;spf&#39; : [&#39;hosp&#39;, &#39;rea&#39;, &#39;rad&#39;, &#39;dc&#39;, &#39;incid_hosp&#39;, &#39;incid_rea&#39;, &#39;incid_dc&#39;,</span>
+<span class="sd">                        &#39;incid_rad&#39;, &#39;P&#39;, &#39;T&#39;, &#39;tx_incid&#39;, &#39;R&#39;, &#39;taux_occupation_sae&#39;, &#39;tx_pos&#39;]</span>
+<span class="sd">                No translation have been done for french keywords data</span>
+<span class="sd">            For more information please have a look to  https://www.data.gouv.fr/fr/organizations/sante-publique-france/</span>
+<span class="sd">            - &#39;opencovid19&#39; :[&#39;cas_confirmes&#39;, &#39;deces&#39;,</span>
+<span class="sd">            &#39;reanimation&#39;, &#39;hospitalises&#39;,&#39;nouvelles_hospitalisations&#39;, &#39;nouvelles_reanimations&#39;, &#39;gueris&#39;, &#39;depistes&#39;]</span>
+<span class="sd">            - &#39;opencovid19national&#39; :[&#39;cas_confirmes&#39;, &#39;cas_ehpad&#39;, &#39;cas_confirmes_ehpad&#39;, &#39;cas_possibles_ehpad&#39;, &#39;deces&#39;, &#39;deces_ehpad&#39;,</span>
+<span class="sd">            &#39;reanimation&#39;, &#39;hospitalises&#39;,&#39;nouvelles_hospitalisations&#39;, &#39;nouvelles_reanimations&#39;, &#39;gueris&#39;, &#39;depistes&#39;]</span>
 <span class="sd">            No translation have been done for french keywords data</span>
-<span class="sd">        For more information please have a look to  https://www.data.gouv.fr/fr/organizations/sante-publique-france/</span>
-<span class="sd">        - &#39;opencovid19&#39; :[&#39;cas_confirmes&#39;, &#39;deces&#39;,</span>
-<span class="sd">        &#39;reanimation&#39;, &#39;hospitalises&#39;,&#39;nouvelles_hospitalisations&#39;, &#39;nouvelles_reanimations&#39;, &#39;gueris&#39;, &#39;depistes&#39;]</span>
-<span class="sd">        - &#39;opencovid19national&#39; :[&#39;cas_confirmes&#39;, &#39;cas_ehpad&#39;, &#39;cas_confirmes_ehpad&#39;, &#39;cas_possibles_ehpad&#39;, &#39;deces&#39;, &#39;deces_ehpad&#39;,</span>
-<span class="sd">        &#39;reanimation&#39;, &#39;hospitalises&#39;,&#39;nouvelles_hospitalisations&#39;, &#39;nouvelles_reanimations&#39;, &#39;gueris&#39;, &#39;depistes&#39;]</span>
-
-<span class="sd">        No translation have been done for french keywords data</span>
-<span class="sd">        For more information please have a look to https://github.com/opencovid19-fr</span>
+<span class="sd">            For more information please have a look to https://github.com/opencovid19-fr</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_keys_words</span></div>
 
@@ -964,9 +963,6 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">==</span> <span class="s1">&#39;dgs&#39;</span><span class="p">:</span>
             <span class="n">mypandas</span> <span class="o">=</span> <span class="n">mypandas</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">==</span> <span class="s1">&#39;spf&#39;</span><span class="p">:</span>
-            <span class="n">mypandas</span> <span class="o">=</span> <span class="n">mypandas</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">!=</span> <span class="s1">&#39;spfnational&#39;</span><span class="p">:</span>
             <span class="n">mypandas</span> <span class="o">=</span> <span class="n">mypandas</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;location&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span> <span class="c1"># summing in case of multiple dates (e.g. in opencovid19 data). But keep nan if any</span>
 
@@ -1007,6 +1003,7 @@
 <span class="sd">            * date : latest date to retrieve (None : max date)</span>
 <span class="sd">            * selected_col: column to keep according to get_available_keys_words (None : all get_available_keys_words)</span>
 <span class="sd">                            N.B. location column is added</span>
+
 <span class="sd">        &#39;&#39;&#39;</span>
        <span class="n">kwargs_test</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;selected_col&#39;</span><span class="p">],</span>
                     <span class="s1">&#39;Bad args used in the get_stats() function.&#39;</span><span class="p">)</span>
@@ -1265,16 +1262,6 @@
             <span class="n">pdfiltered</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="p">[[</span><span class="s1">&#39;location&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;codelocation&#39;</span><span class="p">,</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]]</span>
             <span class="n">pdfiltered</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="c1"># deal with options now</span>
-        <span class="c1">#if fillnan: # which is the default. Use nofillnan option instead.</span>
-            <span class="c1"># fill with previous value</span>
-        <span class="c1">#    pdfiltered = pdfiltered.copy()</span>
-            <span class="c1">#if self.db_world:</span>
-            <span class="c1">#pdfiltered[kwargs[&#39;which&#39;]] = pdfiltered.groupby([&#39;clustername&#39;])[kwargs[&#39;which&#39;]].fillna(method=&#39;bfill&#39;)</span>
-        <span class="c1">#    pdfiltered.loc[:,kwargs[&#39;which&#39;]] = pdfiltered.groupby([&#39;clustername&#39;])[kwargs[&#39;which&#39;]].\</span>
-        <span class="c1">#    apply(lambda x: x.bfill())</span>
-            <span class="c1"># fill remaining nan with zeros</span>
-            <span class="c1">#pdfiltered = pdfiltered.fillna(0)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">option</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
             <span class="n">option</span><span class="o">=</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;fillnan&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">option</span> <span class="ow">and</span> <span class="s1">&#39;nofillnan&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">option</span><span class="p">:</span>
@@ -1295,10 +1282,7 @@
                     <span class="n">loopover</span> <span class="o">=</span> <span class="n">location_exploded</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">loopover</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pdfiltered</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-
                 <span class="k">for</span> <span class="n">loca</span> <span class="ow">in</span> <span class="n">loopover</span><span class="p">:</span>
-                    <span class="c1"># modify values in order that diff values is never negative</span>
-
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location_exploded</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">list</span><span class="p">):</span>
                         <span class="n">pdloc</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">location</span> <span class="o">==</span> <span class="n">loca</span> <span class="p">][</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -1353,18 +1337,10 @@
                     <span class="n">pdfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;location&#39;</span><span class="p">,</span><span class="s1">&#39;clustername&#39;</span><span class="p">])[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">ffill</span><span class="p">())</span>
                     <span class="n">pdfiltered</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="p">[</span><span class="n">pdfiltered</span><span class="p">[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
             <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="s1">&#39;smooth7&#39;</span><span class="p">:</span>
-                <span class="c1">#pdfiltered[kwargs[&#39;which&#39;]] = pdfiltered.groupby([&#39;clustername&#39;])[kwargs[&#39;which&#39;]].rolling(7,min_periods=7,center=True).mean().reset_index(level=0,drop=True)</span>
-                <span class="c1">#pdfiltered[kwargs[&#39;which&#39;]] = pdfiltered.groupby([&#39;location&#39;])[kwargs[&#39;which&#39;]].rolling(7,min_periods=7,center=True).mean().reset_index(level=0,drop=True)</span>
                 <span class="n">pdfiltered</span><span class="p">[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;location&#39;</span><span class="p">])[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="c1">#pdfiltered[kwargs[&#39;which&#39;]] = pdfiltered[kwargs[&#39;which&#39;]].fillna(0) # causes bug with fillnan procedure below</span>
-                <span class="c1">#pdfiltered = pdfiltered.groupby(&#39;location&#39;).apply(lambda x : x[3:-3]).reset_index(drop=True) # remove out of bound dates.</span>
                 <span class="n">fillnan</span><span class="o">=</span><span class="kc">True</span>
-                <span class="c1">#pdfiltered.loc[:,kwargs[&#39;which&#39;]] =\</span>
-                <span class="c1">#pdfiltered.groupby([&#39;location&#39;,&#39;clustername&#39;])[kwargs[&#39;which&#39;]].apply(lambda x: x.bfill())</span>
             <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="s1">&#39;sumall&#39;</span><span class="p">:</span>
                 <span class="n">sumall</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="c1">#if kwargs[&#39;which&#39;].startswith(&#39;cur_idx_Prc&#39;):</span>
-                <span class="c1">#    print(&#39;Warning this data is from rolling value, ended date may be not correct ...&#39;)</span>
             <span class="k">elif</span> <span class="n">o</span> <span class="o">==</span> <span class="s1">&#39;sumallandsmooth7&#39;</span><span class="p">:</span>
                 <span class="n">sumall</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">sumallandsmooth7</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1378,21 +1354,15 @@
             <span class="k">if</span> <span class="n">origlistlistloc</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                <span class="n">uniqcluster</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">clustername</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
                <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;which&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;cur_idx_&#39;</span><span class="p">):</span>
-                   <span class="n">tmp</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;clustername&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+                  <span class="n">tmp</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;clustername&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
                <span class="k">else</span><span class="p">:</span>
-                   <span class="n">tmp</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;clustername&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="c1">#.loc[pdfiltered.clustername.isin(uniqcluster)].\</span>
+                  <span class="n">tmp</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;clustername&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="c1">#.loc[pdfiltered.clustername.isin(uniqcluster)].\</span>
 
-               <span class="c1">#dicocode = {i:list(pdfiltered.loc[pdfiltered.clustername.isin(i)][&#39;codelocation&#39;]) for i in uniqcluster}</span>
                <span class="n">codescluster</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">pdfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pdfiltered</span><span class="o">.</span><span class="n">clustername</span><span class="o">==</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniqcluster</span><span class="p">}</span>
                <span class="n">namescluster</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">pdfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pdfiltered</span><span class="o">.</span><span class="n">clustername</span><span class="o">==</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniqcluster</span><span class="p">}</span>
                <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;codelocation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">codescluster</span><span class="p">)</span>
                <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="s1">&#39;clustername&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">namescluster</span><span class="p">)</span>
 
-               <span class="c1">#if kwargs[&#39;which&#39;].startswith(&#39;cur_idx_&#39;):</span>
-                    <span class="c1">#print(len(tmp.clustername[0].split(&#39;,&#39;)),tmp.clustername[0])</span>
-                    <span class="c1">#tmp[kwargs[&#39;which&#39;]] = tmp.loc[tmp.clustername.isin(uniqcluster)].\</span>
-                    <span class="c1">#apply(lambda x: x[kwargs[&#39;which&#39;]]/len(x.clustername[0].split(&#39;,&#39;)),axis=1)</span>
-                <span class="c1">#    tmp[kwargs[&#39;which&#39;]]</span>
                <span class="n">pdfiltered</span> <span class="o">=</span> <span class="n">tmp</span>
                <span class="n">pdfiltered</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span><span class="s1">&#39;clustername&#39;</span><span class="p">])</span>
                <span class="k">if</span> <span class="n">sumallandsmooth7</span><span class="p">:</span>
@@ -1428,6 +1398,7 @@
             <span class="k">if</span> <span class="n">fillnan</span><span class="p">:</span>
                 <span class="n">pdfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;cumul&#39;</span><span class="p">]</span> <span class="o">=</span>\
                 <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;clustername&#39;</span><span class="p">)[</span><span class="s1">&#39;cumul&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">ffill</span><span class="p">())</span>
+
         <span class="n">pdfiltered</span><span class="p">[</span><span class="s1">&#39;daily&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;clustername&#39;</span><span class="p">)[</span><span class="s1">&#39;cumul&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
         <span class="n">inx</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;clustername&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
         <span class="n">pdfiltered</span><span class="p">[</span><span class="s1">&#39;weekly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdfiltered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;clustername&#39;</span><span class="p">)[</span><span class="s1">&#39;cumul&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
