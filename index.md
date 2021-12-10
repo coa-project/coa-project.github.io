@@ -21,7 +21,7 @@ This environment is designed to be accessible to non-specialists: high-school st
 
 The `PyCoA` tool provides access to several databases and reformats its data. `PyCoA` transparently joins the data with geo-localization databases (management of country or region names, creation of maps). This geolocation information can also be used for other applications outside the Covid19 problematics.
 
-The `PyCoA` tool is designed to be used in a [jupyter](https://jupyter.org/) environment, installed locally or on a remote server (like [Google colaboratory](https://colab.research.google.com/) or [Binder](https://mybinder.org/)). This simplifies [[installation|Installation]] and ensures, thanks to the [`Bokeh`](https://bokeh.org/) library, powerful graphical outputs with very few lines of code for the user, as the following examples attest.
+The `PyCoA` tool is designed to be used in a [jupyter](https://jupyter.org/) environment, installed locally or on a remote server (like [Google colaboratory](https://colab.research.google.com/) or [Binder](https://mybinder.org/)). This simplifies [installation](https://github.com/coa-project/pycoa/wiki/Install) and ensures, thanks to the [`Bokeh`](https://bokeh.org/) library, powerful graphical outputs with very few lines of code for the user, as the following examples attest.
 
 ```python
 import coa.front as cf
@@ -49,7 +49,7 @@ Selected in final phase, the project is free and open source. It has continued t
 
 Its code is public as well as the `notebooks` and are used as references or examples of use during animations or workshops (during the [Salon Culture et Jeux Mathématiques 2021](https://salon-math.fr/) or during the [Fête de la Science 2021](https://www.fetedelascience.fr/)).
 
-## `PyCoA`: generic software for numerical analysis in `Python`.
+## PyCoA: generic software for numerical analysis in Python.
 The project was originally developed for epidemiological studies related to Covid19. However, it can be used for other types of studies.   
 Any analyses involving time series data associated with numerical and geographical variables can use `PyCoA`. Studies will be greatly simplified with clear and precise graphical representations.    
 
@@ -68,9 +68,9 @@ The `PyCoA` project is under [MIT license](https://github.com/coa-project/pycoa/
 <div class="row">
     <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logoCNRS.jpg" alt="CNRS" style="height:40px; padding: 5px;" />
     <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/Universite_Paris_logo_horizontal.jpg" alt="UParis" style="height:40px; padding: 5px;" />
-    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_sorbonne_U.png" alt="SorbonneU"; style="height=40px" />
-    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_LPNHE_web_bleu_2011.gif" alt="LPNHE" style="height=40px; padding: 5px;" />
-    <img src="http://www.msc.univ-paris-diderot.fr/plugins/kitcnrs/images/logo_msc.jpg" alt="MSC" style="height=40px; padding: 5px;" />
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_sorbonne_U.png" alt="SorbonneU"; style="height:40px;" />
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_LPNHE_web_bleu_2011.gif" alt="LPNHE" style="height:40px; padding: 5px;" />
+    <img src="http://www.msc.univ-paris-diderot.fr/plugins/kitcnrs/images/logo_msc.jpg" alt="MSC" style="height:40px; padding: 5px;" />
 </div>
 
 ***
