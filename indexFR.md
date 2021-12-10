@@ -1,5 +1,5 @@
-[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) / 
-[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR) 
+[<img src="fig/UK.png" height="14px" alt="UK flag"> English  version ](http://www.pycoa.fr/index) /
+[ <img src="fig/FR.png" height="14px" alt="FR flag"> Version française ](http://www.pycoa.fr/index_FR)
 
 <section id="downloads" class="clearfix">
   <a href="https://github.com/coa-project/pycoa/archive/main.zip" id="download-zip" class="button" target=_blank><span><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Unarchiver_zip.png" height="25px" align="bottom" alt="zip icon from wikipedia">Archive .zip</span></a>
@@ -12,59 +12,71 @@
 <a href="https://twitter.com/pycoa_fr?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Suivre @pycoa_fr</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </section>
 
-<center>
+<!--center>
 <iframe id="mobilehide" height="460" width="580" src="fig/mapFranceVariant.html" frameborder="0"></iframe>
-</center>
+</center-->
 
 `PyCoA` (Python Covid Analysis) est un ensemble de code Python™ qui fournit :
-- un accès simple aux bases de données sur la Covid-19 ;
-- des outils pour représenter et analyser les données du Covid-19, comme des séries temporelles, des histogrammes ou des cartes.
+- un accès simple aux bases de données sur la <a href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub">Covid19</a> ;
+- des outils pour représenter et analyser les données de la Covid19, comme des séries temporelles ou des cartes.
 
-|Série temporelle (cumulative) | Séries temporelles (G20) |
-|------------|-------------|
-|<a href="fig/pycoa_v2.0_plot_sumall.html" target="_blank"><img src="fig/pycoa_v2.0_plot_sumall.png"></a>|<a href="fig/pycoa_v2.0_plot_g20.html" target="_blank"><img src="fig/pycoa_v2.0_plot_g20.png"></a>|
+Cet environnement est pensé pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Python™.
 
-|Carte (OCDE) | Histogramme | 
-|------------|-------------|
-|<a href="fig/pycoa_v2.0_map_oecd.html" target="_blank"><img src="fig/pycoa_v2.0_map_oecd.png"></a>|<a href="fig/pycoa_v2.0_hist_bycountry.html" target="_blank"><img src="fig/pycoa_v2.0_hist_bycountry.png"></a>|
+L'outil `PyCoA` assure l'accès à plusieurs bases de données et fourni un format standardisé pour les données. Il assure par ailleurs une jointure transparente avec des bases concernant géo-localisation (gestion des noms de pays ou de régions, possibilité de jointures sur des bases avec des description différentes, création de cartes). Ces informations de géolocalisation peuvent par ailleurs être utilisées pour d'autres application en dehors des aspects Covid19.
 
-Cette analyse est pensée pour être accessible à des non-spécialistes : des lycéen·nes qui apprennent Python™, des étudiant·es, des journalistes scientifiques, voire même des chercheurs et chercheuses qui ne sont pas famillier·es avec l'extraction de données. Des analyses simples peuvent être directement effectuées, et des analyses plus poussées peuvent être produites par les personnes habituées à programmer en Python™. Comme exemple, après avoir <a href="https://github.com/coa-project/pycoa/wiki/FR:Install" target=_blank>installé PyCoA</a>, les quelques lignes suivantes permettent de créer les figures en entête de cette courte documentation.
+L'outil `PyCoA` est pensé pour être utilisé dans un environnement [jupyter](https://jupyter.org/), installé localement ou bien sur un serveur distant (comme le propose par exemple [google colaboratory](https://colab.research.google.com/) ou [binder](https://mybinder.org/)). Cela en simplifie l'[installation](https://github.com/coa-project/pycoa/wiki/Installation) et assure grâce à la librairie [`Bokeh`](https://bokeh.org/) des sorties graphiques performantes avec très peu de lignes de code pour l'utilisateur comme en attestent les quelques lignes de code suivantes et les sorties associées.
 
 ```python
 import coa.front as cf
-# default database is JHU
-cf.plot(option='sumall') # default is 'deaths', for all countries
-cf.plot(where='g20') # managing region
-cf.map(where='oecd',what='daily',when='01/02/2021',which='confirmed')
-
-cf.setwhom('owid') # changing database
-cf.hist(which='total_vaccinations') # default is for all countries
+cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
+cf.map(where='world',what='daily',when='01/04/2020')
+cf.hist(where='middle africa', which='confirmed',what='cumul')
+cf.get(where='usa', what='daily', which='recovered',output='pandas')
 ```
-Depuis la version `v2.0`, PyCoA accède également à des données locales comme [SPF](https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19) ou [OpenCovid19](https://github.com/opencovid19-fr) pour la France, [JHU-USA](https://coronavirus.jhu.edu/) pour les États-Unis. Nous pouvons allons obtenir des graphes comme ci-après. D'autres bases ont également été ajouté, pour l'Italie ou l'Inde par exemple.
+<img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_plot_example.png" height="240" align=top />
+<img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_map_example.png" height="240" align=top />
+<br/>
+<img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_hist_example.png" height="240" align=top />
+<img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_get_example.png" height="240" width="300" align=top />
 
-|Données SPF | Données JHU-USA |
-|------------|-------------|
-|<a href="fig/pycoa_v2.0_spf.html" target="_blank"><img src="fig/pycoa_v2.0_spf.png" width=504></a>|<a href="fig/pycoa_v2.0_jhu-usafolium.html" target="_blank"><img src="fig/pycoa_v2.0_jhu-usafolium.jpg" width=504></a>|
+## À propos
 
-```python
-cf.setwhom('spf') # Santé Publique France database
-cf.map(which='tot_vacc',tile='esri') # Vaccinations, map view optional tile 
+Physiciens sur des expériences en physique des particules au [CERN](https://home.cern/) ou en physique de la matière complexe, habitués à la gestion de _big data_, nous avons souhaité partager nos compétences en statistiques et gestion de données au plus grand nombre pour ce qui concerne l'analyse de données liées à la pandémie de la Covid19 au travers le monde.
+L'exploration de données et les statistiques devraient pouvoir aider toutes et tous à mieux comprendre un des phénomènes les plus importants de l'histoire récente.
 
-cf.setwhom('jhu-usa') # JHU USA database
-cf.map(visu='folium') # deaths, map view with folium visualization output
-```
+Pour cela nous proposons le projet `PyCoA`, pour _Python™ Covid19 Analysis_, un outil de statistique qui peut s'utiliser en ligne, avec une interface simple et des schémas de modélisation clairs. La version proposée en ligne peut notamment s'utiliser au travers [Google Colaboratory](https://colab.research.google.com/) ou de [Binder](https://mybinder.org/), une infrastructure de notebooks Python™, et ce, sans aucun effort d'installation.
+Cela permet en outre un travail collaboratif par le partage de _notebooks_ sur le nuage de `google colab`, ce dernier permettant de plus l'utilisation d'une infrastructure de calcul énorme (incluant aussi des GPU pour de futures analyses de _deep learning_ des données Covid19).
 
-PyCoA fonctionne actuellement au sein de _notebooks_ `Jupyter`, que l'installation soit locale ou bien sur des plateformes en ligne comme <a href="https://colab.research.google.com/" target=_blank>Google Colab</a>.
+## Origines
 
-Un code de démonstration simple est accesible comme sous forme d'un notebook sur <a href="https://github.com/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank ><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" height="20" alt="GitHub logo" /> GitHub</a>, sur <a href="https://colab.research.google.com/github/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank ><img src="https://colab.research.google.com/img/colab_favicon_256px.png" height="20" alt="Google colab logo" /> Google Colab</a>, ou sur <a href="https://nbviewer.jupyter.org/github/coa-project/coabook/blob/master/demo_pycoa.ipynb" target=_blank ><img src="https://nbviewer.jupyter.org/static/img/nav_logo.svg" height="20" alt="NbViewer logo" /> Jupyter NbViewer</a>. D'autres _notebooks_ sont fournis via notre <a href="https://github.com/coa-project/coabook/blob/master/README.md" target=_blank >page coabook</a>.
+Le projet `PyCoA`, initialement désigné `CoCoA`, a vu le jour initialement à partir de la participation en avril 2020 à l'hackathon organisé par [UltraHack.org](https://ultrahack.org/covid-19datahack).
+Retenu en phase final mais non sorti vainqueur, le projet se veut libre et gratuit à code source ouvert. Il a continué d'évoluer depuis et a subi une mise à jour majeure lors du [Hackathon Covid19](https://hackathon-covid.fr) animé par la [Direction interministérielle de la transformation publique](https://www.modernisation.gouv.fr/) en avril 2021.
 
-La documentation complète se trouve sur <a href="https://github.com/coa-project/pycoa/wiki/FR:Home" target=_blank>le Wiki</a>.
+Son code est public ainsi que les `notebooks` et servent de références ou d'exemples d'utilisation lors d'animations ou d'ateliers (lors du [Salon Culture et Jeux Mathématiques 2021](https://salon-math.fr/) ou lors de la [Fête de la Science 2021](https://www.fetedelascience.fr/)).
 
-### Auteurs
+## `PyCoA`: logiciel générique d'analyses numériques en `Python`
+Le projet a été développé à l'origine pour des études épidémiologiques liées à la Covid19. Il pourra cependant être utilisé pour d'autres types d'études.   
+Ainsi, des analyses comportant des données avec des séries temporelles associées à des variables numériques et géographiques, pourront utiliser `PyCoA`. Leurs études seront grandement simplifiées et ceux avec des représentations graphiques claires et précises .    
 
-* Tristan Beau - [Université de Paris](http://u-paris.fr) - [laboratoire LPNHE](http://lpnhe.in2p3.fr/)
-* Julien Browaeys - [Université de Paris](http://u-paris.fr) - [laboratoire MSC](http://www.msc.univ-paris-diderot.fr/)
-* Olivier Dadoun - [CNRS](http://cnrs.fr) - [Sorbonne Université](https://www.sorbonne-universite.fr/) - [laboratoire LPNHE](http://lpnhe.in2p3.fr/)
+
+## Licence
+
+Le projet `PyCoA` est sous [licence MIT](https://github.com/coa-project/pycoa/blob/main/LICENSE).
+
+## Auteurs
+
+* Tristan Beau - [Université de Paris](http://u-paris.fr) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
+* Julien Browaeys - [Université de Paris](http://u-paris.fr) - [MSC laboratory](http://www.msc.univ-paris-diderot.fr/)
+* Olivier Dadoun - [CNRS](http://cnrs.fr)/[in2p3](https://www.in2p3.cnrs.fr/) - [LPNHE laboratory](http://lpnhe.in2p3.fr/)
+
+## Institutions
+<div class="row">
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logoCNRS.jpg" alt="CNRS" style="height:45px; padding: 5px;" />
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/Universite_Paris_logo_horizontal.jpg" alt="UParis" style="height:45px; padding: 5px;" />
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_sorbonne_U.png" alt="SorbonneU" style="height:45px;" />
+    <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/logo_LPNHE_web_bleu_2011.gif" alt="LPNHE" style="height:45px; padding: 5px;" />
+    <img src="http://www.msc.univ-paris-diderot.fr/plugins/kitcnrs/images/logo_msc.jpg" alt="MSC" style="height:45px; padding: 5px;" />
+</div>
 
 ***
 [ⓒpycoa.fr <img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/world-wide-web.png' height='25px' />](http://www.pycoa.fr) &nbsp;&nbsp;
