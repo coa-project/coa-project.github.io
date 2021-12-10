@@ -92,8 +92,8 @@ Full documentation is on <a href="https://github.com/coa-project/pycoa/wiki/Home
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/information.png' height='25px' alt='User manual' />](https://github.com/coa-project/pycoa/wiki) &nbsp;&nbsp;
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/manual.png' height='25px' alt='Core documentation' />](https://www.pycoa.fr/docs) &nbsp;&nbsp;
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/mybinder.png' height='20px' alt='MyBinder launch' />](https://mybinder.org/v2/gh/coa-project/pycoa/dev)
-***
 
+***
 ### We talk about us…
 * In the news of [LPNHE - Laboratoire de Physique Nucléaire et Hautes Énergies](https://lpnhe.in2p3.fr/) (july 2021) : [Pycoa, un logiciel pour mieux comprendre la pandémie due à la Covid-19 ](https://lpnhe.in2p3.fr/spip.php?article1596)
 * In the news of [Sorbonne Université](https://www.sorbonne-universite.fr) (july 2021) : [PyCoa : un logiciel gratuit d’analyse des données de la Covid-19](https://www.sorbonne-universite.fr/actualites/pycoa-un-logiciel-gratuit-danalyse-des-donnees-de-la-covid-19)
