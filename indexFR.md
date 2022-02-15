@@ -26,10 +26,10 @@ L'outil `PyCoA` est pensé pour être utilisé dans un environnement [jupyter](h
 
 ```python
 import coa.front as cf
-cf.plot(where=['France', 'Italy', 'United kingdom'], which='deaths', what='cumul')
+cf.plot(where=['France', 'Italy', 'United kingdom'])
 cf.map(where='world',what='daily',when='01/04/2020')
-cf.hist(where='middle africa', which='confirmed',what='cumul')
-cf.get(where='usa', what='daily', which='recovered',output='pandas')
+cf.hist(where='middle africa', which='tot_confirmed',what='cumul')
+cf.get(where='usa', what='daily', which='tot_recovered',output='pandas')
 ```
 <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_plot_example.png" height="240" align=top />
 <img src="https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/pycoa_map_example.png" height="240" align=top />
@@ -84,7 +84,7 @@ Le projet `PyCoA` est sous [licence MIT](https://github.com/coa-project/pycoa/bl
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/information.png' height='25px' alt='User manual' />](https://github.com/coa-project/pycoa/wiki) &nbsp;&nbsp;
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/manual.png' height='25px' alt='Core documentation' />](https://www.pycoa.fr/doc) &nbsp;&nbsp;
 [<img src='https://raw.githubusercontent.com/wiki/coa-project/pycoa/figs/mybinder.png' height='20px' alt='MyBinder launch' />](https://mybinder.org/v2/gh/coa-project/pycoa/dev)&nbsp;&nbsp;
-[<img src='https://raw.githubusercontent.com/coa-project/coa-project.github.io/main/doc/pdoc.png' height='30px' alt='Documentation' />](https://pdoc3.github.io/pdoc/index.html)
+[<img src='https://raw.githubusercontent.com/coa-project/coa-project.github.io/main/doc/pdoc.png' height='30px' alt='Documentation' />](http://pycoa.fr/doc/index.html)
 
 ***
 ### On parle de nous…
