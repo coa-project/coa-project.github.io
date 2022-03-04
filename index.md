@@ -85,6 +85,7 @@ The `PyCoA` project is under [MIT license](https://github.com/coa-project/pycoa/
 
 ***
 ### We talk about us…
+* In the Acteurs Publics [L’héritage du “Hackathon Covid” passé à la loupe](https://www.acteurspublics.fr/articles/lheritage-du-hackathon-covid-passe-a-la-loupe)
 * In the news of [LPNHE - Laboratoire de Physique Nucléaire et Hautes Énergies](https://lpnhe.in2p3.fr/) (july 2021) : [Pycoa, un logiciel pour mieux comprendre la pandémie due à la Covid-19 ](https://lpnhe.in2p3.fr/spip.php?article1596)
 * In the news of [Sorbonne Université](https://www.sorbonne-universite.fr) (july 2021) : [PyCoa : un logiciel gratuit d’analyse des données de la Covid-19](https://www.sorbonne-universite.fr/actualites/pycoa-un-logiciel-gratuit-danalyse-des-donnees-de-la-covid-19)
 * In the news of the [Physics departement of Université de Paris](https://physique.u-paris.fr) (july 2021) : [«Un logiciel pour mieux comprendre la pandémie»](https://physique.u-paris.fr/actualites/un-logiciel-pycoa-pour-mieux-comprendre-la-pandemie)
