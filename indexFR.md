@@ -91,6 +91,7 @@ Le projet `PyCoA` est sous [licence MIT](https://github.com/coa-project/pycoa/bl
 
 ***
 ### On parle de nous…
+* Sur le site [MODCOV19](https://modcov19.math.cnrs.fr/) du [CNRS](https://www.cnrs.fr/) : Modélisation et Covid-19 [PyCoa : Python Covid analysis](https://modcov19.math.cnrs.fr/prepublications/2022_03_11_beau/)
 * Dans le journal Acteurs Publics [L’héritage du “Hackathon Covid” passé à la loupe](https://www.acteurspublics.fr/articles/lheritage-du-hackathon-covid-passe-a-la-loupe)
 * Dans les actualités du [LPNHE - Laboratoire de Physique Nucléaire et Hautes Énergies](https://lpnhe.in2p3.fr/) (juillet 2021) : [Pycoa, un logiciel pour mieux comprendre la pandémie due à la Covid-19 ](https://lpnhe.in2p3.fr/spip.php?article1596)
 * Dans les actualités de [Sorbonne Université](https://www.sorbonne-universite.fr) (juillet 2021) : [PyCoa : un logiciel gratuit d’analyse des données de la Covid-19](https://www.sorbonne-universite.fr/actualites/pycoa-un-logiciel-gratuit-danalyse-des-donnees-de-la-covid-19)
