@@ -7,7 +7,7 @@
 <title>coa.tools API documentation</title>
 <meta name="description" content="Project : PyCoA - Copyright ©pycoa.fr
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -28,7 +28,7 @@ License: See joint …" />
 <section id="section-intro">
 <p>Project : PyCoA - Copyright ©pycoa.fr
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint LICENSE file</p>
 <p>Module : coa.tools</p>
@@ -49,7 +49,7 @@ printing.</p>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
 &#34;&#34;&#34;Project : PyCoA - Copyright ©pycoa.fr
-Date :    april 2020 - march 2021
+Date :    april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint LICENSE file
 
@@ -99,7 +99,7 @@ _db_list_dict = {&#39;jhu&#39;: [&#39;WW&#39;,&#39;nation&#39;,&#39;World&#39;],
     &#39;owid&#39;: [&#39;WW&#39;,&#39;nation&#39;,&#39;World&#39;],
     &#39;jhu-usa&#39;: [&#39;USA&#39;,&#39;subregion&#39;,&#39;United States of America&#39;],
     &#39;spf&#39;: [&#39;FRA&#39;,&#39;subregion&#39;,&#39;France&#39;],
-    &#39;spfnational&#39;: [&#39;WW&#39;,&#39;nation&#39;,&#39;France&#39;],
+    &#39;spfnational&#39;: [&#39;FRA&#39;,&#39;nation&#39;,&#39;France&#39;],
     &#39;opencovid19&#39;: [&#39;FRA&#39;,&#39;subregion&#39;,&#39;France&#39;],
     &#39;opencovid19national&#39;: [&#39;WW&#39;,&#39;nation&#39;,&#39;France&#39;],
     &#39;dpc&#39;: [&#39;ITA&#39;,&#39;region&#39;,&#39;Italy&#39;],
@@ -112,6 +112,11 @@ _db_list_dict = {&#39;jhu&#39;: [&#39;WW&#39;,&#39;nation&#39;,&#39;World&#39;],
     &#39;dgs&#39;:[&#39;PRT&#39;,&#39;region&#39;,&#39;Portugal&#39;],
     &#39;obepine&#39;:[&#39;FRA&#39;,&#39;region&#39;,&#39;France&#39;],
     &#39;moh&#39;:[&#39;MYS&#39;,&#39;subregion&#39;,&#39;Malaysia&#39;],
+    &#39;risklayer&#39;:[&#39;EUR&#39;,&#39;subregion&#39;,&#39;Europe&#39;],
+    &#39;imed&#39;:[&#39;GRC&#39;,&#39;region&#39;,&#39;Greece&#39;],
+    &#39;govcy&#39;:[&#39;CYP&#39;,&#39;nation&#39;,&#39;Cyprus&#39;],
+    &#39;insee&#39;:[&#39;FRA&#39;,&#39;subregion&#39;,&#39;France&#39;],
+    &#39;europa&#39;:[&#39;EUR&#39;,&#39;subregion&#39;,&#39;Europe&#39;],
     #&#39;minciencia&#39;:[&#39;CHL&#39;,&#39;subregion&#39;,&#39;Chile&#39;]
     }
 
@@ -181,7 +186,7 @@ def fill_missing_dates(p, date_field=&#39;date&#39;, loc_field=&#39;location&#39
     if not loc_field in p.columns:
         raise CoaKeyError(&#34;The loc_field is not a proper column of input pandas dataframe.&#34;)
     # datatoilettage :)
-    p = p.loc[~p.location.isin([&#39;&#39;])]
+    p = p.loc[~p[loc_field].isin([&#39;&#39;])]
 
     if d2==None:
         d2=p[date_field].max()
@@ -203,7 +208,7 @@ def fill_missing_dates(p, date_field=&#39;date&#39;, loc_field=&#39;location&#39
         pp2=pp.set_index([date_field])
         pp2.index = pd.DatetimeIndex(pp2.index)
         pp3 = pp2.reindex(idx,fill_value=numpy.nan)#pandas.NA)
-        pp3[&#39;location&#39;] = pp3[&#39;location&#39;].fillna(l)  #pp3[&#39;location&#39;].fillna(method=&#39;bfill&#39;)
+        pp3[loc_field] = pp3[loc_field].fillna(l)  #pp3[&#39;location&#39;].fillna(method=&#39;bfill&#39;)
         #pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;bfill&#39;)
         #pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;ffill&#39;)
         pfill=pd.concat([pfill, pp3])
@@ -476,7 +481,7 @@ When None date is give, the oldest date is 01/01/0001, the newest is now.</p>
     if not loc_field in p.columns:
         raise CoaKeyError(&#34;The loc_field is not a proper column of input pandas dataframe.&#34;)
     # datatoilettage :)
-    p = p.loc[~p.location.isin([&#39;&#39;])]
+    p = p.loc[~p[loc_field].isin([&#39;&#39;])]
 
     if d2==None:
         d2=p[date_field].max()
@@ -498,7 +503,7 @@ When None date is give, the oldest date is 01/01/0001, the newest is now.</p>
         pp2=pp.set_index([date_field])
         pp2.index = pd.DatetimeIndex(pp2.index)
         pp3 = pp2.reindex(idx,fill_value=numpy.nan)#pandas.NA)
-        pp3[&#39;location&#39;] = pp3[&#39;location&#39;].fillna(l)  #pp3[&#39;location&#39;].fillna(method=&#39;bfill&#39;)
+        pp3[loc_field] = pp3[loc_field].fillna(l)  #pp3[&#39;location&#39;].fillna(method=&#39;bfill&#39;)
         #pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;bfill&#39;)
         #pp3[&#39;codelocation&#39;] = pp3[&#39;codelocation&#39;].fillna(method=&#39;ffill&#39;)
         pfill=pd.concat([pfill, pp3])

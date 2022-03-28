@@ -7,7 +7,7 @@
 <title>coa.geo API documentation</title>
 <meta name="description" content="Project : PyCoA
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint …" />
@@ -29,7 +29,7 @@ License: See joint …" />
 <section id="section-intro">
 <p>Project : PyCoA
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint LICENSE file</p>
@@ -48,7 +48,7 @@ statistical information for countries.</p>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
 &#34;&#34;&#34; Project : PyCoA
-Date :    april 2020 - march 2021
+Date :    april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint LICENSE file
@@ -83,6 +83,7 @@ import shapely.geometry as sg
 import shapely.affinity as sa
 import shapely.ops as so
 import bs4
+import numpy as np
 
 from coa.tools import verb,kwargs_test,get_local_from_url,dotdict,tostdstring
 from coa.error import *
@@ -303,6 +304,8 @@ class GeoManager():
                 &#34;Ms Zaandam&#34;:&#34;&#34;,\
                 &#34;Summer Olympics 2020&#34;:&#34;&#34;,\
                 &#34;Micronesia&#34;:&#34;FSM&#34;,\
+                &#34;Winter Olympics 2022&#34;:&#34;&#34;,\
+                &#34;Antarctica&#34;:&#34;&#34;,\
                     })  # last two are names of boats
         elif db==&#39;worldometers&#39;:
             translation_dict.update({\
@@ -424,7 +427,7 @@ class GeoInfo():
                     Mandatory.
         input    -- provide the input pandas dataframe. Mandatory.
         geofield -- provide the field name in the pandas where the
-                    location is stored. Default : &#39;location&#39;
+                    location is stored. Default : &#39;where&#39;
         overload -- Allow to overload a field. Boolean value.
                     Default : False
         &#34;&#34;&#34;
@@ -457,7 +460,7 @@ class GeoInfo():
             raise CoaKeyError(&#39;Some fields already exist in you panda &#39;
                 &#39;dataframe columns. You may set overload to True.&#39;)
 
-        geofield=kwargs.get(&#39;geofield&#39;,&#39;location&#39;)
+        geofield=kwargs.get(&#39;geofield&#39;,&#39;where&#39;)
 
         if not isinstance(geofield,str):
             raise CoaTypeError(&#39;The geofield should be given as a &#39;
@@ -520,7 +523,6 @@ class GeoInfo():
                 p=p.merge(self._data_population[[&#34;iso3_tmp2&#34;,f]],how=&#39;left&#39;,\
                         left_on=&#39;iso3_tmp&#39;,right_on=&#39;iso3_tmp2&#39;,\
                         suffixes=(&#39;&#39;,&#39;_tmp&#39;)).drop([&#39;iso3_tmp2&#39;],axis=1)
-
             # ----------------------------------------------------------
             elif f in [&#39;region_code_list&#39;,&#39;region_name_list&#39;]:
 
@@ -559,13 +561,13 @@ class GeoInfo():
                     # About countries that we artificially put on the east of the map
                     for newc in [&#39;RUS&#39;,&#39;FJI&#39;,&#39;NZL&#39;,&#39;WSM&#39;]:
                         poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly]))
+                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                         self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
                     # About countries that we artificially put on the west of the map
                     for newc in [&#39;USA&#39;]:
                         poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly]))
+                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                         self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
                 p=p.merge(self._data_geometry,how=&#39;left&#39;,\
@@ -700,11 +702,8 @@ class GeoRegion():
             clist=[&#39;DEU&#39;,&#39;CAN&#39;,&#39;USA&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;JAP&#39;,&#39;GBR&#39;,&#39;RUS&#39;]
         elif region==&#39;G20&#39;:
             clist=[&#39;ZAF&#39;,&#39;SAU&#39;,&#39;ARG&#39;,&#39;AUS&#39;,&#39;BRA&#39;,&#39;CAN&#39;,&#39;CHN&#39;,&#39;KOR&#39;,&#39;USA&#39;,\
-                &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;RUS&#39;,&#39;TUR&#39;,\
-                &#39;AUT&#39;,&#39;BEL&#39;,&#39;BGR&#39;,&#39;CYP&#39;,&#39;CZE&#39;,&#39;DEU&#39;,&#39;DNK&#39;,&#39;EST&#39;,\
-                &#39;ESP&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HRV&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ITA&#39;,\
-                &#39;LTU&#39;,&#39;LUX&#39;,&#39;LVA&#39;,&#39;MLT&#39;,&#39;NLD&#39;,&#39;POL&#39;,&#39;PRT&#39;,&#39;ROU&#39;,\
-                &#39;SWE&#39;,&#39;SVN&#39;,&#39;SVK&#39;]
+                &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;DEU&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;TUR&#39;,\
+                &#39;MEX&#39;,&#39;RUS&#39;]
         elif region==&#39;Oecd&#39;: # OCDE in french
             clist=[&#39;DEU&#39;,&#39;AUS&#39;,&#39;AUT&#39;,&#39;BEL&#39;,&#39;CAN&#39;,&#39;CHL&#39;,&#39;COL&#39;,&#39;KOR&#39;,&#39;DNK&#39;,\
                 &#39;ESP&#39;,&#39;EST&#39;,&#39;USA&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ISL&#39;,&#39;ISR&#39;,\
@@ -762,12 +761,16 @@ class GeoCountry():
                     # (simplification of &#39;https://github.com/coa-project/coadata/raw/main&#39;https://dados.gov.pt/en/datasets/r/59368d37-cbdb-426a-9472-5a04cf30fbe4&#39;,\
                     &#39;MYS&#39;:&#39;https://stacks.stanford.edu/file/druid:zd362bc5680/data.zip&#39;,\
                     &#39;CHL&#39;:&#39;http://geonode.meteochile.gob.cl/geoserver/wfs?format_options=charset%3AUTF-8&amp;typename=geonode%3Adivision_comunal_geo_ide_1&amp;outputFormat=SHAPE-ZIP&amp;version=1.0.0&amp;service=WFS&amp;request=GetFeature&#39;,\
+                    &#39;EUR&#39;:&#39;https://github.com/coa-project/coadata/raw/main/coastore/WHO_EUROsmall2.json&#39;,\
+                    &#39;GRC&#39;:&#39;https://geodata.gov.gr/dataset/6deb6a12-1a54-41b4-b53b-6b36068b8348/resource/3e571f7f-42a4-4b49-8db0-311695d72fa3/download/nomoiokxe.zip&#39;,\
                     }
 
     _source_dict = {&#39;FRA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;FRA&#39;],\
                     &#39;Subregion Flags&#39;:&#39;http://sticker-departement.com/&#39;,\
                     &#39;Region Flags&#39;:&#39;https://fr.wikipedia.org/w/index.php?title=R%C3%A9gion_fran%C3%A7aise&amp;oldid=177269957&#39;,\
-                    &#39;Population&#39;:&#39;https://www.insee.fr/fr/statistiques/4989753?sommaire=4989761&#39;},\
+                    &#39;Population&#39;:&#39;https://github.com/coa-project/coadata/raw/main/coastore/www.insee.fr_3658796960&#39;,\
+                    # previously (but sometimes broken : &#39;https://www.insee.fr/fr/statistiques/4989753?sommaire=4989761&#39;
+                    },\
                     &#39;USA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;USA&#39;],\
                     &#39;Subregion informations&#39;:&#39;https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States&#39;},\
                     &#39;ITA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;ITA&#39;]},\
@@ -780,20 +783,16 @@ class GeoCountry():
                     #,&#39;District&#39;:&#39;https://raw.githubusercontent.com/JoaoFOliveira/portuguese-municipalities/master/municipalities.json&#39;},\
                     &#39;MYS&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;MYS&#39;]},\
                     &#39;CHL&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;CHL&#39;]},\
+                    &#39;EUR&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;EUR&#39;]},\
+                    &#39;GRC&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;GRC&#39;]},\
                     }
 
-    def __init__(self,country=None,**kwargs):
+    def __init__(self,country=None):
 
         &#34;&#34;&#34; __init__ member function.
         Must give as arg the country to deal with, as a valid ISO3 string.
-
-        Various args :
-         - dense_geometry (boolean). If True , the geometry of subregions and
-           region is changed in order to have dense overall geometry.
-           Default False.
-         - main_area (boolean). If True, only the geometry of the main area of
-           the country is taken into account.
         &#34;&#34;&#34;
+
         self._country=country
         if country == None:
             return None
@@ -801,17 +800,12 @@ class GeoCountry():
         if not country in self.get_list_countries():
             raise CoaKeyError(&#34;Country &#34;+str(country)+&#34; not supported. Please see get_list_countries() and help. &#34;)
 
-        kwargs_test(kwargs,[&#39;dense_geometry&#39;,&#39;main_area&#39;],&#39;Vad args used in this init of GeoCountry object. See help.&#39;)
-
-        dense_geometry=kwargs.get(&#34;dense_geometry&#34;,False)
-        main_area=kwargs.get(&#34;main_area&#34;,False)
-
-        if not isinstance(dense_geometry,bool) or not isinstance(main_area,bool):
-            raise CoaKeyError(&#34;GeoCountry kwargs are boolean. See help.&#34;)
-
         self._country_data_region=None
         self._country_data_subregion=None
         self._municipality_region=None
+        self._is_dense_geometry=False
+        self._is_main_geometry=False
+
         url=self._country_info_dict[country]
         # country by country, adapt the read file informations
 
@@ -859,7 +853,7 @@ class GeoCountry():
 
             # adding population information (departements)
             pop_fra = pd.read_html(get_local_from_url(self._source_dict[&#39;FRA&#39;][&#39;Population&#39;]))[0]
-            pop_fra[&#39;population_subregion&#39;]=pop_fra[&#39;Population municipale&#39;].str.replace(r&#34;[ \xa0]&#34;,&#34;&#34;).astype(int)
+            pop_fra[&#39;population_subregion&#39;]=pop_fra[&#39;Population municipale&#39;].str.replace(r&#34;[ \xa0]&#34;,&#34;&#34;,regex=True).astype(int)
             # En l&#39;absence de Mayotte dans ce document, car le recensement n&#39;a pas eu lieu en phase, ajout à la main
             # En référence à la page pour Mayotte : https://www.insee.fr/fr/statistiques/3291775?sommaire=2120838
             mayotte_df=pd.DataFrame([{&#39;Code département&#39;:&#39;976&#39;,&#39;population_subregion&#39;:256518}])
@@ -875,44 +869,12 @@ class GeoCountry():
             # Merging
             self._country_data=self._country_data.merge(pop_fra,left_on=&#39;code_subregion&#39;,right_on=&#39;Code département&#39;)
             self._country_data=self._country_data[[&#39;geometry&#39;,&#39;code_subregion&#39;,&#39;name_subregion&#39;,&#39;flag_subregion&#39;,&#39;code_region&#39;,&#39;name_region&#39;,&#39;population_subregion&#39;]]
-            #.drop([&#39;id_geofla&#39;,&#39;code_reg&#39;,&#39;nom_reg&#39;,&#39;x_chf_lieu&#39;,&#39;y_chf_lieu&#39;,&#39;x_centroid&#39;,&#39;y_centroid&#39;,&#39;Code département&#39;,&#39;Nom du département&#39;,&#39;Population municipale&#39;],axis=1,inplace=True) # removing some column without interest
-            # moving artificially (if needed) outre-mer area to be near to metropole for map representations
-            list_translation={&#34;Guadeloupe&#34;:(63,23),
-                                 &#34;Martinique&#34;:(63,23),
-                                 &#34;Guyane&#34;:(50,35),
-                                 &#34;Réunion&#34;:(-51,60),
-                                 &#34;Mayotte&#34;:(-38,51.5)}
-
-            if dense_geometry == True :
-                # Moving DROM-COM near hexagon
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    x=0
-                    y=0
-                    w=self._country_data.loc[index,&#34;name_subregion&#34;]
-                    if w in list_translation.keys():
-                        x=list_translation[w][0]
-                        y=list_translation[w][1]
-                    g = sa.translate(self._country_data.loc[index, &#39;geometry&#39;], xoff=x, yoff=y)
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-                # Add Ile de France zoom
-                idf_translation=(-6.5,-5)
-                idf_scale=5
-                idf_center=(-4,44)
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    g=self._country_data.loc[index, &#39;geometry&#39;]
-                    if self._country_data.loc[index,&#39;code_subregion&#39;] in [&#39;75&#39;,&#39;92&#39;,&#39;93&#39;,&#39;94&#39;]:
-                        g2=sa.scale(sa.translate(g,xoff=idf_translation[0],yoff=idf_translation[1]),\
-                                                xfact=idf_scale,yfact=idf_scale,origin=idf_center)
-                        g=so.unary_union([g,g2])
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-            if main_area == True:
-                self._country_data = self._country_data[~self._country_data[&#39;name_subregion&#39;].isin(list_translation.keys())]
+            #if needed, define translation for dense geometry
+            self._list_translation={&#39;971&#39;:(63,23),   # Guadeloupe
+                     &#39;972&#39;:(63,23), # Martinique
+                     &#39;973&#39;:(50,35), # Guyane
+                     &#39;974&#39;:(-51,60), # Réunion
+                     &#39;976&#39;:(-38,51.5)}  # Mayotte
 
         # --- &#39;USA&#39; case ---------------------------------------------------------------------------------------
         elif self._country == &#39;USA&#39;:
@@ -942,29 +904,10 @@ class GeoCountry():
             h_us[&#39;flag_subregion&#39;] = [ h.split(&#39;\xa0&#39;)[0] for h in h_us[&#39;flag_subregion&#39;] ]
             self._country_data=self._country_data.merge(h_us,how=&#39;left&#39;,on=&#39;code_subregion&#39;)
 
-            list_translation={&#34;AK&#34;:(40,-40),&#34;HI&#34;:(60,0)}
-            list_scale={&#34;AK&#34;:0.4,&#34;HI&#34;:1}
-            list_center={&#34;AK&#34;:(-120,25),&#34;HI&#34;:(-130,25)}
-
-            if dense_geometry == True:
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    x=0
-                    y=0
-                    w=self._country_data.loc[index,&#34;code_subregion&#34;]
-                    if w in list_translation.keys():
-                        x=list_translation[w][0]
-                        y=list_translation[w][1]
-                        g=sa.scale(sa.translate(self._country_data.loc[index, &#39;geometry&#39;],xoff=x,yoff=y),\
-                                                xfact=list_scale[w],yfact=list_scale[w],origin=list_center[w])
-                    else:
-                        g=self._country_data.loc[index, &#39;geometry&#39;]
-
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-            if main_area == True:
-                self._country_data=self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(list_translation.keys())]
+            # if needed, define some variable for dense / main geometry
+            self._list_translation={&#34;AK&#34;:(40,-40),&#34;HI&#34;:(60,0)}
+            self._list_scale={&#34;AK&#34;:0.4,&#34;HI&#34;:1}
+            self._list_center={&#34;AK&#34;:(-120,25),&#34;HI&#34;:(-130,25)}
 
         # --- &#39;ITA&#39; case ---------------------------------------------------------------------------------------
         elif self._country == &#39;ITA&#39;:
@@ -1122,12 +1065,147 @@ class GeoCountry():
             self._country_data[&#39;code_region&#39;]=self._country_data.code_subregion.str.slice(stop=2)
             self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
 
+        # --- &#39;EUR&#39; case, which is a pseudo country for Europe ---------------------------------------------------------
+        elif self._country == &#39;EUR&#39;:
+            self._country_data=gpd.read_file(get_local_from_url(url,0))
+            self._country_data.rename(columns={\
+                &#39;UID&#39;:&#39;code_subregion&#39;,\
+                &#39;RegionName&#39;:&#39;name_subregion&#39;,\
+                &#39;ADM0_ISO3&#39;:&#39;code_region&#39;,\
+                &#39;ADM0_NAME&#39;:&#39;name_region&#39;,\
+                &#39;Population&#39;:&#39;population_subregion&#39;},inplace=True)
+            self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;population_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
+            self._country_data.loc[self._country_data.geometry.is_empty,&#39;geometry&#39;]=None
+            # self._country_data=self._country_data[self._country_data.geometry!=None] to remove subregion without geometry
+
+        # --- &#39;GRC&#39; case ------------------------------------------------------------------------------------------------
+        elif self._country == &#39;GRC&#39;:
+            self._country_data=gpd.read_file(&#39;zip://&#39;+get_local_from_url(url,0,&#39;.zip&#39;)+&#39;!nomoi_okxe&#39;,encoding=&#39;ISO-8859-7&#39;)
+            self._country_data.rename(columns={\
+                &#39;POP&#39;:&#39;population_subregion&#39;},inplace=True)
+            self._country_data[&#39;name_subregion&#39;]=self._country_data.NAME_GR.astype(str).str.slice(start=3)
+            self._country_data[&#39;code_subregion&#39;]=self._country_data.PARENT.astype(str).str.slice(stop=2)
+            self._country_data[&#39;name_region&#39;]=self._country_data[&#39;name_subregion&#39;]
+            self._country_data[&#39;code_region&#39;]=self._country_data[&#39;code_subregion&#39;] # no region info
+            self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;population_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
+            self._country_data=self._country_data.to_crs(epsg=4326)
+            # Merge region to fit with the CSV epidemiological data
+            ath=[&#39;ΔΥΤΙΚΗΣ ΑΤΤΙΚΗΣ&#39;, &#39;ΑΝΑΤΟΛΙΚΗΣ ΑΤΤΙΚΗΣ&#39;, &#39;ΠΕΙΡΑΙΩΣ ΚΑΙ ΝΗΣΩΝ&#39;,&#39;ΑΘΗΝΩΝ&#39;]
+            self._country_data.loc[(self._country_data.name_subregion==&#39;ΑΘΗΝΩΝ&#39;),[&#39;geometry&#39;,&#39;population_subregion&#39;]]=\
+                    self._country_data.loc[self._country_data.name_subregion.isin(ath)].dissolve(aggfunc=&#39;sum&#39;).values
+            self._country_data = self._country_data.loc[~self._country_data.name_subregion.isin(ath[:-1])]
+            changename={&#39;Ο ΟΡΟΣ&#39;:&#39;ΑΓΙΟ ΟΡΟΣ&#39;,&#39;ΑΘΗΝΩΝ&#39;:&#39;ΑΤΤΙΚΗΣ&#39;}
+            self._country_data[&#39;name_subregion&#39;].replace(changename, inplace=True)
+            self._country_data[&#39;name_region&#39;].replace(changename, inplace=True)
+
     # def get_region_from_municipality(self,lname):
     #     &#34;&#34;&#34;  Return region list from a municipality list
     #     &#34;&#34;&#34;
     #     if not isinstance(lname, list):
     #         lname=[lname]
     #     return self._municipality_region.loc[self._municipality_region.name.isin(lname)][&#39;district&#39;].to_list()
+
+    def set_dense_geometry(self):
+        &#34;&#34;&#34;  If used, we&#39;re using for the current country a dense geometry forsubregions
+        and regions.
+        It&#39;s not possible to go back.
+        &#34;&#34;&#34;
+
+        if self.is_dense_geometry():
+            return
+
+        if self.is_main_geometry():
+            raise CoaError(&#34;You already set the main geometry. Cannot set the dense geometry now.&#34;)
+
+        if self.get_country() == &#39;FRA&#39;:
+            #.drop([&#39;id_geofla&#39;,&#39;code_reg&#39;,&#39;nom_reg&#39;,&#39;x_chf_lieu&#39;,&#39;y_chf_lieu&#39;,&#39;x_centroid&#39;,&#39;y_centroid&#39;,&#39;Code département&#39;,&#39;Nom du département&#39;,&#39;Population municipale&#39;],axis=1,inplace=True) # removing some column without interest
+            # moving artificially (if needed) outre-mer area to be near to metropole for map representations
+
+            tmp = []
+            for index, poi in self._country_data.iterrows():
+                x=0
+                y=0
+                w=self._country_data.loc[index,&#34;code_subregion&#34;]
+                if w in self._list_translation.keys():
+                    x=self._list_translation[w][0]
+                    y=self._list_translation[w][1]
+                g = sa.translate(self._country_data.loc[index, &#39;geometry&#39;], xoff=x, yoff=y)
+                tmp.append(g)
+            self._country_data[&#39;geometry&#39;]=tmp
+            # Add Ile de France zoom
+            #idf_translation=(-6.5,-5)
+            #idf_scale=5
+            #idf_center=(-4,44)
+            #tmp = []
+            #for index, poi in self._country_data.iterrows():
+            #    g=self._country_data.loc[index, &#39;geometry&#39;]
+            #    if self._country_data.loc[index,&#39;code_subregion&#39;] in [&#39;75&#39;,&#39;92&#39;,&#39;93&#39;,&#39;94&#39;]:
+            #        g2=sa.scale(sa.translate(g,xoff=idf_translation[0],yoff=idf_translation[1]),\
+            #                                xfact=idf_scale,yfact=idf_scale,origin=idf_center)
+            #        g=so.unary_union([g,g2])
+            #    tmp.append(g)
+            #self._country_data[&#39;geometry&#39;]=tmp
+
+            # Remove COM with dense geometry true, too many islands to manage
+            self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+
+        elif self.get_country() == &#39;USA&#39;:
+            tmp = []
+            for index, poi in self._country_data.iterrows():
+                x=0
+                y=0
+                w=self._country_data.loc[index,&#34;code_subregion&#34;]
+                if w in self._list_translation.keys():
+                    x=self._list_translation[w][0]
+                    y=self._list_translation[w][1]
+                    g=sa.scale(sa.translate(self._country_data.loc[index, &#39;geometry&#39;],xoff=x,yoff=y),\
+                                            xfact=self._list_scale[w],yfact=self._list_scale[w],origin=self._list_center[w])
+                else:
+                    g=self._country_data.loc[index, &#39;geometry&#39;]
+
+                tmp.append(g)
+            self._country_data[&#39;geometry&#39;]=tmp
+        else:
+            raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+        self._country_data_region = None
+        self._country_data_subregion = None
+        self._is_dense_geometry = True
+
+
+    def set_main_geometry(self):
+        &#34;&#34;&#34;  If used, we&#39;re using only for the current country the main
+        geometry for subregions and regions.
+        It&#39;s not possible to go back.
+        &#34;&#34;&#34;
+        if self.is_main_geometry():
+            return
+
+        if self.is_dense_geometry():
+            raise CoaError(&#34;You already set the dense geometry. Cannot set the main geometry now.&#34;)
+
+        if self.get_country()==&#39;FRA&#39;:
+            self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+            # Remove COM with main geometry true, too many islands to manage
+            self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+        elif self.get_country()==&#39;USA&#39;:
+            self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+        else:
+            raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+        self._country_data_region = None
+        self._country_data_subregion = None
+        self._is_main_geometry = True
+
+    def is_dense_geometry(self):
+        &#34;&#34;&#34;Return the self._is_dense_geometry variable
+        &#34;&#34;&#34;
+        return self._is_dense_geometry
+
+    def is_main_geometry(self):
+        &#34;&#34;&#34;Return the self._is_main_geometry variable
+        &#34;&#34;&#34;
+        return self._is_main_geometry
 
     def get_source(self):
         &#34;&#34;&#34; Return informations about URL sources
@@ -1201,7 +1279,7 @@ class GeoCountry():
     def get_subregions_from_region(self,**kwargs):
         &#34;&#34;&#34; Return the list of subregions within a specified region.
         Should give either the code or the name of the region as strings in kwarg : code=# or name=#
-        Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+        Output default is &#39;code&#39; of subregions. Can be changed with output=&#39;name&#39;.
         &#34;&#34;&#34;
         kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
         code=kwargs.get(&#34;code&#34;,None)
@@ -1238,6 +1316,79 @@ class GeoCountry():
         for r in l:
             s=s+self.get_subregions_from_region(name=r,output=output)
         return s
+
+    def get_regions_from_subregion(self,code,output=&#39;code&#39;):
+        &#34;&#34;&#34; Return the list of regions where the subregion, given by a code, is.
+        Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+        &#34;&#34;&#34;
+
+        if not output in [&#39;code&#39;,&#39;name&#39;]:
+            raise CoaKeyError(&#39;The output option should be &#34;code&#34; or &#34;name&#34; only&#39;)
+
+        if not code in self.get_subregion_list()[&#39;code_subregion&#39;].to_list():
+            raise CoaWhereError(&#34;The subregion &#34;+code+&#34; does not exist for country &#34;+self.get_country()+&#34;. See get_subregion_list().&#34;)
+
+        l=[]
+        for k,v in self.get_data(True).iterrows():
+            if code in v.code_subregion:
+                if output == &#39;code&#39;:
+                    l.append(v.code_region)
+                else: # due to first test, that&#39;s for sure name
+                    l.append(v.name_region)
+        return list(dict.fromkeys(l))
+
+    def get_regions_from_list_of_subregion_codes(self,l,output=&#39;code&#39;):
+        &#34;&#34;&#34; Return the list of regions according to list of subregion names given.
+        The output argument (&#39;code&#39; as default) is given to the get_regions_from_subregion function.
+        &#34;&#34;&#34;
+        if not isinstance(l,list):
+            raise CoaTypeError(&#34;Should provide list as argument&#34;)
+        s=[]
+        for sr in l:
+            s=s+self.get_regions_from_subregion(sr,output=output)
+        return list(dict.fromkeys(s))
+
+    def get_regions_from_macroregion(self,**kwargs):
+        &#34;&#34;&#34; Return the list of regions included in another macroregion
+        Can provide input as code= or name=
+        Can provide output as &#39;name&#39; or &#39;code&#39; (default).
+        &#34;&#34;&#34;
+        kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
+        code=kwargs.get(&#34;code&#34;,None)
+        name=kwargs.get(&#34;name&#34;,None)
+        out=kwargs.get(&#34;output&#34;,&#39;code&#39;)
+
+        if not (code == None) ^ (name == None):
+            raise CoaKeyError(&#34;Should give either code or name of region, not both.&#34;)
+        if not out in [&#39;code&#39;,&#39;name&#39;]:
+            raise CoaKeyError(&#34;Should set output either as &#39;code&#39; or &#39;name&#39; for subregions.&#34;)
+
+        dict_input={k:v for k,v in kwargs.items() if k in [&#39;code&#39;,&#39;name&#39;]}
+        r_out=self.get_regions_from_list_of_subregion_codes(self.get_subregions_from_region(**dict_input),output=out)
+
+        # remove the input
+        rl=self.get_region_list()
+        if code != None:
+            if out==&#39;code&#39;:
+                input=rl[rl.code_region==code].name_region.item()
+            else:
+                input=code
+        else:
+            if out==&#39;name&#39;:
+                input=name
+            else:
+                input=rl[rl.name_region==code].code_region.item()
+
+        if input in r_out:
+            r_out.remove(input)
+
+        # Append the input in the right position, the macro region should be at the end
+        if len(r_out) == 1: # the input is not a macro region but just a region
+            r_out.insert(0,input)
+        else: # the input is a real macro region
+            r_out.append(input)
+
+        return r_out
 
     def get_list_properties(self):
         &#34;&#34;&#34;Return the list of available properties for the current country
@@ -1280,7 +1431,7 @@ class GeoCountry():
                         pr=pr.append(pr_metropole,ignore_index=True).append(pr_outremer,ignore_index=True)
 
                     elif self.get_country()==&#39;ESP&#39; : # manage pseudo &#39;ESP&#39; regions within and outside continent
-                        islands_cut=pr.code_region.astype(int).isin([&#39;05&#39;])
+                        islands_cut=pr.code_region.isin([&#39;05&#39;])
                         pr_metropole=pr[~islands_cut].copy()
                         pr_metropole[&#39;code_region&#39;]=&#39;99&#39;
                         pr_metropole[&#39;name_region&#39;]=&#39;España peninsular&#39;
@@ -1309,12 +1460,17 @@ class GeoCountry():
 
                     elif self.get_country()==&#39;USA&#39;:
                         usa_col=pr.columns.tolist()
-                        #usa_col.remove(&#39;population_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
+                        #usa_col.remove(&#39;_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
                         #usa_col.remove(&#39;area_subregion&#39;) # idem
                         pr=pr[usa_col]
 
+                    elif self.get_country()==&#39;EUR&#39;:
+                        pr.loc[pr.geometry.isnull(),&#39;geometry&#39;]=sg.Point()  # For correct geometry merge
+                        pr[&#39;geometry&#39;] = pr[&#39;geometry&#39;].buffer(0.001) # needed with geopandas 0.10.2&#39; for EUR data only (apparently)
+
                     pr[&#39;code_subregion&#39;]=pr.code_subregion.apply(lambda x: [x])
                     pr[&#39;name_subregion&#39;]=pr.name_subregion.apply(lambda x: [x])
+
                     self._country_data_region=pr.dissolve(by=col_reg,aggfunc=(lambda x: x.sum())).sort_values(by=&#39;code_region&#39;).reset_index()
                     for x in [&#39;population&#39;,&#39;area&#39;]:
                         if x+&#39;_subregion&#39; in self._country_data_region.columns:
@@ -1421,7 +1577,7 @@ class GeoCountry():
 <dl>
 <dt id="coa.geo.GeoCountry"><code class="flex name class">
 <span>class <span class="ident">GeoCountry</span></span>
-<span>(</span><span>country=None, **kwargs)</span>
+<span>(</span><span>country=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>GeoCountry class definition.
@@ -1429,13 +1585,7 @@ This class provides functions for specific countries and their states / departme
 and their geo properties (geometry, population if available, etc.)</p>
 <p>The list of supported countries is given by get_list_countries() function. </p>
 <p><strong>init</strong> member function.
-Must give as arg the country to deal with, as a valid ISO3 string.</p>
-<p>Various args :
-- dense_geometry (boolean). If True , the geometry of subregions and
-region is changed in order to have dense overall geometry.
-Default False.
-- main_area (boolean). If True, only the geometry of the main area of
-the country is taken into account.</p></div>
+Must give as arg the country to deal with, as a valid ISO3 string.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1463,12 +1613,16 @@ the country is taken into account.</p></div>
                     # (simplification of &#39;https://github.com/coa-project/coadata/raw/main&#39;https://dados.gov.pt/en/datasets/r/59368d37-cbdb-426a-9472-5a04cf30fbe4&#39;,\
                     &#39;MYS&#39;:&#39;https://stacks.stanford.edu/file/druid:zd362bc5680/data.zip&#39;,\
                     &#39;CHL&#39;:&#39;http://geonode.meteochile.gob.cl/geoserver/wfs?format_options=charset%3AUTF-8&amp;typename=geonode%3Adivision_comunal_geo_ide_1&amp;outputFormat=SHAPE-ZIP&amp;version=1.0.0&amp;service=WFS&amp;request=GetFeature&#39;,\
+                    &#39;EUR&#39;:&#39;https://github.com/coa-project/coadata/raw/main/coastore/WHO_EUROsmall2.json&#39;,\
+                    &#39;GRC&#39;:&#39;https://geodata.gov.gr/dataset/6deb6a12-1a54-41b4-b53b-6b36068b8348/resource/3e571f7f-42a4-4b49-8db0-311695d72fa3/download/nomoiokxe.zip&#39;,\
                     }
 
     _source_dict = {&#39;FRA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;FRA&#39;],\
                     &#39;Subregion Flags&#39;:&#39;http://sticker-departement.com/&#39;,\
                     &#39;Region Flags&#39;:&#39;https://fr.wikipedia.org/w/index.php?title=R%C3%A9gion_fran%C3%A7aise&amp;oldid=177269957&#39;,\
-                    &#39;Population&#39;:&#39;https://www.insee.fr/fr/statistiques/4989753?sommaire=4989761&#39;},\
+                    &#39;Population&#39;:&#39;https://github.com/coa-project/coadata/raw/main/coastore/www.insee.fr_3658796960&#39;,\
+                    # previously (but sometimes broken : &#39;https://www.insee.fr/fr/statistiques/4989753?sommaire=4989761&#39;
+                    },\
                     &#39;USA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;USA&#39;],\
                     &#39;Subregion informations&#39;:&#39;https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States&#39;},\
                     &#39;ITA&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;ITA&#39;]},\
@@ -1481,20 +1635,16 @@ the country is taken into account.</p></div>
                     #,&#39;District&#39;:&#39;https://raw.githubusercontent.com/JoaoFOliveira/portuguese-municipalities/master/municipalities.json&#39;},\
                     &#39;MYS&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;MYS&#39;]},\
                     &#39;CHL&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;CHL&#39;]},\
+                    &#39;EUR&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;EUR&#39;]},\
+                    &#39;GRC&#39;:{&#39;Basics&#39;:_country_info_dict[&#39;GRC&#39;]},\
                     }
 
-    def __init__(self,country=None,**kwargs):
+    def __init__(self,country=None):
 
         &#34;&#34;&#34; __init__ member function.
         Must give as arg the country to deal with, as a valid ISO3 string.
-
-        Various args :
-         - dense_geometry (boolean). If True , the geometry of subregions and
-           region is changed in order to have dense overall geometry.
-           Default False.
-         - main_area (boolean). If True, only the geometry of the main area of
-           the country is taken into account.
         &#34;&#34;&#34;
+
         self._country=country
         if country == None:
             return None
@@ -1502,17 +1652,12 @@ the country is taken into account.</p></div>
         if not country in self.get_list_countries():
             raise CoaKeyError(&#34;Country &#34;+str(country)+&#34; not supported. Please see get_list_countries() and help. &#34;)
 
-        kwargs_test(kwargs,[&#39;dense_geometry&#39;,&#39;main_area&#39;],&#39;Vad args used in this init of GeoCountry object. See help.&#39;)
-
-        dense_geometry=kwargs.get(&#34;dense_geometry&#34;,False)
-        main_area=kwargs.get(&#34;main_area&#34;,False)
-
-        if not isinstance(dense_geometry,bool) or not isinstance(main_area,bool):
-            raise CoaKeyError(&#34;GeoCountry kwargs are boolean. See help.&#34;)
-
         self._country_data_region=None
         self._country_data_subregion=None
         self._municipality_region=None
+        self._is_dense_geometry=False
+        self._is_main_geometry=False
+
         url=self._country_info_dict[country]
         # country by country, adapt the read file informations
 
@@ -1560,7 +1705,7 @@ the country is taken into account.</p></div>
 
             # adding population information (departements)
             pop_fra = pd.read_html(get_local_from_url(self._source_dict[&#39;FRA&#39;][&#39;Population&#39;]))[0]
-            pop_fra[&#39;population_subregion&#39;]=pop_fra[&#39;Population municipale&#39;].str.replace(r&#34;[ \xa0]&#34;,&#34;&#34;).astype(int)
+            pop_fra[&#39;population_subregion&#39;]=pop_fra[&#39;Population municipale&#39;].str.replace(r&#34;[ \xa0]&#34;,&#34;&#34;,regex=True).astype(int)
             # En l&#39;absence de Mayotte dans ce document, car le recensement n&#39;a pas eu lieu en phase, ajout à la main
             # En référence à la page pour Mayotte : https://www.insee.fr/fr/statistiques/3291775?sommaire=2120838
             mayotte_df=pd.DataFrame([{&#39;Code département&#39;:&#39;976&#39;,&#39;population_subregion&#39;:256518}])
@@ -1576,44 +1721,12 @@ the country is taken into account.</p></div>
             # Merging
             self._country_data=self._country_data.merge(pop_fra,left_on=&#39;code_subregion&#39;,right_on=&#39;Code département&#39;)
             self._country_data=self._country_data[[&#39;geometry&#39;,&#39;code_subregion&#39;,&#39;name_subregion&#39;,&#39;flag_subregion&#39;,&#39;code_region&#39;,&#39;name_region&#39;,&#39;population_subregion&#39;]]
-            #.drop([&#39;id_geofla&#39;,&#39;code_reg&#39;,&#39;nom_reg&#39;,&#39;x_chf_lieu&#39;,&#39;y_chf_lieu&#39;,&#39;x_centroid&#39;,&#39;y_centroid&#39;,&#39;Code département&#39;,&#39;Nom du département&#39;,&#39;Population municipale&#39;],axis=1,inplace=True) # removing some column without interest
-            # moving artificially (if needed) outre-mer area to be near to metropole for map representations
-            list_translation={&#34;Guadeloupe&#34;:(63,23),
-                                 &#34;Martinique&#34;:(63,23),
-                                 &#34;Guyane&#34;:(50,35),
-                                 &#34;Réunion&#34;:(-51,60),
-                                 &#34;Mayotte&#34;:(-38,51.5)}
-
-            if dense_geometry == True :
-                # Moving DROM-COM near hexagon
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    x=0
-                    y=0
-                    w=self._country_data.loc[index,&#34;name_subregion&#34;]
-                    if w in list_translation.keys():
-                        x=list_translation[w][0]
-                        y=list_translation[w][1]
-                    g = sa.translate(self._country_data.loc[index, &#39;geometry&#39;], xoff=x, yoff=y)
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-                # Add Ile de France zoom
-                idf_translation=(-6.5,-5)
-                idf_scale=5
-                idf_center=(-4,44)
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    g=self._country_data.loc[index, &#39;geometry&#39;]
-                    if self._country_data.loc[index,&#39;code_subregion&#39;] in [&#39;75&#39;,&#39;92&#39;,&#39;93&#39;,&#39;94&#39;]:
-                        g2=sa.scale(sa.translate(g,xoff=idf_translation[0],yoff=idf_translation[1]),\
-                                                xfact=idf_scale,yfact=idf_scale,origin=idf_center)
-                        g=so.unary_union([g,g2])
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-            if main_area == True:
-                self._country_data = self._country_data[~self._country_data[&#39;name_subregion&#39;].isin(list_translation.keys())]
+            #if needed, define translation for dense geometry
+            self._list_translation={&#39;971&#39;:(63,23),   # Guadeloupe
+                     &#39;972&#39;:(63,23), # Martinique
+                     &#39;973&#39;:(50,35), # Guyane
+                     &#39;974&#39;:(-51,60), # Réunion
+                     &#39;976&#39;:(-38,51.5)}  # Mayotte
 
         # --- &#39;USA&#39; case ---------------------------------------------------------------------------------------
         elif self._country == &#39;USA&#39;:
@@ -1643,29 +1756,10 @@ the country is taken into account.</p></div>
             h_us[&#39;flag_subregion&#39;] = [ h.split(&#39;\xa0&#39;)[0] for h in h_us[&#39;flag_subregion&#39;] ]
             self._country_data=self._country_data.merge(h_us,how=&#39;left&#39;,on=&#39;code_subregion&#39;)
 
-            list_translation={&#34;AK&#34;:(40,-40),&#34;HI&#34;:(60,0)}
-            list_scale={&#34;AK&#34;:0.4,&#34;HI&#34;:1}
-            list_center={&#34;AK&#34;:(-120,25),&#34;HI&#34;:(-130,25)}
-
-            if dense_geometry == True:
-                tmp = []
-                for index, poi in self._country_data.iterrows():
-                    x=0
-                    y=0
-                    w=self._country_data.loc[index,&#34;code_subregion&#34;]
-                    if w in list_translation.keys():
-                        x=list_translation[w][0]
-                        y=list_translation[w][1]
-                        g=sa.scale(sa.translate(self._country_data.loc[index, &#39;geometry&#39;],xoff=x,yoff=y),\
-                                                xfact=list_scale[w],yfact=list_scale[w],origin=list_center[w])
-                    else:
-                        g=self._country_data.loc[index, &#39;geometry&#39;]
-
-                    tmp.append(g)
-                self._country_data[&#39;geometry&#39;]=tmp
-
-            if main_area == True:
-                self._country_data=self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(list_translation.keys())]
+            # if needed, define some variable for dense / main geometry
+            self._list_translation={&#34;AK&#34;:(40,-40),&#34;HI&#34;:(60,0)}
+            self._list_scale={&#34;AK&#34;:0.4,&#34;HI&#34;:1}
+            self._list_center={&#34;AK&#34;:(-120,25),&#34;HI&#34;:(-130,25)}
 
         # --- &#39;ITA&#39; case ---------------------------------------------------------------------------------------
         elif self._country == &#39;ITA&#39;:
@@ -1823,12 +1917,147 @@ the country is taken into account.</p></div>
             self._country_data[&#39;code_region&#39;]=self._country_data.code_subregion.str.slice(stop=2)
             self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
 
+        # --- &#39;EUR&#39; case, which is a pseudo country for Europe ---------------------------------------------------------
+        elif self._country == &#39;EUR&#39;:
+            self._country_data=gpd.read_file(get_local_from_url(url,0))
+            self._country_data.rename(columns={\
+                &#39;UID&#39;:&#39;code_subregion&#39;,\
+                &#39;RegionName&#39;:&#39;name_subregion&#39;,\
+                &#39;ADM0_ISO3&#39;:&#39;code_region&#39;,\
+                &#39;ADM0_NAME&#39;:&#39;name_region&#39;,\
+                &#39;Population&#39;:&#39;population_subregion&#39;},inplace=True)
+            self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;population_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
+            self._country_data.loc[self._country_data.geometry.is_empty,&#39;geometry&#39;]=None
+            # self._country_data=self._country_data[self._country_data.geometry!=None] to remove subregion without geometry
+
+        # --- &#39;GRC&#39; case ------------------------------------------------------------------------------------------------
+        elif self._country == &#39;GRC&#39;:
+            self._country_data=gpd.read_file(&#39;zip://&#39;+get_local_from_url(url,0,&#39;.zip&#39;)+&#39;!nomoi_okxe&#39;,encoding=&#39;ISO-8859-7&#39;)
+            self._country_data.rename(columns={\
+                &#39;POP&#39;:&#39;population_subregion&#39;},inplace=True)
+            self._country_data[&#39;name_subregion&#39;]=self._country_data.NAME_GR.astype(str).str.slice(start=3)
+            self._country_data[&#39;code_subregion&#39;]=self._country_data.PARENT.astype(str).str.slice(stop=2)
+            self._country_data[&#39;name_region&#39;]=self._country_data[&#39;name_subregion&#39;]
+            self._country_data[&#39;code_region&#39;]=self._country_data[&#39;code_subregion&#39;] # no region info
+            self._country_data=self._country_data[[&#39;name_subregion&#39;,&#39;code_subregion&#39;,&#39;population_subregion&#39;,&#39;name_region&#39;,&#39;code_region&#39;,&#39;geometry&#39;]]
+            self._country_data=self._country_data.to_crs(epsg=4326)
+            # Merge region to fit with the CSV epidemiological data
+            ath=[&#39;ΔΥΤΙΚΗΣ ΑΤΤΙΚΗΣ&#39;, &#39;ΑΝΑΤΟΛΙΚΗΣ ΑΤΤΙΚΗΣ&#39;, &#39;ΠΕΙΡΑΙΩΣ ΚΑΙ ΝΗΣΩΝ&#39;,&#39;ΑΘΗΝΩΝ&#39;]
+            self._country_data.loc[(self._country_data.name_subregion==&#39;ΑΘΗΝΩΝ&#39;),[&#39;geometry&#39;,&#39;population_subregion&#39;]]=\
+                    self._country_data.loc[self._country_data.name_subregion.isin(ath)].dissolve(aggfunc=&#39;sum&#39;).values
+            self._country_data = self._country_data.loc[~self._country_data.name_subregion.isin(ath[:-1])]
+            changename={&#39;Ο ΟΡΟΣ&#39;:&#39;ΑΓΙΟ ΟΡΟΣ&#39;,&#39;ΑΘΗΝΩΝ&#39;:&#39;ΑΤΤΙΚΗΣ&#39;}
+            self._country_data[&#39;name_subregion&#39;].replace(changename, inplace=True)
+            self._country_data[&#39;name_region&#39;].replace(changename, inplace=True)
+
     # def get_region_from_municipality(self,lname):
     #     &#34;&#34;&#34;  Return region list from a municipality list
     #     &#34;&#34;&#34;
     #     if not isinstance(lname, list):
     #         lname=[lname]
     #     return self._municipality_region.loc[self._municipality_region.name.isin(lname)][&#39;district&#39;].to_list()
+
+    def set_dense_geometry(self):
+        &#34;&#34;&#34;  If used, we&#39;re using for the current country a dense geometry forsubregions
+        and regions.
+        It&#39;s not possible to go back.
+        &#34;&#34;&#34;
+
+        if self.is_dense_geometry():
+            return
+
+        if self.is_main_geometry():
+            raise CoaError(&#34;You already set the main geometry. Cannot set the dense geometry now.&#34;)
+
+        if self.get_country() == &#39;FRA&#39;:
+            #.drop([&#39;id_geofla&#39;,&#39;code_reg&#39;,&#39;nom_reg&#39;,&#39;x_chf_lieu&#39;,&#39;y_chf_lieu&#39;,&#39;x_centroid&#39;,&#39;y_centroid&#39;,&#39;Code département&#39;,&#39;Nom du département&#39;,&#39;Population municipale&#39;],axis=1,inplace=True) # removing some column without interest
+            # moving artificially (if needed) outre-mer area to be near to metropole for map representations
+
+            tmp = []
+            for index, poi in self._country_data.iterrows():
+                x=0
+                y=0
+                w=self._country_data.loc[index,&#34;code_subregion&#34;]
+                if w in self._list_translation.keys():
+                    x=self._list_translation[w][0]
+                    y=self._list_translation[w][1]
+                g = sa.translate(self._country_data.loc[index, &#39;geometry&#39;], xoff=x, yoff=y)
+                tmp.append(g)
+            self._country_data[&#39;geometry&#39;]=tmp
+            # Add Ile de France zoom
+            #idf_translation=(-6.5,-5)
+            #idf_scale=5
+            #idf_center=(-4,44)
+            #tmp = []
+            #for index, poi in self._country_data.iterrows():
+            #    g=self._country_data.loc[index, &#39;geometry&#39;]
+            #    if self._country_data.loc[index,&#39;code_subregion&#39;] in [&#39;75&#39;,&#39;92&#39;,&#39;93&#39;,&#39;94&#39;]:
+            #        g2=sa.scale(sa.translate(g,xoff=idf_translation[0],yoff=idf_translation[1]),\
+            #                                xfact=idf_scale,yfact=idf_scale,origin=idf_center)
+            #        g=so.unary_union([g,g2])
+            #    tmp.append(g)
+            #self._country_data[&#39;geometry&#39;]=tmp
+
+            # Remove COM with dense geometry true, too many islands to manage
+            self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+
+        elif self.get_country() == &#39;USA&#39;:
+            tmp = []
+            for index, poi in self._country_data.iterrows():
+                x=0
+                y=0
+                w=self._country_data.loc[index,&#34;code_subregion&#34;]
+                if w in self._list_translation.keys():
+                    x=self._list_translation[w][0]
+                    y=self._list_translation[w][1]
+                    g=sa.scale(sa.translate(self._country_data.loc[index, &#39;geometry&#39;],xoff=x,yoff=y),\
+                                            xfact=self._list_scale[w],yfact=self._list_scale[w],origin=self._list_center[w])
+                else:
+                    g=self._country_data.loc[index, &#39;geometry&#39;]
+
+                tmp.append(g)
+            self._country_data[&#39;geometry&#39;]=tmp
+        else:
+            raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+        self._country_data_region = None
+        self._country_data_subregion = None
+        self._is_dense_geometry = True
+
+
+    def set_main_geometry(self):
+        &#34;&#34;&#34;  If used, we&#39;re using only for the current country the main
+        geometry for subregions and regions.
+        It&#39;s not possible to go back.
+        &#34;&#34;&#34;
+        if self.is_main_geometry():
+            return
+
+        if self.is_dense_geometry():
+            raise CoaError(&#34;You already set the dense geometry. Cannot set the main geometry now.&#34;)
+
+        if self.get_country()==&#39;FRA&#39;:
+            self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+            # Remove COM with main geometry true, too many islands to manage
+            self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+        elif self.get_country()==&#39;USA&#39;:
+            self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+        else:
+            raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+        self._country_data_region = None
+        self._country_data_subregion = None
+        self._is_main_geometry = True
+
+    def is_dense_geometry(self):
+        &#34;&#34;&#34;Return the self._is_dense_geometry variable
+        &#34;&#34;&#34;
+        return self._is_dense_geometry
+
+    def is_main_geometry(self):
+        &#34;&#34;&#34;Return the self._is_main_geometry variable
+        &#34;&#34;&#34;
+        return self._is_main_geometry
 
     def get_source(self):
         &#34;&#34;&#34; Return informations about URL sources
@@ -1902,7 +2131,7 @@ the country is taken into account.</p></div>
     def get_subregions_from_region(self,**kwargs):
         &#34;&#34;&#34; Return the list of subregions within a specified region.
         Should give either the code or the name of the region as strings in kwarg : code=# or name=#
-        Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+        Output default is &#39;code&#39; of subregions. Can be changed with output=&#39;name&#39;.
         &#34;&#34;&#34;
         kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
         code=kwargs.get(&#34;code&#34;,None)
@@ -1939,6 +2168,79 @@ the country is taken into account.</p></div>
         for r in l:
             s=s+self.get_subregions_from_region(name=r,output=output)
         return s
+
+    def get_regions_from_subregion(self,code,output=&#39;code&#39;):
+        &#34;&#34;&#34; Return the list of regions where the subregion, given by a code, is.
+        Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+        &#34;&#34;&#34;
+
+        if not output in [&#39;code&#39;,&#39;name&#39;]:
+            raise CoaKeyError(&#39;The output option should be &#34;code&#34; or &#34;name&#34; only&#39;)
+
+        if not code in self.get_subregion_list()[&#39;code_subregion&#39;].to_list():
+            raise CoaWhereError(&#34;The subregion &#34;+code+&#34; does not exist for country &#34;+self.get_country()+&#34;. See get_subregion_list().&#34;)
+
+        l=[]
+        for k,v in self.get_data(True).iterrows():
+            if code in v.code_subregion:
+                if output == &#39;code&#39;:
+                    l.append(v.code_region)
+                else: # due to first test, that&#39;s for sure name
+                    l.append(v.name_region)
+        return list(dict.fromkeys(l))
+
+    def get_regions_from_list_of_subregion_codes(self,l,output=&#39;code&#39;):
+        &#34;&#34;&#34; Return the list of regions according to list of subregion names given.
+        The output argument (&#39;code&#39; as default) is given to the get_regions_from_subregion function.
+        &#34;&#34;&#34;
+        if not isinstance(l,list):
+            raise CoaTypeError(&#34;Should provide list as argument&#34;)
+        s=[]
+        for sr in l:
+            s=s+self.get_regions_from_subregion(sr,output=output)
+        return list(dict.fromkeys(s))
+
+    def get_regions_from_macroregion(self,**kwargs):
+        &#34;&#34;&#34; Return the list of regions included in another macroregion
+        Can provide input as code= or name=
+        Can provide output as &#39;name&#39; or &#39;code&#39; (default).
+        &#34;&#34;&#34;
+        kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
+        code=kwargs.get(&#34;code&#34;,None)
+        name=kwargs.get(&#34;name&#34;,None)
+        out=kwargs.get(&#34;output&#34;,&#39;code&#39;)
+
+        if not (code == None) ^ (name == None):
+            raise CoaKeyError(&#34;Should give either code or name of region, not both.&#34;)
+        if not out in [&#39;code&#39;,&#39;name&#39;]:
+            raise CoaKeyError(&#34;Should set output either as &#39;code&#39; or &#39;name&#39; for subregions.&#34;)
+
+        dict_input={k:v for k,v in kwargs.items() if k in [&#39;code&#39;,&#39;name&#39;]}
+        r_out=self.get_regions_from_list_of_subregion_codes(self.get_subregions_from_region(**dict_input),output=out)
+
+        # remove the input
+        rl=self.get_region_list()
+        if code != None:
+            if out==&#39;code&#39;:
+                input=rl[rl.code_region==code].name_region.item()
+            else:
+                input=code
+        else:
+            if out==&#39;name&#39;:
+                input=name
+            else:
+                input=rl[rl.name_region==code].code_region.item()
+
+        if input in r_out:
+            r_out.remove(input)
+
+        # Append the input in the right position, the macro region should be at the end
+        if len(r_out) == 1: # the input is not a macro region but just a region
+            r_out.insert(0,input)
+        else: # the input is a real macro region
+            r_out.append(input)
+
+        return r_out
 
     def get_list_properties(self):
         &#34;&#34;&#34;Return the list of available properties for the current country
@@ -1981,7 +2283,7 @@ the country is taken into account.</p></div>
                         pr=pr.append(pr_metropole,ignore_index=True).append(pr_outremer,ignore_index=True)
 
                     elif self.get_country()==&#39;ESP&#39; : # manage pseudo &#39;ESP&#39; regions within and outside continent
-                        islands_cut=pr.code_region.astype(int).isin([&#39;05&#39;])
+                        islands_cut=pr.code_region.isin([&#39;05&#39;])
                         pr_metropole=pr[~islands_cut].copy()
                         pr_metropole[&#39;code_region&#39;]=&#39;99&#39;
                         pr_metropole[&#39;name_region&#39;]=&#39;España peninsular&#39;
@@ -2010,12 +2312,17 @@ the country is taken into account.</p></div>
 
                     elif self.get_country()==&#39;USA&#39;:
                         usa_col=pr.columns.tolist()
-                        #usa_col.remove(&#39;population_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
+                        #usa_col.remove(&#39;_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
                         #usa_col.remove(&#39;area_subregion&#39;) # idem
                         pr=pr[usa_col]
 
+                    elif self.get_country()==&#39;EUR&#39;:
+                        pr.loc[pr.geometry.isnull(),&#39;geometry&#39;]=sg.Point()  # For correct geometry merge
+                        pr[&#39;geometry&#39;] = pr[&#39;geometry&#39;].buffer(0.001) # needed with geopandas 0.10.2&#39; for EUR data only (apparently)
+
                     pr[&#39;code_subregion&#39;]=pr.code_subregion.apply(lambda x: [x])
                     pr[&#39;name_subregion&#39;]=pr.name_subregion.apply(lambda x: [x])
+
                     self._country_data_region=pr.dissolve(by=col_reg,aggfunc=(lambda x: x.sum())).sort_values(by=&#39;code_region&#39;).reset_index()
                     for x in [&#39;population&#39;,&#39;area&#39;]:
                         if x+&#39;_subregion&#39; in self._country_data_region.columns:
@@ -2281,7 +2588,7 @@ If region_version = True (not default), the pandas output is region based focali
                     pr=pr.append(pr_metropole,ignore_index=True).append(pr_outremer,ignore_index=True)
 
                 elif self.get_country()==&#39;ESP&#39; : # manage pseudo &#39;ESP&#39; regions within and outside continent
-                    islands_cut=pr.code_region.astype(int).isin([&#39;05&#39;])
+                    islands_cut=pr.code_region.isin([&#39;05&#39;])
                     pr_metropole=pr[~islands_cut].copy()
                     pr_metropole[&#39;code_region&#39;]=&#39;99&#39;
                     pr_metropole[&#39;name_region&#39;]=&#39;España peninsular&#39;
@@ -2310,12 +2617,17 @@ If region_version = True (not default), the pandas output is region based focali
 
                 elif self.get_country()==&#39;USA&#39;:
                     usa_col=pr.columns.tolist()
-                    #usa_col.remove(&#39;population_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
+                    #usa_col.remove(&#39;_subregion&#39;) # Remove numeric column, if not, the dissolve does not work properly
                     #usa_col.remove(&#39;area_subregion&#39;) # idem
                     pr=pr[usa_col]
 
+                elif self.get_country()==&#39;EUR&#39;:
+                    pr.loc[pr.geometry.isnull(),&#39;geometry&#39;]=sg.Point()  # For correct geometry merge
+                    pr[&#39;geometry&#39;] = pr[&#39;geometry&#39;].buffer(0.001) # needed with geopandas 0.10.2&#39; for EUR data only (apparently)
+
                 pr[&#39;code_subregion&#39;]=pr.code_subregion.apply(lambda x: [x])
                 pr[&#39;name_subregion&#39;]=pr.name_subregion.apply(lambda x: [x])
+
                 self._country_data_region=pr.dissolve(by=col_reg,aggfunc=(lambda x: x.sum())).sort_values(by=&#39;code_region&#39;).reset_index()
                 for x in [&#39;population&#39;,&#39;area&#39;]:
                     if x+&#39;_subregion&#39; in self._country_data_region.columns:
@@ -2374,6 +2686,113 @@ If region_version = True (not default), the pandas output is region based focali
     cols=[c for c in self.get_list_properties() if &#39;_region&#39; in c]
     cols.append(&#39;geometry&#39;)
     return self.get_data(True)[cols]</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.get_regions_from_list_of_subregion_codes"><code class="name flex">
+<span>def <span class="ident">get_regions_from_list_of_subregion_codes</span></span>(<span>self, l, output='code')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the list of regions according to list of subregion names given.
+The output argument ('code' as default) is given to the get_regions_from_subregion function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_regions_from_list_of_subregion_codes(self,l,output=&#39;code&#39;):
+    &#34;&#34;&#34; Return the list of regions according to list of subregion names given.
+    The output argument (&#39;code&#39; as default) is given to the get_regions_from_subregion function.
+    &#34;&#34;&#34;
+    if not isinstance(l,list):
+        raise CoaTypeError(&#34;Should provide list as argument&#34;)
+    s=[]
+    for sr in l:
+        s=s+self.get_regions_from_subregion(sr,output=output)
+    return list(dict.fromkeys(s))</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.get_regions_from_macroregion"><code class="name flex">
+<span>def <span class="ident">get_regions_from_macroregion</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the list of regions included in another macroregion
+Can provide input as code= or name=
+Can provide output as 'name' or 'code' (default).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_regions_from_macroregion(self,**kwargs):
+    &#34;&#34;&#34; Return the list of regions included in another macroregion
+    Can provide input as code= or name=
+    Can provide output as &#39;name&#39; or &#39;code&#39; (default).
+    &#34;&#34;&#34;
+    kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
+    code=kwargs.get(&#34;code&#34;,None)
+    name=kwargs.get(&#34;name&#34;,None)
+    out=kwargs.get(&#34;output&#34;,&#39;code&#39;)
+
+    if not (code == None) ^ (name == None):
+        raise CoaKeyError(&#34;Should give either code or name of region, not both.&#34;)
+    if not out in [&#39;code&#39;,&#39;name&#39;]:
+        raise CoaKeyError(&#34;Should set output either as &#39;code&#39; or &#39;name&#39; for subregions.&#34;)
+
+    dict_input={k:v for k,v in kwargs.items() if k in [&#39;code&#39;,&#39;name&#39;]}
+    r_out=self.get_regions_from_list_of_subregion_codes(self.get_subregions_from_region(**dict_input),output=out)
+
+    # remove the input
+    rl=self.get_region_list()
+    if code != None:
+        if out==&#39;code&#39;:
+            input=rl[rl.code_region==code].name_region.item()
+        else:
+            input=code
+    else:
+        if out==&#39;name&#39;:
+            input=name
+        else:
+            input=rl[rl.name_region==code].code_region.item()
+
+    if input in r_out:
+        r_out.remove(input)
+
+    # Append the input in the right position, the macro region should be at the end
+    if len(r_out) == 1: # the input is not a macro region but just a region
+        r_out.insert(0,input)
+    else: # the input is a real macro region
+        r_out.append(input)
+
+    return r_out</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.get_regions_from_subregion"><code class="name flex">
+<span>def <span class="ident">get_regions_from_subregion</span></span>(<span>self, code, output='code')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the list of regions where the subregion, given by a code, is.
+Output default is 'code' of subregions. Can be changer with output='name'.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_regions_from_subregion(self,code,output=&#39;code&#39;):
+    &#34;&#34;&#34; Return the list of regions where the subregion, given by a code, is.
+    Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+    &#34;&#34;&#34;
+
+    if not output in [&#39;code&#39;,&#39;name&#39;]:
+        raise CoaKeyError(&#39;The output option should be &#34;code&#34; or &#34;name&#34; only&#39;)
+
+    if not code in self.get_subregion_list()[&#39;code_subregion&#39;].to_list():
+        raise CoaWhereError(&#34;The subregion &#34;+code+&#34; does not exist for country &#34;+self.get_country()+&#34;. See get_subregion_list().&#34;)
+
+    l=[]
+    for k,v in self.get_data(True).iterrows():
+        if code in v.code_subregion:
+            if output == &#39;code&#39;:
+                l.append(v.code_region)
+            else: # due to first test, that&#39;s for sure name
+                l.append(v.name_region)
+    return list(dict.fromkeys(l))</code></pre>
 </details>
 </dd>
 <dt id="coa.geo.GeoCountry.get_source"><code class="name flex">
@@ -2439,7 +2858,7 @@ The output argument ('code' as default) is given to the get_subregions_from_regi
 <dd>
 <div class="desc"><p>Return the list of subregions within a specified region.
 Should give either the code or the name of the region as strings in kwarg : code=# or name=#
-Output default is 'code' of subregions. Can be changer with output='name'.</p></div>
+Output default is 'code' of subregions. Can be changed with output='name'.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -2447,7 +2866,7 @@ Output default is 'code' of subregions. Can be changer with output='name'.</p></
 <pre><code class="python">def get_subregions_from_region(self,**kwargs):
     &#34;&#34;&#34; Return the list of subregions within a specified region.
     Should give either the code or the name of the region as strings in kwarg : code=# or name=#
-    Output default is &#39;code&#39; of subregions. Can be changer with output=&#39;name&#39;.
+    Output default is &#39;code&#39; of subregions. Can be changed with output=&#39;name&#39;.
     &#34;&#34;&#34;
     kwargs_test(kwargs,[&#39;name&#39;,&#39;code&#39;,&#39;output&#39;],&#39;Should give either name or code of region. Output can be changed with the output option.&#39;)
     code=kwargs.get(&#34;code&#34;,None)
@@ -2475,6 +2894,21 @@ Output default is 'code' of subregions. Can be changer with output='name'.</p></
     return self.get_data(True)[cut][out+&#39;_subregion&#39;].iloc[0]#to_list()</code></pre>
 </details>
 </dd>
+<dt id="coa.geo.GeoCountry.is_dense_geometry"><code class="name flex">
+<span>def <span class="ident">is_dense_geometry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the self._is_dense_geometry variable</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_dense_geometry(self):
+    &#34;&#34;&#34;Return the self._is_dense_geometry variable
+    &#34;&#34;&#34;
+    return self._is_dense_geometry</code></pre>
+</details>
+</dd>
 <dt id="coa.geo.GeoCountry.is_init"><code class="name flex">
 <span>def <span class="ident">is_init</span></span>(<span>self)</span>
 </code></dt>
@@ -2491,6 +2925,21 @@ Output default is 'code' of subregions. Can be changer with output='name'.</p></
         return True
     else:
         return False</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.is_main_geometry"><code class="name flex">
+<span>def <span class="ident">is_main_geometry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the self._is_main_geometry variable</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_main_geometry(self):
+    &#34;&#34;&#34;Return the self._is_main_geometry variable
+    &#34;&#34;&#34;
+    return self._is_main_geometry</code></pre>
 </details>
 </dd>
 <dt id="coa.geo.GeoCountry.is_region"><code class="name flex">
@@ -2532,6 +2981,121 @@ Output default is 'code' of subregions. Can be changer with output='name'.</p></
     if a.size == 1:
         return a[0]
     return False</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.set_dense_geometry"><code class="name flex">
+<span>def <span class="ident">set_dense_geometry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>If used, we're using for the current country a dense geometry forsubregions
+and regions.
+It's not possible to go back.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_dense_geometry(self):
+    &#34;&#34;&#34;  If used, we&#39;re using for the current country a dense geometry forsubregions
+    and regions.
+    It&#39;s not possible to go back.
+    &#34;&#34;&#34;
+
+    if self.is_dense_geometry():
+        return
+
+    if self.is_main_geometry():
+        raise CoaError(&#34;You already set the main geometry. Cannot set the dense geometry now.&#34;)
+
+    if self.get_country() == &#39;FRA&#39;:
+        #.drop([&#39;id_geofla&#39;,&#39;code_reg&#39;,&#39;nom_reg&#39;,&#39;x_chf_lieu&#39;,&#39;y_chf_lieu&#39;,&#39;x_centroid&#39;,&#39;y_centroid&#39;,&#39;Code département&#39;,&#39;Nom du département&#39;,&#39;Population municipale&#39;],axis=1,inplace=True) # removing some column without interest
+        # moving artificially (if needed) outre-mer area to be near to metropole for map representations
+
+        tmp = []
+        for index, poi in self._country_data.iterrows():
+            x=0
+            y=0
+            w=self._country_data.loc[index,&#34;code_subregion&#34;]
+            if w in self._list_translation.keys():
+                x=self._list_translation[w][0]
+                y=self._list_translation[w][1]
+            g = sa.translate(self._country_data.loc[index, &#39;geometry&#39;], xoff=x, yoff=y)
+            tmp.append(g)
+        self._country_data[&#39;geometry&#39;]=tmp
+        # Add Ile de France zoom
+        #idf_translation=(-6.5,-5)
+        #idf_scale=5
+        #idf_center=(-4,44)
+        #tmp = []
+        #for index, poi in self._country_data.iterrows():
+        #    g=self._country_data.loc[index, &#39;geometry&#39;]
+        #    if self._country_data.loc[index,&#39;code_subregion&#39;] in [&#39;75&#39;,&#39;92&#39;,&#39;93&#39;,&#39;94&#39;]:
+        #        g2=sa.scale(sa.translate(g,xoff=idf_translation[0],yoff=idf_translation[1]),\
+        #                                xfact=idf_scale,yfact=idf_scale,origin=idf_center)
+        #        g=so.unary_union([g,g2])
+        #    tmp.append(g)
+        #self._country_data[&#39;geometry&#39;]=tmp
+
+        # Remove COM with dense geometry true, too many islands to manage
+        self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+
+    elif self.get_country() == &#39;USA&#39;:
+        tmp = []
+        for index, poi in self._country_data.iterrows():
+            x=0
+            y=0
+            w=self._country_data.loc[index,&#34;code_subregion&#34;]
+            if w in self._list_translation.keys():
+                x=self._list_translation[w][0]
+                y=self._list_translation[w][1]
+                g=sa.scale(sa.translate(self._country_data.loc[index, &#39;geometry&#39;],xoff=x,yoff=y),\
+                                        xfact=self._list_scale[w],yfact=self._list_scale[w],origin=self._list_center[w])
+            else:
+                g=self._country_data.loc[index, &#39;geometry&#39;]
+
+            tmp.append(g)
+        self._country_data[&#39;geometry&#39;]=tmp
+    else:
+        raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+    self._country_data_region = None
+    self._country_data_subregion = None
+    self._is_dense_geometry = True</code></pre>
+</details>
+</dd>
+<dt id="coa.geo.GeoCountry.set_main_geometry"><code class="name flex">
+<span>def <span class="ident">set_main_geometry</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>If used, we're using only for the current country the main
+geometry for subregions and regions.
+It's not possible to go back.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_main_geometry(self):
+    &#34;&#34;&#34;  If used, we&#39;re using only for the current country the main
+    geometry for subregions and regions.
+    It&#39;s not possible to go back.
+    &#34;&#34;&#34;
+    if self.is_main_geometry():
+        return
+
+    if self.is_dense_geometry():
+        raise CoaError(&#34;You already set the dense geometry. Cannot set the main geometry now.&#34;)
+
+    if self.get_country()==&#39;FRA&#39;:
+        self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+        # Remove COM with main geometry true, too many islands to manage
+        self._country_data=self._country_data[self._country_data.code_subregion!=&#39;980&#39;]
+    elif self.get_country()==&#39;USA&#39;:
+        self._country_data = self._country_data[~self._country_data[&#39;code_subregion&#39;].isin(self._list_translation.keys())]
+    else:
+        raise CoaError(&#34;The current country does not have dense geometry support.&#34;)
+
+    self._country_data_region = None
+    self._country_data_subregion = None
+    self._is_main_geometry = True</code></pre>
 </details>
 </dd>
 <dt id="coa.geo.GeoCountry.test_is_init"><code class="name flex">
@@ -2644,7 +3208,7 @@ of errors (see pycoa.error)</p>
                     Mandatory.
         input    -- provide the input pandas dataframe. Mandatory.
         geofield -- provide the field name in the pandas where the
-                    location is stored. Default : &#39;location&#39;
+                    location is stored. Default : &#39;where&#39;
         overload -- Allow to overload a field. Boolean value.
                     Default : False
         &#34;&#34;&#34;
@@ -2677,7 +3241,7 @@ of errors (see pycoa.error)</p>
             raise CoaKeyError(&#39;Some fields already exist in you panda &#39;
                 &#39;dataframe columns. You may set overload to True.&#39;)
 
-        geofield=kwargs.get(&#39;geofield&#39;,&#39;location&#39;)
+        geofield=kwargs.get(&#39;geofield&#39;,&#39;where&#39;)
 
         if not isinstance(geofield,str):
             raise CoaTypeError(&#39;The geofield should be given as a &#39;
@@ -2740,7 +3304,6 @@ of errors (see pycoa.error)</p>
                 p=p.merge(self._data_population[[&#34;iso3_tmp2&#34;,f]],how=&#39;left&#39;,\
                         left_on=&#39;iso3_tmp&#39;,right_on=&#39;iso3_tmp2&#39;,\
                         suffixes=(&#39;&#39;,&#39;_tmp&#39;)).drop([&#39;iso3_tmp2&#39;],axis=1)
-
             # ----------------------------------------------------------
             elif f in [&#39;region_code_list&#39;,&#39;region_name_list&#39;]:
 
@@ -2779,13 +3342,13 @@ of errors (see pycoa.error)</p>
                     # About countries that we artificially put on the east of the map
                     for newc in [&#39;RUS&#39;,&#39;FJI&#39;,&#39;NZL&#39;,&#39;WSM&#39;]:
                         poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly]))
+                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                         self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
                     # About countries that we artificially put on the west of the map
                     for newc in [&#39;USA&#39;]:
                         poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly]))
+                        poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                         self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
                 p=p.merge(self._data_geometry,how=&#39;left&#39;,\
@@ -2821,7 +3384,7 @@ Mandatory.
 input
 &ndash; provide the input pandas dataframe. Mandatory.
 geofield &ndash; provide the field name in the pandas where the
-location is stored. Default : 'location'
+location is stored. Default : 'where'
 overload &ndash; Allow to overload a field. Boolean value.
 Default : False</p></div>
 <details class="source">
@@ -2840,7 +3403,7 @@ Default : False</p></div>
                 Mandatory.
     input    -- provide the input pandas dataframe. Mandatory.
     geofield -- provide the field name in the pandas where the
-                location is stored. Default : &#39;location&#39;
+                location is stored. Default : &#39;where&#39;
     overload -- Allow to overload a field. Boolean value.
                 Default : False
     &#34;&#34;&#34;
@@ -2873,7 +3436,7 @@ Default : False</p></div>
         raise CoaKeyError(&#39;Some fields already exist in you panda &#39;
             &#39;dataframe columns. You may set overload to True.&#39;)
 
-    geofield=kwargs.get(&#39;geofield&#39;,&#39;location&#39;)
+    geofield=kwargs.get(&#39;geofield&#39;,&#39;where&#39;)
 
     if not isinstance(geofield,str):
         raise CoaTypeError(&#39;The geofield should be given as a &#39;
@@ -2936,7 +3499,6 @@ Default : False</p></div>
             p=p.merge(self._data_population[[&#34;iso3_tmp2&#34;,f]],how=&#39;left&#39;,\
                     left_on=&#39;iso3_tmp&#39;,right_on=&#39;iso3_tmp2&#39;,\
                     suffixes=(&#39;&#39;,&#39;_tmp&#39;)).drop([&#39;iso3_tmp2&#39;],axis=1)
-
         # ----------------------------------------------------------
         elif f in [&#39;region_code_list&#39;,&#39;region_name_list&#39;]:
 
@@ -2975,13 +3537,13 @@ Default : False</p></div>
                 # About countries that we artificially put on the east of the map
                 for newc in [&#39;RUS&#39;,&#39;FJI&#39;,&#39;NZL&#39;,&#39;WSM&#39;]:
                     poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                    poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly]))
+                    poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x,y) if x&gt;=0 else (x+360,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                     self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
                 # About countries that we artificially put on the west of the map
                 for newc in [&#39;USA&#39;]:
                     poly=self._data_geometry[self._data_geometry.id_tmp==newc].geometry.values[0]
-                    poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly]))
+                    poly=so.unary_union(sg.MultiPolygon([sg.Polygon([(x-360,y) if x&gt;=0 else (x,y) for x,y in p.exterior.coords]) for p in poly.geoms]))
                     self._data_geometry.loc[self._data_geometry.id_tmp==newc,&#39;geometry&#39;]=gpd.GeoSeries(poly).values
 
             p=p.merge(self._data_geometry,how=&#39;left&#39;,\
@@ -3282,6 +3844,8 @@ see get_list_standard()[0].</p></div>
                 &#34;Ms Zaandam&#34;:&#34;&#34;,\
                 &#34;Summer Olympics 2020&#34;:&#34;&#34;,\
                 &#34;Micronesia&#34;:&#34;FSM&#34;,\
+                &#34;Winter Olympics 2022&#34;:&#34;&#34;,\
+                &#34;Antarctica&#34;:&#34;&#34;,\
                     })  # last two are names of boats
         elif db==&#39;worldometers&#39;:
             translation_dict.update({\
@@ -3361,6 +3925,8 @@ for specific databases</p></div>
             &#34;Ms Zaandam&#34;:&#34;&#34;,\
             &#34;Summer Olympics 2020&#34;:&#34;&#34;,\
             &#34;Micronesia&#34;:&#34;FSM&#34;,\
+            &#34;Winter Olympics 2022&#34;:&#34;&#34;,\
+            &#34;Antarctica&#34;:&#34;&#34;,\
                 })  # last two are names of boats
     elif db==&#39;worldometers&#39;:
         translation_dict.update({\
@@ -3793,11 +4359,8 @@ of errors (see pycoa.error)</p>
             clist=[&#39;DEU&#39;,&#39;CAN&#39;,&#39;USA&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;JAP&#39;,&#39;GBR&#39;,&#39;RUS&#39;]
         elif region==&#39;G20&#39;:
             clist=[&#39;ZAF&#39;,&#39;SAU&#39;,&#39;ARG&#39;,&#39;AUS&#39;,&#39;BRA&#39;,&#39;CAN&#39;,&#39;CHN&#39;,&#39;KOR&#39;,&#39;USA&#39;,\
-                &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;RUS&#39;,&#39;TUR&#39;,\
-                &#39;AUT&#39;,&#39;BEL&#39;,&#39;BGR&#39;,&#39;CYP&#39;,&#39;CZE&#39;,&#39;DEU&#39;,&#39;DNK&#39;,&#39;EST&#39;,\
-                &#39;ESP&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HRV&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ITA&#39;,\
-                &#39;LTU&#39;,&#39;LUX&#39;,&#39;LVA&#39;,&#39;MLT&#39;,&#39;NLD&#39;,&#39;POL&#39;,&#39;PRT&#39;,&#39;ROU&#39;,\
-                &#39;SWE&#39;,&#39;SVN&#39;,&#39;SVK&#39;]
+                &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;DEU&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;TUR&#39;,\
+                &#39;MEX&#39;,&#39;RUS&#39;]
         elif region==&#39;Oecd&#39;: # OCDE in french
             clist=[&#39;DEU&#39;,&#39;AUS&#39;,&#39;AUT&#39;,&#39;BEL&#39;,&#39;CAN&#39;,&#39;CHL&#39;,&#39;COL&#39;,&#39;KOR&#39;,&#39;DNK&#39;,\
                 &#39;ESP&#39;,&#39;EST&#39;,&#39;USA&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ISL&#39;,&#39;ISR&#39;,\
@@ -3863,11 +4426,8 @@ use the GeoManager class.</p></div>
         clist=[&#39;DEU&#39;,&#39;CAN&#39;,&#39;USA&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;JAP&#39;,&#39;GBR&#39;,&#39;RUS&#39;]
     elif region==&#39;G20&#39;:
         clist=[&#39;ZAF&#39;,&#39;SAU&#39;,&#39;ARG&#39;,&#39;AUS&#39;,&#39;BRA&#39;,&#39;CAN&#39;,&#39;CHN&#39;,&#39;KOR&#39;,&#39;USA&#39;,\
-            &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;RUS&#39;,&#39;TUR&#39;,\
-            &#39;AUT&#39;,&#39;BEL&#39;,&#39;BGR&#39;,&#39;CYP&#39;,&#39;CZE&#39;,&#39;DEU&#39;,&#39;DNK&#39;,&#39;EST&#39;,\
-            &#39;ESP&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HRV&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ITA&#39;,\
-            &#39;LTU&#39;,&#39;LUX&#39;,&#39;LVA&#39;,&#39;MLT&#39;,&#39;NLD&#39;,&#39;POL&#39;,&#39;PRT&#39;,&#39;ROU&#39;,\
-            &#39;SWE&#39;,&#39;SVN&#39;,&#39;SVK&#39;]
+            &#39;IND&#39;,&#39;IDN&#39;,&#39;JAP&#39;,&#39;MEX&#39;,&#39;GBR&#39;,&#39;DEU&#39;,&#39;FRA&#39;,&#39;ITA&#39;,&#39;TUR&#39;,\
+            &#39;MEX&#39;,&#39;RUS&#39;]
     elif region==&#39;Oecd&#39;: # OCDE in french
         clist=[&#39;DEU&#39;,&#39;AUS&#39;,&#39;AUT&#39;,&#39;BEL&#39;,&#39;CAN&#39;,&#39;CHL&#39;,&#39;COL&#39;,&#39;KOR&#39;,&#39;DNK&#39;,\
             &#39;ESP&#39;,&#39;EST&#39;,&#39;USA&#39;,&#39;FIN&#39;,&#39;FRA&#39;,&#39;GRC&#39;,&#39;HUN&#39;,&#39;IRL&#39;,&#39;ISL&#39;,&#39;ISR&#39;,\
@@ -3986,13 +4546,20 @@ use the GeoManager class.</p></div>
 <li><code><a title="coa.geo.GeoCountry.get_list_countries" href="#coa.geo.GeoCountry.get_list_countries">get_list_countries</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_list_properties" href="#coa.geo.GeoCountry.get_list_properties">get_list_properties</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_region_list" href="#coa.geo.GeoCountry.get_region_list">get_region_list</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.get_regions_from_list_of_subregion_codes" href="#coa.geo.GeoCountry.get_regions_from_list_of_subregion_codes">get_regions_from_list_of_subregion_codes</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.get_regions_from_macroregion" href="#coa.geo.GeoCountry.get_regions_from_macroregion">get_regions_from_macroregion</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.get_regions_from_subregion" href="#coa.geo.GeoCountry.get_regions_from_subregion">get_regions_from_subregion</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_source" href="#coa.geo.GeoCountry.get_source">get_source</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_subregion_list" href="#coa.geo.GeoCountry.get_subregion_list">get_subregion_list</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_subregions_from_list_of_region_names" href="#coa.geo.GeoCountry.get_subregions_from_list_of_region_names">get_subregions_from_list_of_region_names</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.get_subregions_from_region" href="#coa.geo.GeoCountry.get_subregions_from_region">get_subregions_from_region</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.is_dense_geometry" href="#coa.geo.GeoCountry.is_dense_geometry">is_dense_geometry</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.is_init" href="#coa.geo.GeoCountry.is_init">is_init</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.is_main_geometry" href="#coa.geo.GeoCountry.is_main_geometry">is_main_geometry</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.is_region" href="#coa.geo.GeoCountry.is_region">is_region</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.is_subregion" href="#coa.geo.GeoCountry.is_subregion">is_subregion</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.set_dense_geometry" href="#coa.geo.GeoCountry.set_dense_geometry">set_dense_geometry</a></code></li>
+<li><code><a title="coa.geo.GeoCountry.set_main_geometry" href="#coa.geo.GeoCountry.set_main_geometry">set_main_geometry</a></code></li>
 <li><code><a title="coa.geo.GeoCountry.test_is_init" href="#coa.geo.GeoCountry.test_is_init">test_is_init</a></code></li>
 </ul>
 </li>

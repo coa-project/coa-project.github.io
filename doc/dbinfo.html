@@ -7,7 +7,7 @@
 <title>coa.dbinfo API documentation</title>
 <meta name="description" content="Project : PyCoA - Copyright ©pycoa.fr
 Date :
-april 2020 - april 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -28,7 +28,7 @@ License: See joint …" />
 <section id="section-intro">
 <p>Project : PyCoA - Copyright ©pycoa.fr
 Date :
-april 2020 - april 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint LICENSE file
 Module : report
@@ -41,7 +41,7 @@ About</p>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
 &#34;&#34;&#34;Project : PyCoA - Copyright ©pycoa.fr
-Date :    april 2020 - april 2021
+Date :    april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 License: See joint LICENSE file
 Module : report
@@ -141,14 +141,14 @@ def generic_info(namedb, keys):
         &#39;cur_idx_tx_A1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
         &#39;cur_idx_tx_B1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
         &#39;cur_idx_tx_C1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
-        &#39;nb_A0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est négatif (A = E484K)&#39;,url8,urlmaster8],
-        &#39;nb_A1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est positif (A = E484K)&#39;,url8,urlmaster8],
+        &#39;cur_nb_A0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est négatif (A = E484K)&#39;,url8,urlmaster8],
+        &#39;cur_nb_A1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est positif (A = E484K)&#39;,url8,urlmaster8],
         &#39;tx_A1&#39; : [&#39;Taux de présence mutation A (A = E484K)&#39;,url8,urlmaster8],
-        &#39;nb_B0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est négatif (B = E484Q)&#39;,url8,urlmaster8],
-        &#39;nb_B1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est positif (B = E484Q)&#39;,url8,urlmaster8],
+        &#39;cur_nb_B0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est négatif (B = E484Q)&#39;,url8,urlmaster8],
+        &#39;cur_nb_B1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est positif (B = E484Q)&#39;,url8,urlmaster8],
         &#39;tx_B1&#39; : [&#39;Taux de présence mutation B (B = E484Q)&#39;,url8,urlmaster8],
-        &#39;nb_C0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est négatif (C = L452R)&#39;,url8,urlmaster8],
-        &#39;nb_C1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est positif (C = L452R)&#39;,url8,urlmaster8],
+        &#39;cur_nb_C0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est négatif (C = L452R)&#39;,url8,urlmaster8],
+        &#39;cur_nb_C1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est positif (C = L452R)&#39;,url8,urlmaster8],
         &#39;tx_C1&#39; : [&#39;Taux de présence mutation C (C = L452R)&#39;,url8,urlmaster8],
         &#39;cur_nbre_pass_corona&#39; : [&#39;  Nombre de passages aux urgences pour suspicion de COVID-19 (nbre_pass_corona)&#39;,url9,urlmaster9],
         }
@@ -168,7 +168,14 @@ def generic_info(namedb, keys):
               spfn[k].append(&#39;https://www.data.gouv.fr/fr/datasets/r/d3a98a30-893f-47f7-96c5-2f4bcaaa0d71&#39;)
               spfn[k].append(&#39;https://www.data.gouv.fr/en/datasets/donnees-relatives-a-lepidemie-de-covid-19-en-france-vue-densemble/&#39;)
         mydico = spfn
-
+    elif namedb == &#39;insee&#39;:
+        insee = {
+        &#39;tot_deaths_since_2018-01-01&#39;:[&#39;tot deaths number_of_deaths integrated since 2018-01-01 &#39;],\
+        }
+        for k,v in insee.items():
+            insee[k].append(&#39;https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/&#39;)
+            insee[k].append(&#39;https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/&#39;)
+        mydico = insee
     elif namedb == &#39;opencovid19&#39;:
         op19 = {
         &#39;tot_deces&#39;:[&#39;tot_deces: total cumulé du nombre de décès au niveau national&#39;],
@@ -229,10 +236,9 @@ def generic_info(namedb, keys):
         &#39;cur_reproduction_rate&#39;:[&#39;cur_reproduction_rate (original name reproduction_rate): Real-time estimate of the effective reproduction rate (R) of COVID-19. See https://github.com/crondonm/TrackingR/tree/main/Estimates-Database&#39;],
         &#39;cur_icu_patients&#39;:[&#39;cur_icu_patients (orignal name icu_patients): Number of COVID-19 patients in intensive care units (ICUs) on a given day&#39;],
         &#39;cur_hosp_patients&#39;:[&#39;cur_hosp_patients (original name hosp_patients): Number of COVID-19 patients in hospital on a given day&#39;],
+        &#39;cur_weekly_hosp_admissions&#39;:[&#39;cur_weekly_hosp_admissions (original name weekly_hosp_admissions): Number of COVID-19 patients in hospital on a given week&#39;],
         &#39;cur_idx_positive_rate&#39;:[&#39;cur_idx_positive_rate (original name positive_rate): The share of COVID-19 tests that are positive, given as a rolling 7-day average (this is the inverse of tests_per_case)&#39;],
-        &#39;num_sequences&#39;:[&#39;num_sequences: Number of sequenced samples that fall into the category variant.&#39;],
-        &#39;perc_sequences&#39;:[&#39;perc_sequences: Percentage of the sequenced samples that fall into the category variant.&#39;],
-        &#39;num_sequences_total&#39;:[&#39;num_sequences_total: Total number of samples sequenced in the last two weeks&#39;],
+        &#39;total_gdp_per_capita&#39;:[&#39;Gross domestic product at purchasing power parity (constant 2011 international dollars), most recent year available&#39;],
         }
         for k,v in owid.items():
             owid[k].append(&#34;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv&#34;)
@@ -283,10 +289,10 @@ def generic_info(namedb, keys):
         mydico = mi
     elif namedb == &#39;covid19india&#39;:
         india = {
-        &#39;Deceased&#39;:[&#39;Deceased:FILLIT&#39;],\
-        &#39;Confirmed&#39;:[&#39;Confirmed:FILLIT&#39;],\
-        &#39;Recovered&#39;:[&#39;Recovered:FILLIT&#39;],\
-        &#39;Tested&#39;:[&#39;Tested:FILLIT&#39;]
+        &#39;tot_Deceased&#39;:[&#39;tot_Deceased (original name: Deceased): Total number of Deceased&#39;],\
+        &#39;tot_Confirmed&#39;:[&#39;tot_Confirmed (original name: Confirmed): Total number of Confirmed&#39;],\
+        &#39;tot_Recovered&#39;:[&#39;tot_Recovered ( original name:  Recovered): Total number of Recovered&#39;],\
+        &#39;tot_Tested&#39;:[&#39;tot_Tested ( original name:  Tested): Total number of Tested&#39;]
         }
         for k,v in india.items():
             india[k].append(&#39;https://api.covid19india.org/csv/latest/states.csv&#39;)
@@ -312,18 +318,18 @@ def generic_info(namedb, keys):
     elif namedb == &#39;escovid19data&#39;:
         esco = {
         &#39;tot_deaths&#39;:[&#39;Cumulative deaths  (original name deceased)&#39;],\
-        &#39;tot_cases&#39;:[&#39;Cumulatvie number of new COVID-19 cases (original name cases_accumulated)&#39;],\
-        &#39;cur_cases&#39;:[&#39;Active COVID-19 cases (original name activos)&#39;],\
+        &#39;tot_cases&#39;:[&#39;Number of new COVID-19 cases detected with PCR (original name cases_accumulated_PCR)&#39;],\
         &#39;cur_hosp&#39;:[&#39;Hospitalized (original name hospitalized)&#39;],\
         &#39;tot_hosp&#39;:[&#39;Cumulative Hospitalized (original name hospitalized_accumulated)&#39;],\
+        &#39;cur_hosp_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants (original name hospitalized_per_100000&#39;],\
         &#39;cur_icu&#39;:[&#39;UCI, intensive care patient, (original name intensive_care)&#39;],\
         &#39;tot_recovered&#39;:[&#39;Recovered (original name recovered)&#39;],\
-        &#39;cur_cases_per100k&#39;:[&#39;Cumulative cases per 100,000 inhabitants (original name cases_per_cienmil)&#39;],\
+        &#39;tot_cases_per100k&#39;:[&#39;Cumulative cases per 100,000 inhabitants (original name cases_per_cienmil)&#39;],\
         &#39;cur_icu_per1M&#39; :[&#39;Intensive care per 1000,000 inhabitants (original name intensive_care_per_1000000)&#39;],\
         &#39;tot_deaths_per100k&#39;:[&#39;Cumulative deaths per 100,000 inhabitants (original name deceassed_per_100000)&#39;],\
-        &#39;cur_hosp_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants, (original name hospitalized_per_100000)&#39;],\
-        &#39;deaths&#39;:[&#39;deaths:FILLIT&#39;,&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;],
-        &#39;cases&#39;:[&#39;cases:FILLIT&#39;,&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;],
+        &#39;tot_cases_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants, (original name hospitalized_per_100000)&#39;],\
+        &#39;incidence&#39;:[&#39;Cases in 14 days by 100,000 inhabitants (original name ia14&#39;],\
+        &#39;population&#39;:[&#39;Inhabitants of the province (orignal name poblacion)&#39;],\
         }
         for k,v in esco.items():
             esco[k].append(&#39;https://raw.githubusercontent.com/montera34/escovid19data/master/data/output/covid19-provincias-spain_consolidated.csv&#39;)
@@ -345,10 +351,10 @@ def generic_info(namedb, keys):
         phe = {
         &#39;tot_deaths&#39;:[&#39;Total number of deaths (original name cumDeaths28DaysByDeathDate)&#39;,url+&#39;cumDeaths28DaysByDeathDate&#39;+&#39;&amp;format=csv&#39;],\
         &#39;tot_cases&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumCasesBySpecimenDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_tests&#39;:[&#39;Total number of cases (originale name cumTestByPublishDate)&#39;,url+&#39;cumLFDTests&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc1&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedFirstDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc2&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedSecondDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc3&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedThirddDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_tests&#39;:[&#39;Total number of tests (originale name cumTestByPublishDate)&#39;,url+&#39;cumLFDTests&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc1&#39;:[&#39;Total number of tot_vacc1 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedFirstDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc2&#39;:[&#39;Total number of tot_vacc2 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedSecondDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc3&#39;:[&#39;Total number of tot_vacc3 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedThirddDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
         &#39;cur_B.1.617.2&#39;:[&#39;Current variant B.1.617.2&#39;,url +&#39;https://covid-surveillance-data.cog.sanger.ac.uk/download/lineages_by_ltla_and_week.tsv&#39;],
         }
         for k,v in phe.items():
@@ -379,6 +385,54 @@ def generic_info(namedb, keys):
             cotra[k].append(url)
             cotra[k].append(&#39;https://covidtracking.com/analysis-updates/five-major-metrics-covid-19-data&#39;)
         mydico = cotra
+    elif namedb == &#39;risklayer&#39;:
+        url=&#39;https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-JLawOH35vPyOk39w0tjn64YQLlahiD2AaNfjd82pgQ37Jr1K8KMHOqJbxoi4k2FZVYBGbZ-nsxhi/pub?output=csv&#39;
+        risk = {
+            &#39;tot_positive&#39;: [&#39;tot_positive ... fill it &#39;],\
+            &#39;tot_incidence&#39;: [&#39;tot_incidence ... fill it&#39;],\
+            }
+        for k,v in risk.items():
+            risk[k].append(url)
+            risk[k].append(&#39;https://www.risklayer-explorer.com/event/100/detail&#39;)
+        mydico = risk
+    elif namedb == &#39;europa&#39;:
+        url=&#39;https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-region/jrc-covid-19-all-days-by-regions.csv&#39;
+        euro = {
+            &#39;tot_deaths&#39;:[&#39;Orginal name CumulativeDeceased&#39;],
+            &#39;tot_positive&#39;:[&#39;sum the Original name CurrentlyPositive&#39;],
+            &#39;cur_hosp&#39;:[&#39;Orginal name Hospitalized&#39;],
+            &#39;cur_icu&#39;:[&#39;Orginal name IntensiveCare&#39;],
+            }
+        for k,v in euro.items():
+            euro[k].append(url)
+            euro[k].append(&#39;https://github.com/ec-jrc/COVID-19/tree/master/data-by-region&#39;)
+        mydico = euro
+    elif namedb == &#39;imed&#39;:
+        imed = {
+        &#39;tot_cases&#39;:[&#39;tot_cases (original name cases)&#39;,\
+        &#39;https://github.com/iMEdD-Lab/open-data/blob/master/COVID-19/greece_cases_v2.csv&#39;],
+        &#39;tot_deaths&#39;:[&#39;tot_deaths (original name deaths)&#39;,\
+        &#39;https://github.com/iMEdD-Lab/open-data/blob/master/COVID-19/greece_deaths_v2.csv&#39;]
+        }
+        for k,v in imed.items():
+             imed[k].append(&#34;https://github.com/iMEdD-Lab/open-data/tree/master/COVID-19&#34;)
+        mydico = imed
+    elif namedb == &#39;govcy&#39;:
+        mi = {
+        &#39;tot_deaths&#39;:[&#39;total deaths attributed to Covid-19 disease (total deaths)&#39;],\
+        &#39;tot_cases&#39;:[&#39;total number of confirmed cases (total cases)&#39;],\
+        &#39;cur_hosp&#39;:[&#39;number of patients with covid-19 hospitalized cases (Hospitalised Cases)&#39;],\
+        &#39;cur_severe&#39;:[&#39;number of patients with covid-19 hospitalized in severe cases (Severe Cases)&#39;],\
+        &#39;cur_icu&#39;:[&#39;number of patients with covid-19 admitted to ICUs (Cases In ICUs)&#39;],\
+        &#39;cur_incub&#39;:[&#39;number of patients with covid-19 admitted to ICUs (Incubated Cases)&#39;],\
+        &#39;tot_pcr&#39;:[&#39;extract from PCR_daily tests performedtotal number of PCR tests performed (PCR_daily tests performed)&#39;],\
+        &#39;tot_rat&#39;:[&#39;total number of rapid antigen (RAT) tests performed (total RA tests)&#39;],\
+        &#39;tot_test&#39;:[&#39;total numbers of PCR and RA tests performed (total tests)&#39;],\
+        }
+        for k,v in mi.items():
+            mi[k].append(&#34;https://www.data.gov.cy/sites/default/files/CY%20Covid19%20Open%20Data%20-%20Extended%20-%20new_247.csv&#34;)
+            mi[k].append(&#34;https://www.data.gov.cy/node/4617?language=en&#34;)
+        mydico = mi
     else:
         raise CoaKeyError(&#39;Error in the database selected, please check !&#39;)
     if keys not in mydico:
@@ -493,14 +547,14 @@ def generic_info(namedb, keys):
         &#39;cur_idx_tx_A1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
         &#39;cur_idx_tx_B1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
         &#39;cur_idx_tx_C1&#39;:[&#39;FILL IT&#39;,url8,urlmaster8],
-        &#39;nb_A0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est négatif (A = E484K)&#39;,url8,urlmaster8],
-        &#39;nb_A1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est positif (A = E484K)&#39;,url8,urlmaster8],
+        &#39;cur_nb_A0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est négatif (A = E484K)&#39;,url8,urlmaster8],
+        &#39;cur_nb_A1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation A est positif (A = E484K)&#39;,url8,urlmaster8],
         &#39;tx_A1&#39; : [&#39;Taux de présence mutation A (A = E484K)&#39;,url8,urlmaster8],
-        &#39;nb_B0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est négatif (B = E484Q)&#39;,url8,urlmaster8],
-        &#39;nb_B1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est positif (B = E484Q)&#39;,url8,urlmaster8],
+        &#39;cur_nb_B0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est négatif (B = E484Q)&#39;,url8,urlmaster8],
+        &#39;cur_nb_B1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation B est positif (B = E484Q)&#39;,url8,urlmaster8],
         &#39;tx_B1&#39; : [&#39;Taux de présence mutation B (B = E484Q)&#39;,url8,urlmaster8],
-        &#39;nb_C0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est négatif (C = L452R)&#39;,url8,urlmaster8],
-        &#39;nb_C1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est positif (C = L452R)&#39;,url8,urlmaster8],
+        &#39;cur_nb_C0&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est négatif (C = L452R)&#39;,url8,urlmaster8],
+        &#39;cur_nb_C1&#39; : [&#39;Nombre des tests positifs pour lesquels la recherche de mutation C est positif (C = L452R)&#39;,url8,urlmaster8],
         &#39;tx_C1&#39; : [&#39;Taux de présence mutation C (C = L452R)&#39;,url8,urlmaster8],
         &#39;cur_nbre_pass_corona&#39; : [&#39;  Nombre de passages aux urgences pour suspicion de COVID-19 (nbre_pass_corona)&#39;,url9,urlmaster9],
         }
@@ -520,7 +574,14 @@ def generic_info(namedb, keys):
               spfn[k].append(&#39;https://www.data.gouv.fr/fr/datasets/r/d3a98a30-893f-47f7-96c5-2f4bcaaa0d71&#39;)
               spfn[k].append(&#39;https://www.data.gouv.fr/en/datasets/donnees-relatives-a-lepidemie-de-covid-19-en-france-vue-densemble/&#39;)
         mydico = spfn
-
+    elif namedb == &#39;insee&#39;:
+        insee = {
+        &#39;tot_deaths_since_2018-01-01&#39;:[&#39;tot deaths number_of_deaths integrated since 2018-01-01 &#39;],\
+        }
+        for k,v in insee.items():
+            insee[k].append(&#39;https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/&#39;)
+            insee[k].append(&#39;https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/&#39;)
+        mydico = insee
     elif namedb == &#39;opencovid19&#39;:
         op19 = {
         &#39;tot_deces&#39;:[&#39;tot_deces: total cumulé du nombre de décès au niveau national&#39;],
@@ -581,10 +642,9 @@ def generic_info(namedb, keys):
         &#39;cur_reproduction_rate&#39;:[&#39;cur_reproduction_rate (original name reproduction_rate): Real-time estimate of the effective reproduction rate (R) of COVID-19. See https://github.com/crondonm/TrackingR/tree/main/Estimates-Database&#39;],
         &#39;cur_icu_patients&#39;:[&#39;cur_icu_patients (orignal name icu_patients): Number of COVID-19 patients in intensive care units (ICUs) on a given day&#39;],
         &#39;cur_hosp_patients&#39;:[&#39;cur_hosp_patients (original name hosp_patients): Number of COVID-19 patients in hospital on a given day&#39;],
+        &#39;cur_weekly_hosp_admissions&#39;:[&#39;cur_weekly_hosp_admissions (original name weekly_hosp_admissions): Number of COVID-19 patients in hospital on a given week&#39;],
         &#39;cur_idx_positive_rate&#39;:[&#39;cur_idx_positive_rate (original name positive_rate): The share of COVID-19 tests that are positive, given as a rolling 7-day average (this is the inverse of tests_per_case)&#39;],
-        &#39;num_sequences&#39;:[&#39;num_sequences: Number of sequenced samples that fall into the category variant.&#39;],
-        &#39;perc_sequences&#39;:[&#39;perc_sequences: Percentage of the sequenced samples that fall into the category variant.&#39;],
-        &#39;num_sequences_total&#39;:[&#39;num_sequences_total: Total number of samples sequenced in the last two weeks&#39;],
+        &#39;total_gdp_per_capita&#39;:[&#39;Gross domestic product at purchasing power parity (constant 2011 international dollars), most recent year available&#39;],
         }
         for k,v in owid.items():
             owid[k].append(&#34;https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv&#34;)
@@ -635,10 +695,10 @@ def generic_info(namedb, keys):
         mydico = mi
     elif namedb == &#39;covid19india&#39;:
         india = {
-        &#39;Deceased&#39;:[&#39;Deceased:FILLIT&#39;],\
-        &#39;Confirmed&#39;:[&#39;Confirmed:FILLIT&#39;],\
-        &#39;Recovered&#39;:[&#39;Recovered:FILLIT&#39;],\
-        &#39;Tested&#39;:[&#39;Tested:FILLIT&#39;]
+        &#39;tot_Deceased&#39;:[&#39;tot_Deceased (original name: Deceased): Total number of Deceased&#39;],\
+        &#39;tot_Confirmed&#39;:[&#39;tot_Confirmed (original name: Confirmed): Total number of Confirmed&#39;],\
+        &#39;tot_Recovered&#39;:[&#39;tot_Recovered ( original name:  Recovered): Total number of Recovered&#39;],\
+        &#39;tot_Tested&#39;:[&#39;tot_Tested ( original name:  Tested): Total number of Tested&#39;]
         }
         for k,v in india.items():
             india[k].append(&#39;https://api.covid19india.org/csv/latest/states.csv&#39;)
@@ -664,18 +724,18 @@ def generic_info(namedb, keys):
     elif namedb == &#39;escovid19data&#39;:
         esco = {
         &#39;tot_deaths&#39;:[&#39;Cumulative deaths  (original name deceased)&#39;],\
-        &#39;tot_cases&#39;:[&#39;Cumulatvie number of new COVID-19 cases (original name cases_accumulated)&#39;],\
-        &#39;cur_cases&#39;:[&#39;Active COVID-19 cases (original name activos)&#39;],\
+        &#39;tot_cases&#39;:[&#39;Number of new COVID-19 cases detected with PCR (original name cases_accumulated_PCR)&#39;],\
         &#39;cur_hosp&#39;:[&#39;Hospitalized (original name hospitalized)&#39;],\
         &#39;tot_hosp&#39;:[&#39;Cumulative Hospitalized (original name hospitalized_accumulated)&#39;],\
+        &#39;cur_hosp_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants (original name hospitalized_per_100000&#39;],\
         &#39;cur_icu&#39;:[&#39;UCI, intensive care patient, (original name intensive_care)&#39;],\
         &#39;tot_recovered&#39;:[&#39;Recovered (original name recovered)&#39;],\
-        &#39;cur_cases_per100k&#39;:[&#39;Cumulative cases per 100,000 inhabitants (original name cases_per_cienmil)&#39;],\
+        &#39;tot_cases_per100k&#39;:[&#39;Cumulative cases per 100,000 inhabitants (original name cases_per_cienmil)&#39;],\
         &#39;cur_icu_per1M&#39; :[&#39;Intensive care per 1000,000 inhabitants (original name intensive_care_per_1000000)&#39;],\
         &#39;tot_deaths_per100k&#39;:[&#39;Cumulative deaths per 100,000 inhabitants (original name deceassed_per_100000)&#39;],\
-        &#39;cur_hosp_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants, (original name hospitalized_per_100000)&#39;],\
-        &#39;deaths&#39;:[&#39;deaths:FILLIT&#39;,&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;],
-        &#39;cases&#39;:[&#39;cases:FILLIT&#39;,&#39;https://github.com/jgehrcke/covid-19-germany-gae/raw/master/deaths-rki-by-ags.csv&#39;],
+        &#39;tot_cases_per100k&#39;:[&#39;Intensive care per 100,000 inhabitants, (original name hospitalized_per_100000)&#39;],\
+        &#39;incidence&#39;:[&#39;Cases in 14 days by 100,000 inhabitants (original name ia14&#39;],\
+        &#39;population&#39;:[&#39;Inhabitants of the province (orignal name poblacion)&#39;],\
         }
         for k,v in esco.items():
             esco[k].append(&#39;https://raw.githubusercontent.com/montera34/escovid19data/master/data/output/covid19-provincias-spain_consolidated.csv&#39;)
@@ -697,10 +757,10 @@ def generic_info(namedb, keys):
         phe = {
         &#39;tot_deaths&#39;:[&#39;Total number of deaths (original name cumDeaths28DaysByDeathDate)&#39;,url+&#39;cumDeaths28DaysByDeathDate&#39;+&#39;&amp;format=csv&#39;],\
         &#39;tot_cases&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumCasesBySpecimenDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_tests&#39;:[&#39;Total number of cases (originale name cumTestByPublishDate)&#39;,url+&#39;cumLFDTests&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc1&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedFirstDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc2&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedSecondDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
-        &#39;tot_vacc3&#39;:[&#39;Total number of cases (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedThirddDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_tests&#39;:[&#39;Total number of tests (originale name cumTestByPublishDate)&#39;,url+&#39;cumLFDTests&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc1&#39;:[&#39;Total number of tot_vacc1 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedFirstDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc2&#39;:[&#39;Total number of tot_vacc2 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedSecondDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
+        &#39;tot_vacc3&#39;:[&#39;Total number of tot_vacc3 (originale name cumCasesBySpecimenDate)&#39;,url+&#39;cumPeopleVaccinatedThirddDoseByVaccinationDate&#39;+&#39;&amp;format=csv&#39;],
         &#39;cur_B.1.617.2&#39;:[&#39;Current variant B.1.617.2&#39;,url +&#39;https://covid-surveillance-data.cog.sanger.ac.uk/download/lineages_by_ltla_and_week.tsv&#39;],
         }
         for k,v in phe.items():
@@ -731,6 +791,54 @@ def generic_info(namedb, keys):
             cotra[k].append(url)
             cotra[k].append(&#39;https://covidtracking.com/analysis-updates/five-major-metrics-covid-19-data&#39;)
         mydico = cotra
+    elif namedb == &#39;risklayer&#39;:
+        url=&#39;https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-JLawOH35vPyOk39w0tjn64YQLlahiD2AaNfjd82pgQ37Jr1K8KMHOqJbxoi4k2FZVYBGbZ-nsxhi/pub?output=csv&#39;
+        risk = {
+            &#39;tot_positive&#39;: [&#39;tot_positive ... fill it &#39;],\
+            &#39;tot_incidence&#39;: [&#39;tot_incidence ... fill it&#39;],\
+            }
+        for k,v in risk.items():
+            risk[k].append(url)
+            risk[k].append(&#39;https://www.risklayer-explorer.com/event/100/detail&#39;)
+        mydico = risk
+    elif namedb == &#39;europa&#39;:
+        url=&#39;https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-region/jrc-covid-19-all-days-by-regions.csv&#39;
+        euro = {
+            &#39;tot_deaths&#39;:[&#39;Orginal name CumulativeDeceased&#39;],
+            &#39;tot_positive&#39;:[&#39;sum the Original name CurrentlyPositive&#39;],
+            &#39;cur_hosp&#39;:[&#39;Orginal name Hospitalized&#39;],
+            &#39;cur_icu&#39;:[&#39;Orginal name IntensiveCare&#39;],
+            }
+        for k,v in euro.items():
+            euro[k].append(url)
+            euro[k].append(&#39;https://github.com/ec-jrc/COVID-19/tree/master/data-by-region&#39;)
+        mydico = euro
+    elif namedb == &#39;imed&#39;:
+        imed = {
+        &#39;tot_cases&#39;:[&#39;tot_cases (original name cases)&#39;,\
+        &#39;https://github.com/iMEdD-Lab/open-data/blob/master/COVID-19/greece_cases_v2.csv&#39;],
+        &#39;tot_deaths&#39;:[&#39;tot_deaths (original name deaths)&#39;,\
+        &#39;https://github.com/iMEdD-Lab/open-data/blob/master/COVID-19/greece_deaths_v2.csv&#39;]
+        }
+        for k,v in imed.items():
+             imed[k].append(&#34;https://github.com/iMEdD-Lab/open-data/tree/master/COVID-19&#34;)
+        mydico = imed
+    elif namedb == &#39;govcy&#39;:
+        mi = {
+        &#39;tot_deaths&#39;:[&#39;total deaths attributed to Covid-19 disease (total deaths)&#39;],\
+        &#39;tot_cases&#39;:[&#39;total number of confirmed cases (total cases)&#39;],\
+        &#39;cur_hosp&#39;:[&#39;number of patients with covid-19 hospitalized cases (Hospitalised Cases)&#39;],\
+        &#39;cur_severe&#39;:[&#39;number of patients with covid-19 hospitalized in severe cases (Severe Cases)&#39;],\
+        &#39;cur_icu&#39;:[&#39;number of patients with covid-19 admitted to ICUs (Cases In ICUs)&#39;],\
+        &#39;cur_incub&#39;:[&#39;number of patients with covid-19 admitted to ICUs (Incubated Cases)&#39;],\
+        &#39;tot_pcr&#39;:[&#39;extract from PCR_daily tests performedtotal number of PCR tests performed (PCR_daily tests performed)&#39;],\
+        &#39;tot_rat&#39;:[&#39;total number of rapid antigen (RAT) tests performed (total RA tests)&#39;],\
+        &#39;tot_test&#39;:[&#39;total numbers of PCR and RA tests performed (total tests)&#39;],\
+        }
+        for k,v in mi.items():
+            mi[k].append(&#34;https://www.data.gov.cy/sites/default/files/CY%20Covid19%20Open%20Data%20-%20Extended%20-%20new_247.csv&#34;)
+            mi[k].append(&#34;https://www.data.gov.cy/node/4617?language=en&#34;)
+        mydico = mi
     else:
         raise CoaKeyError(&#39;Error in the database selected, please check !&#39;)
     if keys not in mydico:

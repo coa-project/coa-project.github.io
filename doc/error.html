@@ -7,7 +7,7 @@
 <title>coa.error API documentation</title>
 <meta name="description" content="Project : PyCoA
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint …" />
@@ -29,7 +29,7 @@ License: See joint …" />
 <section id="section-intro">
 <p>Project : PyCoA
 Date :
-april 2020 - march 2021
+april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint LICENSE file</p>
@@ -43,14 +43,14 @@ All Coa exceptions should derive from the main CoaError class.</p>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
 &#34;&#34;&#34; Project : PyCoA
-Date :    april 2020 - march 2021
+Date :    april 2020 - march 2022
 Authors : Olivier Dadoun, Julien Browaeys, Tristan Beau
 Copyright ©pycoa.fr
 License: See joint LICENSE file
 
 Module : coa.error
 
-About : 
+About :
 -------
 
 Main class definitions for error management within the pycoa framework.
@@ -62,7 +62,14 @@ class CoaError(Exception):
     &#34;&#34;&#34;Base class for exceptions in PyCoa.&#34;&#34;&#34;
 
     def __init__(self, message):
-        self.message = message
+        #self.message = message
+        message = &#39;  &#39; + message + &#39;  &#39;
+        pycoatexterror = &#39;PYCOA Error ! &#39;
+        center=int((len(message)-len(pycoatexterror))/2)
+        self.message = &#39; &#39;*len(message)+&#39;\n&#39;\
+        + &#39; &#39;*center+pycoatexterror+&#39; &#39;*center+&#39;\n&#39;\
+        + message.center(30)+&#39;\n&#39;+&#39; &#39;*len(message)
+        print(&#39;\033[1;30;41m&#39;+self.message)
         Exception(message)
 
 
@@ -250,7 +257,14 @@ class CoaConnectionError(CoaError, ConnectionError):
     &#34;&#34;&#34;Base class for exceptions in PyCoa.&#34;&#34;&#34;
 
     def __init__(self, message):
-        self.message = message
+        #self.message = message
+        message = &#39;  &#39; + message + &#39;  &#39;
+        pycoatexterror = &#39;PYCOA Error ! &#39;
+        center=int((len(message)-len(pycoatexterror))/2)
+        self.message = &#39; &#39;*len(message)+&#39;\n&#39;\
+        + &#39; &#39;*center+pycoatexterror+&#39; &#39;*center+&#39;\n&#39;\
+        + message.center(30)+&#39;\n&#39;+&#39; &#39;*len(message)
+        print(&#39;\033[1;30;41m&#39;+self.message)
         Exception(message)</code></pre>
 </details>
 <h3>Ancestors</h3>
